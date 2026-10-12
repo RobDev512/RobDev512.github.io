@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "analytics": {
+    "provider": "goatcounter",
+    "enabled": true,
+    "siteCode": "robdev512",
+    "counterPath": "TOTAL",
+    "displayToday": true
+  }
+}

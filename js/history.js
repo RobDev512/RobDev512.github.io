@@ -51,6 +51,42 @@ function historyCreate(tag, className = "", text = "") {
   return element;
 }
 
+
+const HISTORY_ICON_SPRITE = "./assets/icons/hub-icons.svg";
+
+function historyIcon(name, className = "ui-icon") {
+  const svg = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+
+  svg.setAttribute("class", className);
+  svg.setAttribute("aria-hidden", "true");
+
+  const use = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+
+  use.setAttribute(
+    "href",
+    `${HISTORY_ICON_SPRITE}#icon-${name}`
+  );
+
+  svg.append(use);
+  return svg;
+}
+
+function historyTypeIcon(type) {
+  const icons = {
+    "hub-phase": "roadmap",
+    release: "tag",
+    milestone: "star"
+  };
+
+  return icons[type] ?? "history";
+}
+
 function historyRequireString(value, fieldName, eventId = "history") {
   if (typeof value !== "string" || value.trim() === "") {
     throw new Error(`${eventId}: ${fieldName} debe ser una cadena no vacía.`);
@@ -498,9 +534,20 @@ function historyEventCard(event) {
   }
 
   const subjectCopy = historyCreate("div");
+  const typeLine = historyCreate("span", "history-event-type-line");
+  typeLine.append(
+    historyIcon(
+      historyTypeIcon(event.type),
+      "ui-icon history-event-type-icon"
+    ),
+    document.createTextNode(
+      historyTypeLabel(event.type)
+    )
+  );
+
   subjectCopy.append(
     historyCreate("strong", "", subject.name),
-    historyCreate("span", "", historyTypeLabel(event.type))
+    typeLine
   );
   identity.append(subjectCopy);
 
@@ -692,8 +739,12 @@ function renderHistoryDetail() {
     historyCreate("span", "history-detail-type", historyTypeLabel(event.type))
   );
 
-  const close = historyCreate("button", "history-detail-close", "Cerrar");
+  const close = historyCreate("button", "history-detail-close");
   close.type = "button";
+  close.append(
+    historyIcon("close"),
+    historyCreate("span", "", "Cerrar")
+  );
   close.addEventListener("click", () => {
     historyState.selectedId = null;
     renderHistoryTimeline();
@@ -728,8 +779,16 @@ function renderHistoryDetail() {
     const actions = historyCreate("div", "history-detail-actions");
 
     for (const link of event.links) {
-      const anchor = historyCreate("a", "history-detail-link", link.label);
+      const anchor = historyCreate("a", "history-detail-link");
       anchor.href = link.url;
+      anchor.append(
+        historyIcon(
+          link.external
+            ? "external"
+            : "link"
+        ),
+        historyCreate("span", "", link.label)
+      );
 
       if (link.external) {
         anchor.target = "_blank";

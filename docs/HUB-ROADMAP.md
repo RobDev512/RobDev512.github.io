@@ -229,9 +229,50 @@ memoria técnica navegable de cómo evolucionaron los proyectos.
 
 ---
 
+# Fase 7.1 - Identidad visual e iconografía SVG
+
+**Estado:** Completada.
+
+## Objetivo
+
+Cerrar el ciclo visual posterior al historial con una identidad propia para el
+Hub y un sistema de iconografía reutilizable que pueda crecer con las fases
+futuras.
+
+## Alcance
+
+- logo principal, icono cuadrado y lockup del Hub;
+- favicon y tamaños derivados para navegador y dispositivos;
+- banner tecnológico de portada con líneas, nodos y circuitos decorativos;
+- navegación superior con identidad del Hub;
+- sprite SVG reutilizable para controles e interacciones;
+- iconos SVG en navegación, catálogo, filtros, tarjetas, historial y roadmap;
+- soporte responsive y `prefers-reduced-motion`;
+- sección dinámica de proyectos destacados alimentada por `projects.json`;
+- centro de documentación dinámica en una pestaña independiente;
+- descarga opcional del Markdown original desde el centro de documentación;
+- integración real de visitas mediante GoatCounter;
+- contador público de visitas totales y del día;
+- favoritos personales persistentes por navegador mediante `localStorage`;
+- filtro avanzado de favoritos y acceso rápido desde el banner;
+- documentación del sistema visual dentro de la arquitectura del Hub.
+
+## Regla
+
+Los SVG son parte de la interfaz y deben mantener significado funcional. La
+decoración puramente visual permanece marcada como `aria-hidden` para no añadir
+ruido a lectores de pantalla.
+
+## Impacto esperado
+
+Consolidar al Hub como un producto con identidad propia y no únicamente como un
+contenedor de tarjetas de otros proyectos.
+
+---
+
 # Fase 8 - Centro de releases y actividad
 
-**Estado:** Siguiente objetivo.
+**Estado:** Planeada.
 
 ## Objetivo
 
@@ -374,11 +415,47 @@ aprendizajes sin convertir todas las páginas en reportes extensos.
 
 ---
 
+# Fase 14 - Ingeniería y documentación funcional del Hub
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Documentar el Hub como sistema de software, tomando como referencia prácticas de
+ingeniería utilizadas en proyectos académicos como FISW, pero adaptadas a un
+proyecto personal para evitar documentación artificial o innecesaria.
+
+## Documentación prevista
+
+- actores y alcance del sistema;
+- catálogo formal de casos de uso;
+- diagrama de casos de uso;
+- flujos principal, alternos y excepciones de los casos importantes;
+- requisitos funcionales y no funcionales;
+- reglas de negocio y restricciones;
+- diagramas de actividad o BPMN cuando el proceso lo justifique;
+- componentes, responsabilidades e interfaces internas;
+- matriz ligera de trazabilidad entre requisito, caso de uso y componente;
+- criterios de calidad, pruebas y mantenimiento;
+- historial de decisiones arquitectónicas relevantes.
+
+## Regla
+
+La documentación debe describir comportamiento real del Hub. No se crearán
+diagramas, requisitos o procesos únicamente para llenar una plantilla.
+
+## Impacto esperado
+
+Hacer que el Hub pueda entenderse, mantenerse y evaluarse como un sistema
+completo, además de funcionar como portafolio público.
+
+---
+
 # Próximo paso
 
 Implementar la Fase 8:
 
 **centro de releases y actividad reciente del portafolio**.
 
-Las fases 9 a 13 quedan registradas como posibilidades futuras. Su prioridad
+Las fases 9 a 14 quedan registradas como posibilidades futuras. Su prioridad
 puede cambiar según crezcan los proyectos y las necesidades reales del Hub.

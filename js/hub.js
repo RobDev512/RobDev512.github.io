@@ -3,6 +3,7 @@
 const CATALOG_URL = "./data/projects.json";
 const HUB_ROADMAP_URL = "./docs/HUB-ROADMAP.md";
 const SUPPORTED_SCHEMA_VERSION = 1;
+const FAVORITES_STORAGE_KEY = "robdev512-hub-favorites-v1";
 const SUPPORTED_CARD_VARIANTS = new Set([
   "featured",
   "labnotes",
@@ -18,8 +19,10 @@ const state = {
     technology: null,
     visibility: null,
     query: null,
-    featured: false
+    featured: false,
+    favorites: false
   },
+  favorites: new Set(),
   sort: "curated",
   advancedOpen: false,
   roadmap: {
@@ -34,6 +37,15 @@ const state = {
 const grid = document.querySelector("#projectsGrid");
 const categoryFilters = document.querySelector("#categoryFilters");
 const catalogSummary = document.querySelector("#catalogSummary");
+
+const featuredProjectsGrid =
+  document.querySelector("#featuredProjectsGrid");
+
+const bannerSearchProject =
+  document.querySelector("#bannerSearchProject");
+
+const bannerFeaturedProjects =
+  document.querySelector("#bannerFeaturedProjects");
 
 const catalogSearch =
   document.querySelector("#catalogSearch");
@@ -52,6 +64,15 @@ const sortOrder =
 
 const featuredOnly =
   document.querySelector("#featuredOnly");
+
+const favoriteOnly =
+  document.querySelector("#favoriteOnly");
+
+const bannerFavoriteProjects =
+  document.querySelector("#bannerFavoriteProjects");
+
+const bannerFavoriteLabel =
+  document.querySelector("#bannerFavoriteLabel");
 
 const resetCatalogFilters =
   document.querySelector("#resetCatalogFilters");
@@ -104,6 +125,221 @@ function createElement(tagName, className = "", text = "") {
   }
 
   return element;
+}
+
+
+const HUB_ICON_SPRITE = "./assets/icons/hub-icons.svg";
+
+function createUiIcon(name, className = "ui-icon") {
+  const svg = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+
+  svg.setAttribute("class", className);
+  svg.setAttribute("aria-hidden", "true");
+
+  const use = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "use"
+  );
+
+  use.setAttribute(
+    "href",
+    `${HUB_ICON_SPRITE}#icon-${name}`
+  );
+
+  svg.append(use);
+  return svg;
+}
+
+function setUiIconLabel(element, iconName, label) {
+  if (!element) {
+    return;
+  }
+
+  element.replaceChildren(
+    createUiIcon(iconName),
+    createElement("span", "button-label", label)
+  );
+}
+
+function projectActionIcon(link) {
+  const icons = {
+    project: "project",
+    play: "play",
+    app: "app",
+    download: "download",
+    repository: "code"
+  };
+
+  return icons[link?.id] ?? (
+    link?.external
+      ? "external"
+      : "link"
+  );
+}
+
+function categoryIcon(categoryId) {
+  const icons = {
+    web: "globe",
+    desktop: "monitor",
+    mobile: "phone",
+    games: "gamepad",
+    automation: "terminal",
+    backend: "server",
+    data: "database",
+    systems: "cpu",
+    other: "grid"
+  };
+
+  return icons[categoryId] ?? "grid";
+}
+
+
+function loadFavoriteIds() {
+  try {
+    const raw =
+      window.localStorage.getItem(
+        FAVORITES_STORAGE_KEY
+      );
+
+    const parsed =
+      raw
+        ? JSON.parse(raw)
+        : [];
+
+    if (!Array.isArray(parsed)) {
+      return new Set();
+    }
+
+    return new Set(
+      parsed.filter(
+        (value) =>
+          typeof value === "string" &&
+          value.trim() !== ""
+      )
+    );
+  }
+  catch (error) {
+    console.warn(
+      "No se pudieron cargar los favoritos:",
+      error
+    );
+
+    return new Set();
+  }
+}
+
+
+function saveFavoriteIds() {
+  try {
+    window.localStorage.setItem(
+      FAVORITES_STORAGE_KEY,
+      JSON.stringify(
+        [...state.favorites]
+      )
+    );
+  }
+  catch (error) {
+    console.warn(
+      "No se pudieron guardar los favoritos:",
+      error
+    );
+  }
+}
+
+
+function isFavorite(projectId) {
+  return state.favorites.has(projectId);
+}
+
+
+function favoriteCount() {
+  return state.projects.filter(
+    (project) =>
+      isFavorite(project.id)
+  ).length;
+}
+
+
+function toggleFavorite(projectId) {
+  if (isFavorite(projectId)) {
+    state.favorites.delete(projectId);
+  }
+  else {
+    state.favorites.add(projectId);
+  }
+
+  saveFavoriteIds();
+  renderCatalog();
+}
+
+
+function createFavoriteButton(
+  project,
+  extraClass = ""
+) {
+  const active =
+    isFavorite(project.id);
+
+  const button =
+    createElement(
+      "button",
+      `project-favorite-button${
+        active ? " is-favorite" : ""
+      } ${extraClass}`.trim()
+    );
+
+  button.type = "button";
+
+  button.setAttribute(
+    "aria-pressed",
+    String(active)
+  );
+
+  button.setAttribute(
+    "aria-label",
+    active
+      ? `Quitar ${project.name} de favoritos`
+      : `Agregar ${project.name} a favoritos`
+  );
+
+  button.title =
+    active
+      ? "Quitar de favoritos"
+      : "Agregar a favoritos";
+
+  button.append(
+    createUiIcon("heart")
+  );
+
+  button.addEventListener(
+    "click",
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      toggleFavorite(
+        project.id
+      );
+    }
+  );
+
+  return button;
+}
+
+
+function syncFavoriteUi() {
+  const count =
+    favoriteCount();
+
+  if (bannerFavoriteLabel) {
+    bannerFavoriteLabel.textContent =
+      count > 0
+        ? `Mis favoritos (${count})`
+        : "Mis favoritos";
+  }
 }
 
 function requireString(value, fieldName, projectId = "catalog") {
@@ -382,11 +618,14 @@ async function exportProjectRoadmap(
   }
 
   const originalText =
-    button.textContent;
+    button.textContent.trim();
 
   button.disabled = true;
-  button.textContent =
-    "Generando PDF…";
+  setUiIconLabel(
+    button,
+    "pdf",
+    "Generando PDF…"
+  );
 
   try {
     const exporter =
@@ -396,13 +635,19 @@ async function exportProjectRoadmap(
       config
     );
 
-    button.textContent =
-      "PDF descargado";
+    setUiIconLabel(
+      button,
+      "status",
+      "PDF descargado"
+    );
 
     window.setTimeout(
       () => {
-        button.textContent =
-          originalText;
+        setUiIconLabel(
+          button,
+          "pdf",
+          originalText
+        );
 
         button.disabled =
           false;
@@ -416,13 +661,19 @@ async function exportProjectRoadmap(
       error
     );
 
-    button.textContent =
-      "Error al exportar";
+    setUiIconLabel(
+      button,
+      "info",
+      "Error al exportar"
+    );
 
     window.setTimeout(
       () => {
-        button.textContent =
-          originalText;
+        setUiIconLabel(
+          button,
+          "pdf",
+          originalText
+        );
 
         button.disabled =
           false;
@@ -439,13 +690,16 @@ async function exportHubRoadmapPdf() {
   }
 
   const originalText =
-    hubRoadmapPdfExport.textContent;
+    hubRoadmapPdfExport.textContent.trim();
 
   hubRoadmapPdfExport.disabled =
     true;
 
-  hubRoadmapPdfExport.textContent =
-    "Generando PDF…";
+  setUiIconLabel(
+    hubRoadmapPdfExport,
+    "pdf",
+    "Generando PDF…"
+  );
 
   try {
     const exporter =
@@ -485,13 +739,19 @@ async function exportHubRoadmapPdf() {
         "RobDev512-Hub-Roadmap.pdf"
     });
 
-    hubRoadmapPdfExport.textContent =
-      "PDF descargado";
+    setUiIconLabel(
+      hubRoadmapPdfExport,
+      "status",
+      "PDF descargado"
+    );
 
     window.setTimeout(
       () => {
-        hubRoadmapPdfExport.textContent =
-          originalText;
+        setUiIconLabel(
+          hubRoadmapPdfExport,
+          "pdf",
+          originalText
+        );
 
         hubRoadmapPdfExport.disabled =
           false;
@@ -505,13 +765,19 @@ async function exportHubRoadmapPdf() {
       error
     );
 
-    hubRoadmapPdfExport.textContent =
-      "Error al exportar";
+    setUiIconLabel(
+      hubRoadmapPdfExport,
+      "info",
+      "Error al exportar"
+    );
 
     window.setTimeout(
       () => {
-        hubRoadmapPdfExport.textContent =
-          originalText;
+        setUiIconLabel(
+          hubRoadmapPdfExport,
+          "pdf",
+          originalText
+        );
 
         hubRoadmapPdfExport.disabled =
           false;
@@ -531,7 +797,12 @@ function createActions(project, extraClass = "") {
   for (const link of project.links) {
     const anchor = createElement(
       "a",
-      buttonClasses(link),
+      buttonClasses(link)
+    );
+
+    setUiIconLabel(
+      anchor,
+      projectActionIcon(link),
       link.label
     );
 
@@ -543,12 +814,17 @@ function createActions(project, extraClass = "") {
     const exportButton =
       createElement(
         "button",
-        "btn btn-secondary roadmap-pdf-action",
-        "Roadmap PDF"
+        "btn btn-secondary roadmap-pdf-action"
       );
 
     exportButton.type =
       "button";
+
+    setUiIconLabel(
+      exportButton,
+      "pdf",
+      "Roadmap PDF"
+    );
 
     exportButton.title =
       `Descargar respaldo PDF del roadmap de ${project.name}`;
@@ -618,6 +894,7 @@ function createProjectState(project, extraClass = "") {
   );
 
   status.append(
+    createUiIcon("status"),
     createElement(
       "span",
       "project-state-key",
@@ -636,6 +913,7 @@ function createProjectState(project, extraClass = "") {
   );
 
   visibility.append(
+    createUiIcon("eye"),
     createElement(
       "span",
       "project-state-key",
@@ -737,7 +1015,11 @@ function renderFeaturedCard(project) {
     createActions(project)
   );
 
-  article.append(art, copy);
+  article.append(
+    art,
+    copy,
+    createFavoriteButton(project)
+  );
 
   return article;
 }
@@ -771,7 +1053,8 @@ function renderLabNotesCard(project) {
     createElement("p", "", project.description),
     createProjectState(project, "labnotes-state"),
     createBadges(project),
-    createActions(project, "labnotes-actions")
+    createActions(project, "labnotes-actions"),
+    createFavoriteButton(project)
   );
 
   return article;
@@ -871,7 +1154,11 @@ function renderStandardCard(project) {
     createActions(project)
   );
 
-  article.append(visual, copy);
+  article.append(
+    visual,
+    copy,
+    createFavoriteButton(project)
+  );
 
   return article;
 }
@@ -932,7 +1219,8 @@ function projectMatchesFilters(
     technology,
     visibility,
     query,
-    featured
+    featured,
+    favorites
   } = filters;
 
   if (
@@ -966,6 +1254,13 @@ function projectMatchesFilters(
   if (
     featured === true &&
     project.featured !== true
+  ) {
+    return false;
+  }
+
+  if (
+    favorites === true &&
+    !isFavorite(project.id)
   ) {
     return false;
   }
@@ -1127,6 +1422,11 @@ function createCategoryButton({
   );
 
   button.append(
+    createUiIcon(
+      id
+        ? categoryIcon(id)
+        : "grid"
+    ),
     createElement(
       "span",
       "",
@@ -1326,6 +1626,7 @@ function hasAdvancedFilterState() {
     state.filters.visibility ||
     state.filters.technology ||
     state.filters.featured === true ||
+    state.filters.favorites === true ||
     state.sort !== "curated"
   );
 }
@@ -1339,7 +1640,8 @@ function clearAdvancedFilters({
     status: null,
     visibility: null,
     technology: null,
-    featured: false
+    featured: false,
+    favorites: false
   };
 
   state.sort = "curated";
@@ -1405,6 +1707,13 @@ function syncControlValues() {
       state.filters.featured === true;
   }
 
+  if (favoriteOnly) {
+    favoriteOnly.checked =
+      state.filters.favorites === true;
+  }
+
+  syncFavoriteUi();
+
   if (resetCatalogFilters) {
     resetCatalogFilters.disabled =
       !hasActiveFilters();
@@ -1416,10 +1725,13 @@ function syncControlValues() {
       String(state.advancedOpen)
     );
 
-    advancedSearchToggle.textContent =
+    setUiIconLabel(
+      advancedSearchToggle,
+      "sliders",
       state.advancedOpen
         ? "Ocultar búsqueda avanzada"
-        : "Búsqueda avanzada";
+        : "Búsqueda avanzada"
+    );
   }
 
   if (advancedCatalogPanel) {
@@ -1438,6 +1750,9 @@ function activeFilterCount() {
     state.filters.query,
     state.filters.featured === true
       ? "featured"
+      : null,
+    state.filters.favorites === true
+      ? "favorites"
       : null
   ].filter(Boolean).length;
 }
@@ -1448,6 +1763,279 @@ function hasActiveFilters() {
     activeFilterCount() > 0 ||
     state.sort !== "curated"
   );
+}
+
+
+
+function featuredProjects() {
+  return state.projects
+    .filter(
+      (project) =>
+        project.featured === true
+    )
+    .sort(curatedOrder);
+}
+
+
+function preferredProjectLink(project) {
+  return (
+    project.links.find(
+      (link) =>
+        link.id === "project"
+    ) ??
+    project.links.find(
+      (link) =>
+        link.style === "primary"
+    ) ??
+    project.links[0] ??
+    null
+  );
+}
+
+
+function renderFeaturedProjectCard(project) {
+  const article =
+    createElement(
+      "article",
+      "featured-project-card"
+    );
+
+  article.dataset.projectId =
+    project.id;
+
+  const visual =
+    createElement(
+      "div",
+      "featured-project-visual"
+    );
+
+  if (project.logo?.src) {
+    const logo =
+      document.createElement("img");
+
+    logo.src =
+      project.logo.src;
+
+    logo.alt =
+      project.logo.alt ?? "";
+
+    logo.loading =
+      "lazy";
+
+    visual.append(logo);
+  }
+  else {
+    visual.append(
+      createUiIcon(
+        categoryIcon(project.category),
+        "ui-icon featured-project-fallback-icon"
+      )
+    );
+  }
+
+  const copy =
+    createElement(
+      "div",
+      "featured-project-copy"
+    );
+
+  const eyebrow =
+    createElement(
+      "span",
+      "featured-project-eyebrow"
+    );
+
+  eyebrow.append(
+    createUiIcon("star"),
+    createElement(
+      "span",
+      "",
+      "Destacado"
+    )
+  );
+
+  const meta =
+    createElement(
+      "div",
+      "featured-project-meta"
+    );
+
+  meta.append(
+    createElement(
+      "span",
+      "",
+      categoryLabel(project.category)
+    )
+  );
+
+  if (project.version) {
+    meta.append(
+      createElement(
+        "span",
+        "",
+        project.version
+      )
+    );
+  }
+
+  const title =
+    createElement(
+      "h3",
+      "",
+      project.name
+    );
+
+  const description =
+    createElement(
+      "p",
+      "",
+      project.description
+    );
+
+  const actions =
+    createElement(
+      "div",
+      "featured-project-actions"
+    );
+
+  const primaryLink =
+    preferredProjectLink(project);
+
+  if (primaryLink) {
+    const anchor =
+      createElement(
+        "a",
+        "featured-project-action"
+      );
+
+    setUiIconLabel(
+      anchor,
+      projectActionIcon(primaryLink),
+      primaryLink.label
+    );
+
+    applyLinkBehavior(
+      anchor,
+      primaryLink
+    );
+
+    actions.append(anchor);
+  }
+
+  const catalogButton =
+    createElement(
+      "button",
+      "featured-project-action featured-project-action-secondary"
+    );
+
+  catalogButton.type =
+    "button";
+
+  setUiIconLabel(
+    catalogButton,
+    "search",
+    "Ver en catálogo"
+  );
+
+  catalogButton.addEventListener(
+    "click",
+    () => {
+      setFilters(
+        {
+          query: project.name,
+          featured: false,
+          category: null,
+          status: null,
+          visibility: null,
+          technology: null
+        },
+        {
+          historyMode: "push"
+        }
+      );
+
+      catalogSearch?.focus();
+
+      document
+        .querySelector("#projects")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+    }
+  );
+
+  actions.append(
+    catalogButton
+  );
+
+  copy.append(
+    eyebrow,
+    meta,
+    title,
+    description,
+    actions
+  );
+
+  article.append(
+    visual,
+    copy,
+    createFavoriteButton(
+      project,
+      "featured-project-favorite"
+    )
+  );
+
+  return article;
+}
+
+
+function renderFeaturedProjects() {
+  if (!featuredProjectsGrid) {
+    return;
+  }
+
+  const projects =
+    featuredProjects();
+
+  const fragment =
+    document.createDocumentFragment();
+
+  for (const project of projects) {
+    fragment.append(
+      renderFeaturedProjectCard(project)
+    );
+  }
+
+  featuredProjectsGrid.replaceChildren(
+    fragment
+  );
+
+  featuredProjectsGrid.setAttribute(
+    "aria-busy",
+    "false"
+  );
+
+  if (projects.length === 0) {
+    const empty =
+      createElement(
+        "article",
+        "featured-project-card featured-project-placeholder"
+      );
+
+    empty.append(
+      createUiIcon("star"),
+      createElement(
+        "span",
+        "",
+        "Todavía no hay proyectos marcados como destacados."
+      )
+    );
+
+    featuredProjectsGrid.append(
+      empty
+    );
+  }
 }
 
 
@@ -1543,6 +2131,7 @@ function renderProjects() {
 
 
 function renderCatalog() {
+  renderFeaturedProjects();
   renderCategoryFilters();
   renderCatalogSummary();
   syncControlValues();
@@ -1626,6 +2215,9 @@ function normalizeFilters(
   next.featured =
     next.featured === true;
 
+  next.favorites =
+    next.favorites === true;
+
   return next;
 }
 
@@ -1670,6 +2262,9 @@ function readViewStateFromUrl() {
 
   const featured =
     params.get("featured") === "1";
+
+  const favorites =
+    params.get("favorites") === "1";
 
   const sort =
     normalizeSort(
@@ -1718,7 +2313,8 @@ function readViewStateFromUrl() {
           ? query.trim()
           : null,
 
-      featured
+      featured,
+      favorites
     }),
 
     sort
@@ -1752,6 +2348,11 @@ function syncUrl(
 
     featured:
       state.filters.featured
+        ? "1"
+        : null,
+
+    favorites:
+      state.filters.favorites
         ? "1"
         : null,
 
@@ -1896,7 +2497,8 @@ function resetFilters() {
     technology: null,
     visibility: null,
     query: null,
-    featured: false
+    featured: false,
+    favorites: false
   };
 
   state.sort = "curated";
@@ -2053,6 +2655,24 @@ function bindAdvancedControls() {
     }
   );
 
+  favoriteOnly?.addEventListener(
+    "change",
+    () => {
+      state.advancedOpen = true;
+
+      setFilters(
+        {
+          favorites:
+            favoriteOnly.checked
+        },
+        {
+          historyMode:
+            "push"
+        }
+      );
+    }
+  );
+
   resetCatalogFilters?.addEventListener(
     "click",
     () => {
@@ -2157,6 +2777,9 @@ async function loadCatalog() {
     [
       ...catalog.projects
     ];
+
+  state.favorites =
+    loadFavoriteIds();
 
   populateAdvancedFilters();
 
@@ -2748,7 +3371,7 @@ function parseHubRoadmap(markdown) {
   let current = null;
 
   const headingPattern =
-    /^# Fase (\d+) - (.+)$/;
+    /^# Fase (\d+(?:\.\d+)?) - (.+)$/;
 
   for (const rawLine of lines) {
     const match =
@@ -3378,14 +4001,20 @@ function createRoadmapCard(phase) {
         phase.number
           ? " active"
           : ""
-      }`,
-      state.roadmap.selected ===
-        phase.number
-        ? "Ocultar detalle"
-        : "Ver detalle"
+      }`
     );
 
   detailButton.type = "button";
+
+  setUiIconLabel(
+    detailButton,
+    state.roadmap.selected === phase.number
+      ? "close"
+      : "info",
+    state.roadmap.selected === phase.number
+      ? "Ocultar detalle"
+      : "Ver detalle"
+  );
 
   detailButton.addEventListener(
     "click",
