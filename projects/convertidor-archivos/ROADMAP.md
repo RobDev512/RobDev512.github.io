@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.1.1  
-**Estado general:** Estable / publicada  
+**Versión vigente:** v1.1.1
+**Estado general:** Estable / publicada
 **Plataforma principal:** Windows 64-bit
 
 > La ruta futura conserva la planificación original del proyecto. Los estados
@@ -18,7 +18,7 @@
 
 ## v1.0.0 — Convertidor inicial
 
-**Estado:** Aplicada  
+**Estado:** Aplicada
 **Hito histórico:** versión inicial reconstruida / sin tag público
 
 Primera etapa del proyecto, centrada únicamente en convertir un archivo de un

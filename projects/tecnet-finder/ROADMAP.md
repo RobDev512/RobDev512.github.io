@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.2.1  
-**Estado general:** Cerrada funcionalmente / roadmap activo  
+**Versión vigente:** v1.2.1
+**Estado general:** Cerrada funcionalmente / roadmap activo
 **Siguiente etapa activa:** v1.2.2 — Stability & Polish
 
 > Cada versión debe cubrir una necesidad académica concreta y, además,
@@ -18,7 +18,7 @@
 
 ## v1.0.0 — Base de Lenguajes y Autómatas I
 
-**Estado:** Aplicada  
+**Estado:** Aplicada
 **Hito histórico:** reconstrucción SemVer del tag `lya1-base`
 
 Primera base funcional del proyecto desarrollada en Lenguajes y Autómatas I.

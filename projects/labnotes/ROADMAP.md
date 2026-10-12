@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-**Versión estable:** v1.0.0 — Foundation  
-**Versión en desarrollo:** v1.1.0 — Night Shift  
+**Versión estable:** v1.0.0 — Foundation
+**Versión en desarrollo:** v1.1.0 — Night Shift
 **Pre-release actual:** v1.1.0-alpha.1
 
 > Este documento conserva en Markdown el roadmap de la presentación pública de
@@ -28,7 +28,7 @@ Primera versión funcional y base SemVer de LabNotes.
 
 ## v1.1.0 — Night Shift · Experiencia y participación
 
-**Estado:** En desarrollo  
+**Estado:** En desarrollo
 **Pre-release:** v1.1.0-alpha.1
 
 Accesibilidad visual, participación comunitaria y mejor organización de las notas.
