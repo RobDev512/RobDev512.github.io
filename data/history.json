@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 2,
+  "generatedFrom": "curated-history",
+  "taxonomy": {
+    "types": [
+      {
+        "id": "hub-phase",
+        "label": "Fase del Hub"
+      },
+      {
+        "id": "release",
+        "label": "Release"
+      },
+      {
+        "id": "milestone",
+        "label": "Hito"
+      }
+    ]
+  },
+  "subjects": [
+    {
+      "id": "hub",
+      "label": "RobDev512 Hub",
+      "shortLabel": "Hub",
+      "logo": null,
+      "accent": "hub"
+    }
+  ],
+  "events": [
+    {
+      "id": "convertidor-v1-0-1",
+      "date": "2026-08-30",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "convertidor-archivos",
+      "title": "Convertidor de Archivos v1.0.1",
+      "summary": "Primera versión pública estable del proyecto, con conversión de múltiples familias de formatos y procesamiento local.",
+      "version": "v1.0.1",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "./projects/convertidor-archivos/",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/ConvertidorArchivos/releases/tag/v1.0.1",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-08-30T22:41:06Z",
+      "precision": "time"
+    },
+    {
+      "id": "convertidor-v1-1-0",
+      "date": "2026-09-02",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "convertidor-archivos",
+      "title": "Convertidor v1.1.0 · Herramientas PDF",
+      "summary": "La aplicación amplía el convertidor principal con herramientas dedicadas para unir, dividir, extraer, reordenar y comprimir PDF.",
+      "version": "v1.1.0",
+      "featured": false,
+      "links": [
+        {
+          "label": "Roadmap",
+          "url": "./projects/convertidor-archivos/ROADMAP.md",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/ConvertidorArchivos/releases/tag/v1.1.0",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-09-02T08:31:16Z",
+      "precision": "time"
+    },
+    {
+      "id": "convertidor-v1-1-1",
+      "date": "2026-09-05",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "convertidor-archivos",
+      "title": "Convertidor v1.1.1 · Herramientas de imágenes",
+      "summary": "Se incorporan herramientas de imagen, procesamiento local con modelos y un motor propio de conversión PDF a DOCX.",
+      "version": "v1.1.1",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "./projects/convertidor-archivos/",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/ConvertidorArchivos/releases/tag/v1.1.1",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-09-05T05:55:17Z",
+      "precision": "time"
+    },
+    {
+      "id": "tecnet-v1-1-0",
+      "date": "2026-09-13",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "tecnet-finder",
+      "title": "TecNet Finder v1.1.0",
+      "summary": "Primera versión empaquetada y distribuible del DSL, con análisis léxico y sintáctico, VLSM, diagnósticos, advertencias y exportación de resultados.",
+      "version": "v1.1.0",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "./projects/tecnet-finder/",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/tag/v1.1.0",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-09-13T19:42:58Z",
+      "precision": "time"
+    },
+    {
+      "id": "tecnet-v1-2-0",
+      "date": "2026-09-17",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "tecnet-finder",
+      "title": "TecNet Finder v1.2.0 · Semantic Update",
+      "summary": "La Unidad 1 de Lenguajes y Autómatas II integra el análisis semántico, amplía diagnósticos y reorganiza la arquitectura interna.",
+      "version": "v1.2.0",
+      "featured": true,
+      "links": [
+        {
+          "label": "Roadmap",
+          "url": "./projects/tecnet-finder/ROADMAP.md",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/tag/v1.2.0",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-09-17T10:51:27Z",
+      "precision": "time"
+    },
+    {
+      "id": "tecnet-v1-2-1",
+      "date": "2026-09-24",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "tecnet-finder",
+      "title": "TecNet Finder v1.2.1 · Final Polish",
+      "summary": "Cierre de estabilización con internacionalización, tipografía configurable, refinamiento del árbol sintáctico y exportación PNG HD, SVG y PDF.",
+      "version": "v1.2.1",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "./projects/tecnet-finder/",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/tag/v1.2.1",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-09-24T07:36:02Z",
+      "precision": "time"
+    },
+    {
+      "id": "aws-orbishot-v1-4-3-2",
+      "date": "2026-10-12",
+      "sequence": 5,
+      "type": "release",
+      "projectId": "aws-orbishot",
+      "title": "AWS ORBISHOT v1.4.3.2 · Structure & Boss HUD Hotfix",
+      "summary": "Release estable congelada que corrige el HUD de boss y deja la estructura preparada para continuar con v1.4.4.",
+      "version": "v1.4.3.2",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "https://robdev512.github.io/AWS-ORBISHOT/",
+          "external": false
+        },
+        {
+          "label": "Código",
+          "url": "https://github.com/RobDev512/AWS-ORBISHOT",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-10-12T00:14:43Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-1",
+      "date": "2026-10-12",
+      "sequence": 10,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 1 · Catálogo dinámico",
+      "summary": "El Hub separa el catálogo de index.html y convierte data/projects.json en la fuente central de proyectos.",
+      "featured": false,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T03:34:17Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-2",
+      "date": "2026-10-12",
+      "sequence": 20,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 2 · Categorías y navegación",
+      "summary": "El catálogo gana navegación por categorías, contadores, URLs compartibles y compatibilidad con Atrás y Adelante.",
+      "featured": false,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T03:48:17Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-3",
+      "date": "2026-10-12",
+      "sequence": 30,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 3 · Inventario de proyectos",
+      "summary": "AWS ORBISHOT, LabNotes, Convertidor de Archivos y TecNet Finder quedan registrados como productos del portafolio.",
+      "featured": true,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T04:31:49Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-4",
+      "date": "2026-10-12",
+      "sequence": 40,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 4 · Estados y visibilidad",
+      "summary": "Estado y visibilidad pasan a ser dimensiones independientes y visibles en las tarjetas del catálogo.",
+      "featured": false,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T04:57:31Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-5",
+      "date": "2026-10-12",
+      "sequence": 50,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 5 · Navegación avanzada",
+      "summary": "Se añaden búsqueda, filtros combinados, ordenamiento y una visualización pública interactiva del roadmap.",
+      "featured": false,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T05:07:16Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-6",
+      "date": "2026-10-12",
+      "sequence": 60,
+      "type": "hub-phase",
+      "projectId": "hub",
+      "title": "Fase 6 · Páginas individuales y respaldos",
+      "summary": "El Hub obtiene un estándar reutilizable para páginas de proyecto, roadmaps coherentes y exportación visual directa a PDF.",
+      "featured": true,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "occurredAt": "2026-10-12T20:27:13Z",
+      "precision": "time"
+    },
+    {
+      "id": "hub-phase-7-complete",
+      "date": "2026-10-12",
+      "sequence": 70,
+      "type": "milestone",
+      "projectId": "hub",
+      "title": "Fase 7 · Historial del portafolio completada",
+      "summary": "El Hub incorpora una memoria cronológica independiente del catálogo y del roadmap, con filtros y agrupación por año, mes, día y hora.",
+      "featured": true,
+      "links": [
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "precision": "day"
+    }
+  ]
+}

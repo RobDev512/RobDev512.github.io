@@ -374,3 +374,25 @@ Los badges de estado largos también ajustan tamaño o cambian de fila.
 La maquetación final combina masonry de dos columnas con tarjetas de ancho
 completo cuando eso aprovecha mejor el espacio. El exportador calcula la altura
 real antes de dibujar y evita badges o texto fuera de sus contenedores.
+
+## Historial del portafolio
+
+La Fase 7 añade una memoria cronológica independiente del catálogo y del
+roadmap.
+
+Fuente:
+
+`data/history.json`
+
+Renderer:
+
+`js/history.js`
+
+La portada ofrece filtros por proyecto, tipo de evento, año, mes, día y hora,
+además de una agrupación configurable por año, mes, día u hora. Los eventos que
+conservan un timestamp verificable muestran su hora local; cuando sólo existe
+fecha, el Hub mantiene precisión de día y no inventa una hora.
+
+La vista alternativa resume por periodo usando la granularidad elegida. El
+historial registra hechos ya ocurridos; `docs/HUB-ROADMAP.md` continúa
+representando la planificación.

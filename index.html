@@ -39,6 +39,11 @@
     defer
   ></script>
 
+  <script
+    src="./js/history.js"
+    defer
+  ></script>
+
 </head>
 
 
@@ -67,14 +72,25 @@
       </div>
 
 
-      <a
-        class="github-link"
-        href="https://github.com/RobDev512"
-        target="_blank"
-        rel="noreferrer"
-      >
-        GitHub
-      </a>
+      <div class="hub-header-actions">
+
+        <a
+          class="github-link"
+          href="#portfolioHistory"
+        >
+          Historial
+        </a>
+
+        <a
+          class="github-link"
+          href="https://github.com/RobDev512"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
+        </a>
+
+      </div>
 
     </header>
 
@@ -359,6 +375,173 @@
 
       </section>
 
+
+
+
+
+      <section
+        class="portfolio-history"
+        id="portfolioHistory"
+        aria-labelledby="portfolioHistoryTitle"
+      >
+
+        <div class="history-heading">
+
+          <div>
+            <span class="catalog-kicker">
+              Evolución real
+            </span>
+
+            <h2 id="portfolioHistoryTitle">
+              Historial del portafolio
+            </h2>
+          </div>
+
+          <p>
+            Releases, hitos y etapas que ya ocurrieron. Puedes navegar desde
+            una vista anual hasta el día y la hora cuando la fuente conserva
+            esa precisión temporal.
+          </p>
+
+        </div>
+
+        <div
+          class="history-stats"
+          id="historyStats"
+          aria-label="Resumen del historial"
+        ></div>
+
+        <div class="history-controls">
+
+          <div class="history-filter-grid">
+
+            <label class="history-field">
+              <span>Proyecto</span>
+              <select id="historyProjectFilter">
+                <option value="">Todos los proyectos</option>
+              </select>
+            </label>
+
+            <label class="history-field">
+              <span>Tipo de evento</span>
+              <select id="historyTypeFilter">
+                <option value="">Todos los tipos</option>
+              </select>
+            </label>
+
+            <label class="history-field">
+              <span>Año</span>
+              <select id="historyYearFilter">
+                <option value="">Todos los años</option>
+              </select>
+            </label>
+
+            <label class="history-field">
+              <span>Mes</span>
+              <select id="historyMonthFilter">
+                <option value="">Todos los meses</option>
+              </select>
+            </label>
+
+            <label class="history-field">
+              <span>Día</span>
+              <select id="historyDayFilter">
+                <option value="">Todos los días</option>
+              </select>
+            </label>
+
+            <label class="history-field">
+              <span>Hora</span>
+              <select id="historyHourFilter">
+                <option value="">Todas las horas</option>
+              </select>
+            </label>
+
+          </div>
+
+          <div class="history-control-actions">
+
+            <label class="history-granularity">
+              <span>Agrupar</span>
+              <select id="historyGranularity">
+                <option value="year">Año</option>
+                <option value="month" selected>Mes</option>
+                <option value="day">Día</option>
+                <option value="hour">Hora</option>
+              </select>
+            </label>
+
+            <div
+              class="history-view-toggle"
+              id="historyViewToggle"
+              role="group"
+              aria-label="Cambiar vista del historial"
+            >
+              <button
+                class="history-view-button active"
+                type="button"
+                data-history-view="timeline"
+                aria-pressed="true"
+              >
+                Cronología
+              </button>
+
+              <button
+                class="history-view-button"
+                type="button"
+                data-history-view="periods"
+                aria-pressed="false"
+              >
+                Por periodo
+              </button>
+            </div>
+
+            <button
+              class="history-reset"
+              id="historyReset"
+              type="button"
+            >
+              Limpiar filtros
+            </button>
+
+          </div>
+
+        </div>
+
+        <p
+          class="history-time-note"
+        >
+          Las horas exactas se muestran en la zona horaria local del navegador.
+          Cuando una fuente sólo conserva la fecha, el evento permanece marcado
+          con precisión de día y no se inventa una hora.
+        </p>
+
+        <p
+          class="history-status"
+          id="historyStatus"
+          aria-live="polite"
+        >
+          Cargando historial...
+        </p>
+
+        <div
+          class="history-timeline"
+          id="historyTimeline"
+        ></div>
+
+        <div
+          class="history-periods"
+          id="historyPeriods"
+          hidden
+        ></div>
+
+        <article
+          class="history-detail"
+          id="historyDetail"
+          hidden
+        ></article>
+
+      </section>
 
 
       <section

@@ -15,7 +15,8 @@ El hub ya cuenta con:
 - filtros combinados y ordenamiento;
 - inventario inicial de proyectos personales;
 - páginas individuales para los proyectos ya registrados;
-- sección pública del roadmap del propio hub.
+- sección pública del roadmap del propio hub;
+- historial cronológico del portafolio con fuente independiente.
 
 ## Criterio general
 
@@ -181,32 +182,203 @@ compartidos, mientras que cada proyecto conserva su contenido y roadmap.
 
 # Fase 7 - Historial del portafolio
 
+**Estado:** Completada.
+
+## Objetivo
+
+Registrar la evolución del portafolio como un sistema vivo y separar con
+claridad tres conceptos:
+
+- catálogo: qué proyectos existen y cuál es su estado actual;
+- historial: qué hitos y releases ya ocurrieron;
+- roadmap: qué está planeado para después.
+
+## Alcance de la fase
+
+- `data/history.json` como fuente central del historial;
+- `js/history.js` como renderer independiente del catálogo;
+- cronología visual de releases, hitos y fases del Hub;
+- filtros por proyecto, tipo de evento, año, mes, día y hora;
+- agrupación temporal configurable por año, mes, día u hora;
+- horas exactas cuando la fuente pública conserva un timestamp verificable;
+- eventos con precisión de día cuando no existe una hora confiable, sin inventarla;
+- estado de filtros compartible mediante URL;
+- vista cronológica y resumen por periodo;
+- identidad visual por proyecto;
+- panel de detalle y enlaces a proyectos, releases o documentación;
+- datos históricos curados: nada se infiere automáticamente sin una fuente
+  confiable.
+
+## Primer inventario histórico
+
+La primera versión del historial registra:
+
+- releases verificadas de Convertidor de Archivos;
+- releases verificadas de TecNet Finder;
+- release estable v1.4.3.2 de AWS ORBISHOT;
+- cierre de las Fases 1 a 6 del Hub;
+- inicio de la Fase 7.
+
+LabNotes podrá incorporar eventos adicionales cuando exista una fecha histórica
+confiable para cada hito que se quiera representar.
+
+## Impacto esperado
+
+El Hub deja de mostrar únicamente el estado presente y empieza a conservar una
+memoria técnica navegable de cómo evolucionaron los proyectos.
+
+---
+
+# Fase 8 - Centro de releases y actividad
+
+**Estado:** Siguiente objetivo.
+
+## Objetivo
+
+Reunir en una vista específica las versiones actuales y releases relevantes de
+todos los proyectos sin sustituir sus repositorios.
+
+## Posibles funciones
+
+- feed de releases recientes;
+- versión estable / versión en desarrollo por proyecto;
+- acceso directo a descarga, notas y changelog cuando existan;
+- distinción entre release estable, pre-release y parche;
+- actividad reciente sin convertir el Hub en un clon de GitHub.
+
+## Impacto esperado
+
+Responder rápidamente: **¿qué cambió recientemente en mis proyectos?**
+
+---
+
+# Fase 9 - Mapa del ecosistema de proyectos
+
 **Estado:** Visión futura.
 
 ## Objetivo
 
-Registrar la evolución del portafolio como un sistema vivo, mostrando cómo ha
-crecido el conjunto de proyectos con el tiempo.
+Mostrar relaciones reales entre proyectos sin alterar la clasificación principal
+por tipo de producto.
 
 ## Posibles funciones
 
-- historial de altas de proyectos;
-- timeline de releases relevantes del portafolio;
-- vista por etapas o temporadas de desarrollo;
-- destacados por año o ciclo;
-- conexiones entre proyectos relacionados.
+- relaciones entre proyectos por tecnologías compartidas;
+- proyectos que nacieron de una materia, práctica o proyecto previo;
+- dependencias o reutilización de componentes cuando sean relevantes;
+- vista tipo grafo opcional;
+- enlaces entre proyectos relacionados desde sus páginas individuales.
+
+## Regla
+
+Una relación sólo se registra cuando tiene sentido técnico o histórico; no se
+crean conexiones únicamente porque dos proyectos usen el mismo lenguaje.
+
+---
+
+# Fase 10 - Métricas e insights del portafolio
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Generar estadísticas derivadas de los datos que el Hub ya mantiene.
+
+## Posibles funciones
+
+- proyectos por categoría, estado y visibilidad;
+- tecnologías más utilizadas;
+- releases por año;
+- evolución del número de proyectos;
+- distribución entre proyectos públicos, privados y locales;
+- hitos destacados por año;
+- métricas técnicas y descriptivas, evitando rankings de productividad sin
+  contexto.
 
 ## Impacto esperado
 
-Convertir el hub no sólo en un catálogo, sino también en un registro narrativo
-de evolución personal y técnica.
+Convertir datos del catálogo e historial en una lectura resumida de la evolución
+técnica del portafolio.
+
+---
+
+# Fase 11 - Automatización y calidad del Hub
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Reducir mantenimiento manual sin perder el control curado sobre la información
+pública.
+
+## Posibles funciones
+
+- validación automática de `projects.json`, `project-pages.json` e
+  `history.json`;
+- comprobación de enlaces públicos;
+- detección de IDs duplicados o referencias rotas;
+- GitHub Actions para validar PRs del Hub;
+- herramienta para sugerir nuevas entradas históricas a partir de releases;
+- actualización asistida de `updatedAt`;
+- generación de snapshots de datos antes de cambios estructurales.
+
+## Regla
+
+La automatización puede **proponer** información, pero no debe publicar datos
+privados ni inventar hechos históricos.
+
+---
+
+# Fase 12 - Archivo y snapshots del portafolio
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Conservar estados históricos completos del Hub para que el portafolio pueda
+reconstruirse aun cuando proyectos individuales cambien o desaparezcan.
+
+## Posibles funciones
+
+- snapshot anual del catálogo;
+- exportación JSON / Markdown de metadata pública;
+- paquete de respaldo del historial;
+- página de archivo por año;
+- comparación entre dos snapshots;
+- preservación de versiones públicas importantes del propio Hub.
+
+## Impacto esperado
+
+Convertir el Hub en un archivo personal durable, no sólo en una página de
+presentación actual.
+
+---
+
+# Fase 13 - Casos de estudio y presentación profesional
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Permitir que los proyectos más importantes expliquen decisiones, arquitectura y
+aprendizajes sin convertir todas las páginas en reportes extensos.
+
+## Posibles funciones
+
+- casos de estudio opcionales por proyecto;
+- problema, solución, arquitectura y decisiones clave;
+- galería de evolución visual;
+- retos técnicos y aprendizajes;
+- vínculos desde historial y releases hacia un caso de estudio;
+- modo de presentación pública más enfocado a portafolio profesional.
 
 ---
 
 # Próximo paso
 
-Evaluar la Fase 7:
+Implementar la Fase 8:
 
-**historial del portafolio y evolución temporal de los proyectos**.
+**centro de releases y actividad reciente del portafolio**.
 
-La Fase 6 queda cerrada con un estándar reutilizable para páginas futuras.
+Las fases 9 a 13 quedan registradas como posibilidades futuras. Su prioridad
+puede cambiar según crezcan los proyectos y las necesidades reales del Hub.
