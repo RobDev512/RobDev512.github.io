@@ -208,9 +208,8 @@
       ],
       "updatedAt": "2026-09-30",
       "roadmapExport": {
-        "type": "script-array",
-        "url": "./projects/labnotes/roadmap.js",
-        "variableName": "roadmapItems",
+        "type": "markdown",
+        "url": "./projects/labnotes/ROADMAP.md",
         "title": "LabNotes",
         "subtitle": "Roadmap de la plataforma",
         "filename": "LabNotes-Roadmap.pdf"

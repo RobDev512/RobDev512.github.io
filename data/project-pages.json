@@ -147,7 +147,7 @@
         "meta": [
           {
             "strong": "v1.2.1",
-            "small": "Semantic Update"
+            "small": "Final Polish & Internationalization"
           },
           {
             "strong": "DSL de redes",
@@ -180,14 +180,14 @@
       "release": {
         "kicker": "Release actual",
         "version": "v1.2.1",
-        "summary": "Semantic Update cierra formalmente la etapa de análisis semántico e integra lexer, parser y diagnósticos dentro de una experiencia gráfica orientada al DSL de redes.",
+        "summary": "v1.2.1 estabiliza la etapa semántica completada en v1.2.0 y añade internacionalización, mejoras de tipografía, refinamiento del árbol sintáctico y exportación PNG HD, SVG y PDF.",
         "status": "Aplicada",
-        "title": "Semantic Update",
+        "title": "Final Polish & Internationalization",
         "items": [
-          "Análisis léxico, sintáctico y semántico.",
-          "Diagnósticos y advertencias.",
-          "Recuperación parcial ante bloques con errores.",
-          "Seis idiomas y ejemplos traducibles.",
+          "Compilador léxico, sintáctico y semántico consolidado.",
+          "Seis idiomas y ejemplos localizados.",
+          "Tipografía configurable para interfaz y editor.",
+          "Árbol sintáctico refinado y más legible.",
           "Exportación PNG HD, SVG y PDF."
         ],
         "link": {

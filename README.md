@@ -285,7 +285,7 @@ Fuentes actuales:
 
 - Hub: `docs/HUB-ROADMAP.md`;
 - AWS ORBISHOT: `AWS-Game/docs/ROADMAP.md` del repositorio público;
-- LabNotes: arreglo `roadmapItems` de su presentación pública;
+- LabNotes: `projects/labnotes/ROADMAP.md`;
 - Convertidor de Archivos: `projects/convertidor-archivos/ROADMAP.md`;
 - TecNet Finder: `projects/tecnet-finder/ROADMAP.md`.
 

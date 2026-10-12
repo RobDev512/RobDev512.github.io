@@ -2,35 +2,76 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.1.1
-**Estado general:** Estable / publicada
+**Versión vigente:** v1.1.1  
+**Estado general:** Estable / publicada  
 **Plataforma principal:** Windows 64-bit
 
 > La ruta futura conserva la planificación original del proyecto. Los estados
 > pueden cambiar conforme evolucione el desarrollo.
 
+> Nota histórica: el primer tag y release público conservado en GitHub es
+> `v1.0.1`. Para documentar el origen real del proyecto, el roadmap incorpora
+> `v1.0.0` como versión histórica reconstruida del convertidor inicial; no se
+> presenta como un release público que nunca existió.
+
 ---
 
-## v1.0.1 — Base estable publicada
+## v1.0.0 — Convertidor inicial
 
-**Estado:** Aplicada
+**Estado:** Aplicada  
+**Hito histórico:** versión inicial reconstruida / sin tag público
 
-Primera versión estable y distribuible.
+Primera etapa del proyecto, centrada únicamente en convertir un archivo de un
+formato a otro desde el flujo principal.
 
 ### Base funcional
 
-- Conversión entre múltiples tipos de archivos.
-- Documentos de Microsoft Office.
-- PDF.
+- Seleccionar un archivo de origen.
+- Elegir un formato de destino compatible.
+- Ejecutar la conversión.
+- Guardar el archivo resultante.
+- Interfaz de escritorio para el flujo de conversión.
+- Sin menú de herramientas especializadas.
+
+---
+
+## v1.0.1 — Primera versión pública estable
+
+**Estado:** Aplicada
+
+Primera versión pública estable y distribuible del proyecto.
+
+### Conversión
+
 - Imágenes.
-- Archivos comprimidos.
+- Documentos.
+- Hojas de cálculo.
+- Presentaciones.
+- PDF.
 - Libros y formatos de marcado.
-- Archivos de Minecraft.
-- Previsualización de archivos originales y resultados.
-- Manejo seguro de sobrescritura, copias, cancelaciones y temporales.
-- Funcionamiento offline.
-- Instalador mediante Inno Setup.
-- Publicación mediante GitHub Releases.
+- Archivos comprimidos.
+- Compatibilidad con JAR.
+- Contenedores de Minecraft.
+- Conversión múltiple.
+- Previsualización de archivos.
+- Procesamiento local.
+
+### Motores incluidos
+
+- LibreOffice.
+- ImageMagick.
+- 7-Zip.
+- Pandoc.
+- PDFium y bibliotecas internas.
+- Microsoft Office y WinRAR aprovechados de forma opcional cuando están disponibles.
+
+### Presentación
+
+- Nuevo logo e identidad visual.
+- Icono propio para aplicación e instalador.
+- Ventana Acerca de.
+- Rediseño de la zona para seleccionar o arrastrar archivos.
+- Nuevos iconos y ajustes generales de interfaz.
 
 ---
 
@@ -38,7 +79,7 @@ Primera versión estable y distribuible.
 
 **Estado:** Aplicada
 
-Primera gran expansión del menú de herramientas PDF.
+Primera gran expansión del proyecto más allá del convertidor principal.
 
 ### Incluido
 
@@ -47,7 +88,13 @@ Primera gran expansión del menú de herramientas PDF.
 - Extraer páginas.
 - Reordenar páginas.
 - Comprimir PDF.
-- Conversión PDF → DOCX mediante motor propio y motores de respaldo compatibles.
+- Herramientas visuales con miniaturas y arrastrar y soltar.
+- Mejoras de navegación y presentación.
+
+### Evolución de PDF → DOCX
+
+La familia v1.1 incorpora y evoluciona la conversión PDF → DOCX; el motor propio
+queda consolidado en v1.1.1.
 
 ---
 
@@ -57,15 +104,27 @@ Primera gran expansión del menú de herramientas PDF.
 
 Versión vigente.
 
-### Incluido
+### PDF
+
+- Motor propio de conversión PDF → DOCX.
+- Eliminación de la dependencia de Aspose.PDF.
+- Mejoras en análisis de texto, imágenes, fondos, tablas y estructura.
+
+### Imágenes
 
 - Redimensionar imágenes.
 - Comprimir imágenes.
 - Imágenes → PDF.
 - Mejorar calidad mediante Real-ESRGAN local y mejora clásica.
 - Quitar fondo mediante modelos locales.
-- Procesamiento por lotes en las herramientas compatibles.
+- Procesamiento por lotes en herramientas compatibles.
 - Funcionamiento local sin necesidad de subir imágenes a Internet.
+
+### Instalación
+
+- Nuevos motores y modelos incluidos.
+- Actualización desde versiones anteriores.
+- Windows 64-bit sin necesidad de instalar Python por separado.
 
 ---
 
