@@ -14,7 +14,10 @@ El hub ya cuenta con:
 - fuente central data/projects.json;
 - renderizado mediante js/hub.js;
 - taxonomía inicial de categorías, estados y visibilidades;
-- soporte interno para filtros por categoría, estado y tecnología.
+- navegación visible por categoría;
+- contadores por categoría;
+- URL compartible de categoría;
+- soporte interno para filtros combinados por categoría, estado, tecnología y visibilidad.
 
 ---
 
@@ -51,7 +54,7 @@ Transformar el hub en un catálogo centralizado y eliminar la información indiv
 
 # Fase 2 - Categorías y navegación del catálogo
 
-**Estado:** Siguiente objetivo.
+**Estado:** Completada.
 
 ## Objetivo
 
@@ -69,20 +72,29 @@ Permitir explorar el catálogo por tipo de proyecto sin clasificarlo principalme
 - Sistemas y Experimentación.
 - Otros.
 
-## Alcance previsto
+## Implementado
 
-- Mostrar filtros visibles por categoría.
-- Añadir opción Todos.
-- Conectar los controles con HubCatalog.setFilters().
-- Mantener tecnologías como etiquetas secundarias.
-- Preparar filtros combinados posteriores.
-- Mantener el diseño responsive.
+- [x] Mostrar navegación visible por categoría.
+- [x] Añadir opción Todos.
+- [x] Generar los filtros desde la taxonomía de projects.json.
+- [x] Mostrar únicamente categorías que contienen proyectos.
+- [x] Añadir contador de proyectos por categoría.
+- [x] Conectar los controles con HubCatalog.setFilters().
+- [x] Mantener tecnologías como etiquetas secundarias.
+- [x] Preparar filtros combinados posteriores.
+- [x] Preparar filtro interno de visibilidad.
+- [x] Mantener el diseño responsive.
+- [x] Añadir estado activo accesible con aria-pressed.
+- [x] Añadir resumen dinámico de resultados.
+- [x] Sincronizar la categoría activa con ?category=<id>.
+- [x] Soportar navegación Atrás / Adelante del navegador.
+- [x] Hacer que nuevas categorías aparezcan automáticamente al recibir su primer proyecto.
 
 ---
 
 # Fase 3 - Inventario de proyectos existentes
 
-**Estado:** Planeado.
+**Estado:** Siguiente objetivo.
 
 ## Objetivo
 
@@ -150,7 +162,6 @@ Permitir que proyectos todavía no publicados tengan presencia en el portafolio.
 ## Funciones
 
 - buscador;
-- filtros por categoría;
 - filtros por estado;
 - filtros por tecnología;
 - filtros por visibilidad;
@@ -158,6 +169,8 @@ Permitir que proyectos todavía no publicados tengan presencia en el portafolio.
 - proyectos destacados;
 - proyectos recientes;
 - combinación de filtros.
+
+La navegación básica por categoría ya quedó implementada en la Fase 2.
 
 ---
 
@@ -219,8 +232,8 @@ Los lenguajes son metadata secundaria.
 
 # Próximo paso
 
-Implementar la Fase 2:
+Implementar la Fase 3:
 
-**categorías y navegación visible del catálogo**
+**inventario de proyectos personales existentes**
 
-utilizando la infraestructura dinámica creada durante la Fase 1.
+registrándolos progresivamente en data/projects.json sin publicar rutas locales ni información sensible.

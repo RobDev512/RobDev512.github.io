@@ -399,13 +399,13 @@ data/projects.json
 
 como fuente central de verdad del catálogo.
 
-La lógica de carga, validación, filtrado y renderizado se encuentra en:
+La lógica de carga, validación, filtrado, navegación y renderizado se encuentra en:
 
 js/hub.js
 
-index.html conserva únicamente la estructura general de la página y el contenedor donde se renderiza el catálogo.
+index.html conserva la estructura general de la página, la navegación visible por categorías y el contenedor donde se renderiza el catálogo.
 
-Cada proyecto podrá definir:
+Cada proyecto puede definir:
 
 - identificador;
 - nombre;
@@ -431,7 +431,6 @@ Ejemplo conceptual de un registro de LabNotes:
       "id": "labnotes",
       "name": "LabNotes",
       "category": "web",
-      "categoryLabel": "Desarrollo Web",
       "subtype": "Aplicación web full-stack",
       "technologies": [
         "Node.js",
@@ -448,7 +447,52 @@ Ejemplo conceptual de un registro de LabNotes:
 
 ---
 
-# 11. Regla de publicación
+# 11. Navegación por categorías
+
+La navegación visible del hub se genera dinámicamente a partir de la taxonomía y del contenido real del catálogo.
+
+## Reglas
+
+- Siempre existe la opción Todos.
+- Sólo se muestran categorías que contienen al menos un proyecto.
+- Cada filtro muestra su cantidad de proyectos.
+- Al agregar el primer proyecto de una categoría previamente vacía, el filtro aparece automáticamente.
+- Las categorías continúan definidas centralmente en data/projects.json.
+- Los lenguajes y frameworks no se convierten en categorías principales.
+
+## URL compartible
+
+La categoría activa se representa mediante el parámetro:
+
+?category=<id>
+
+Ejemplos conceptuales:
+
+- ?category=web
+- ?category=games
+
+Esto permite compartir una vista del catálogo y conserva el comportamiento de Atrás y Adelante del navegador.
+
+## Accesibilidad
+
+Los filtros son botones reales y exponen su estado mediante aria-pressed.
+
+La cantidad de resultados se anuncia mediante una región aria-live.
+
+## Preparación para filtros combinados
+
+El estado interno de js/hub.js conserva filtros independientes para:
+
+- categoría;
+- estado;
+- tecnología;
+- visibilidad.
+
+En esta fase sólo existe interfaz pública para categoría. Los demás filtros podrán añadirse sin cambiar la estructura del catálogo.
+
+---
+
+# 12. Regla de publicación
 
 Un proyecto no necesita estar en GitHub para aparecer en el hub.
 
@@ -475,7 +519,7 @@ Nunca se deben publicar:
 
 ---
 
-# 12. Relación con las carpetas locales
+# 13. Relación con las carpetas locales
 
 La estructura local y la estructura pública son independientes.
 
@@ -500,7 +544,7 @@ si ese es su propósito.
 
 ---
 
-# 13. Filosofía del hub
+# 14. Filosofía del hub
 
 El hub no debe mostrar solamente código.
 
