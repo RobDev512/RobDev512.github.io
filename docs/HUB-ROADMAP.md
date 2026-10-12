@@ -24,6 +24,11 @@ El hub se organiza por **tipo de proyecto/producto**, no por lenguaje de
 programación. Los lenguajes, frameworks, plataformas y bases de datos se
 tratan como metadata secundaria.
 
+El roadmap principal se limita a **15 fases principales** para mantener una
+evolución legible. Las mejoras de alcance menor pueden registrarse como
+subfases decimales —por ejemplo, la Fase 7.1— sin inflar artificialmente la
+numeración principal.
+
 ---
 
 # Fase 1 - Catálogo dinámico
@@ -415,39 +420,88 @@ aprendizajes sin convertir todas las páginas en reportes extensos.
 
 ---
 
-# Fase 14 - Ingeniería y documentación funcional del Hub
+# Fase 14 - Análisis funcional y modelado del Hub
 
 **Estado:** Visión futura.
 
 ## Objetivo
 
-Documentar el Hub como sistema de software, tomando como referencia prácticas de
-ingeniería utilizadas en proyectos académicos como FISW, pero adaptadas a un
-proyecto personal para evitar documentación artificial o innecesaria.
+Documentar formalmente qué hace el Hub, quién interactúa con él y qué reglas
+gobiernan su comportamiento, tomando como referencia prácticas de ingeniería de
+software utilizadas en FISW, pero adaptadas a un proyecto personal real.
 
 ## Documentación prevista
 
-- actores y alcance del sistema;
+- visión, propósito y alcance del sistema;
+- stakeholders y actores relevantes;
+- requisitos funcionales y no funcionales;
+- reglas de negocio, restricciones y supuestos;
 - catálogo formal de casos de uso;
 - diagrama de casos de uso;
-- flujos principal, alternos y excepciones de los casos importantes;
-- requisitos funcionales y no funcionales;
-- reglas de negocio y restricciones;
-- diagramas de actividad o BPMN cuando el proceso lo justifique;
-- componentes, responsabilidades e interfaces internas;
-- matriz ligera de trazabilidad entre requisito, caso de uso y componente;
-- criterios de calidad, pruebas y mantenimiento;
-- historial de decisiones arquitectónicas relevantes.
+- especificación de los casos de uso importantes;
+- precondiciones y postcondiciones;
+- flujo principal, flujos alternos y excepciones;
+- diagramas de actividad cuando ayuden a explicar comportamiento;
+- BPMN únicamente para procesos cuyo flujo realmente lo justifique.
+
+## Ejemplos de comportamiento a modelar
+
+- explorar, buscar y filtrar proyectos;
+- consultar proyectos destacados;
+- marcar y filtrar favoritos;
+- consultar historial, roadmap y documentación;
+- registrar un proyecto nuevo;
+- mantener metadata, roadmaps e historial;
+- publicar cambios del Hub de forma controlada.
 
 ## Regla
 
-La documentación debe describir comportamiento real del Hub. No se crearán
-diagramas, requisitos o procesos únicamente para llenar una plantilla.
+La documentación debe describir comportamiento real. No se crearán actores,
+procesos, requisitos o diagramas únicamente para completar una plantilla.
 
 ## Impacto esperado
 
-Hacer que el Hub pueda entenderse, mantenerse y evaluarse como un sistema
-completo, además de funcionar como portafolio público.
+Convertir el conocimiento implícito del Hub en un modelo funcional claro que
+pueda utilizarse para mantenimiento, pruebas y evolución futura.
+
+---
+
+# Fase 15 - Arquitectura, trazabilidad y documentación técnica
+
+**Estado:** Visión futura.
+
+## Objetivo
+
+Cerrar la documentación de ingeniería del Hub conectando su comportamiento con
+la arquitectura que lo implementa, las decisiones técnicas tomadas y los
+criterios utilizados para verificar su calidad.
+
+## Documentación prevista
+
+- arquitectura lógica del Hub;
+- componentes, responsabilidades e interfaces internas;
+- fuentes y flujos de datos del catálogo, historial, páginas y roadmaps;
+- integración con GitHub Pages, GitHub y servicios externos como GoatCounter;
+- diagrama de componentes;
+- diagrama de despliegue cuando aporte claridad;
+- registro de decisiones arquitectónicas relevantes mediante ADRs ligeros;
+- matriz de trazabilidad requisito → caso de uso → componente → prueba;
+- estrategia de pruebas y smoke tests;
+- criterios de aceptación para cambios relevantes;
+- accesibilidad, rendimiento, privacidad y mantenibilidad;
+- checklist técnico para releases del propio Hub;
+- índice final de documentación y relaciones entre documentos.
+
+## Regla
+
+La documentación técnica debe mantenerse proporcional al tamaño del proyecto y
+actualizarse cuando cambie el sistema. La trazabilidad existe para facilitar el
+mantenimiento, no para generar burocracia documental.
+
+## Impacto esperado
+
+Dejar el Hub documentado como un sistema mantenible y verificable, además de
+funcionar como portafolio público y archivo de proyectos personales.
 
 ---
 
@@ -457,5 +511,5 @@ Implementar la Fase 8:
 
 **centro de releases y actividad reciente del portafolio**.
 
-Las fases 9 a 14 quedan registradas como posibilidades futuras. Su prioridad
+Las fases 9 a 15 quedan registradas como posibilidades futuras. Su prioridad
 puede cambiar según crezcan los proyectos y las necesidades reales del Hub.

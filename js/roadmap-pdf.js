@@ -85,7 +85,7 @@
     let group = null;
 
     const phaseHeading =
-      /^#{1,3}\s+(Fase\s+\d+\s*[-—]\s*.+)$/i;
+      /^#{1,3}\s+(Fase\s+\d+(?:\.\d+)?\s*[-—]\s*.+)$/i;
 
     const versionHeading =
       /^#{1,3}\s+(v\d+(?:\.\d+){1,3}\s*[-—]\s*.+)$/i;
