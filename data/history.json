@@ -333,6 +333,29 @@
         }
       ],
       "precision": "day"
+    },
+    {
+      "id": "hub-phase-7-1-complete",
+      "date": "2026-10-12",
+      "sequence": 71,
+      "type": "milestone",
+      "projectId": "hub",
+      "title": "Fase 7.1 · Identidad visual y experiencia del Hub completada",
+      "summary": "El Hub consolida branding propio, banner tecnológico, iconografía SVG, proyectos destacados, favoritos personales, centro de documentación dinámica y contador público de visitas con GoatCounter.",
+      "featured": true,
+      "links": [
+        {
+          "label": "Documentación del Hub",
+          "url": "./docs/",
+          "external": false
+        },
+        {
+          "label": "Roadmap del Hub",
+          "url": "./docs/HUB-ROADMAP.md",
+          "external": false
+        }
+      ],
+      "precision": "day"
     }
   ]
 }

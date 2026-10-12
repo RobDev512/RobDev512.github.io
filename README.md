@@ -396,3 +396,46 @@ fecha, el Hub mantiene precisión de día y no inventa una hora.
 La vista alternativa resume por periodo usando la granularidad elegida. El
 historial registra hechos ya ocurridos; `docs/HUB-ROADMAP.md` continúa
 representando la planificación.
+
+## Identidad visual del Hub
+
+La Fase 7.1 introduce una identidad visual propia para el Hub.
+
+Recursos principales:
+
+- `assets/branding/robdev512-hub-logo.png`: logo horizontal de portada;
+- `assets/branding/robdev512-hub-icon.png`: icono cuadrado maestro;
+- `assets/branding/robdev512-hub-lockup.png`: lockup compacto;
+- `assets/icons/hub-icons.svg`: sprite SVG compartido de interfaz.
+
+El icono maestro se utiliza para generar favicons y tamaños de navegador. El
+sprite SVG evita repetir archivos de iconos individuales y mantiene una
+apariencia consistente entre catálogo, historial, roadmap y navegación.
+
+El banner principal utiliza elementos vectoriales decorativos propios de la
+interfaz —líneas, nodos y circuitos— sin convertirlos en información semántica.
+
+## Destacados, documentación y visitas
+
+La Fase 7.1 amplía la identidad del Hub con:
+
+- una sección dinámica de proyectos destacados basada en `featured`;
+- un centro visual de documentación disponible en `/docs/`;
+- un contador global de visitas integrado con GoatCounter.
+
+El contador se configura en `data/site-config.json` y actualmente utiliza el sitio
+`robdev512.goatcounter.com`. Las vistas locales no se registran; el conteo público
+se alimenta desde la versión publicada del Hub.
+
+## Favoritos personales
+
+Cada visitante puede marcar proyectos como favoritos. La selección se guarda
+localmente en el navegador y no modifica `data/projects.json`.
+
+Esto mantiene separados dos conceptos:
+
+- **destacados**: selección editorial definida por `featured`;
+- **favoritos**: selección personal guardada en `localStorage`.
+
+La búsqueda avanzada permite mostrar únicamente los favoritos del navegador
+actual.

@@ -509,3 +509,99 @@ día y quedan fuera de un filtro de hora específico.
 El historial es curado. La automatización futura podrá sugerir eventos a partir
 de tags, releases o commits, pero la publicación seguirá requiriendo datos
 públicos y verificables.
+
+## 22. Identidad visual e iconografía SVG
+
+La Fase 7.1 separa la marca del Hub de los logos de los proyectos.
+
+### Branding
+
+Los recursos de identidad viven en:
+
+`assets/branding/`
+
+El Hub conserva tres piezas maestras:
+
+- logo horizontal;
+- icono cuadrado;
+- lockup compacto.
+
+Los favicons y tamaños derivados se generan desde el icono cuadrado para evitar
+variaciones visuales entre navegador y página.
+
+### Sistema de iconos
+
+La interfaz usa un sprite SVG compartido:
+
+`assets/icons/hub-icons.svg`
+
+Los controles estáticos usan referencias `<use>` directamente desde HTML. Los
+renderers dinámicos (`js/hub.js` y `js/history.js`) crean las mismas referencias
+mediante helpers propios.
+
+Esto permite:
+
+- una sola fuente de iconografía;
+- escalado sin pérdida;
+- cambio de color mediante `currentColor`;
+- consistencia entre controles estáticos y dinámicos;
+- evitar dependencias externas de bibliotecas de iconos.
+
+### Accesibilidad
+
+Los iconos decorativos utilizan `aria-hidden="true"`. El texto continúa siendo
+la fuente principal del significado de botones, enlaces y estados.
+
+### Banner tecnológico
+
+El banner principal combina el logo horizontal con SVG decorativo de circuitos,
+nodos y esquinas técnicas. El SVG de fondo no contiene información y se mantiene
+separado del contenido textual para conservar accesibilidad y responsividad.
+
+## 23. Proyectos destacados
+
+La propiedad `featured` de `data/projects.json` es la única fuente de verdad para
+los proyectos destacados.
+
+La portada renderiza una sección compacta a partir de esos proyectos. No existe
+una segunda lista manual, de modo que marcar o desmarcar un proyecto en el
+catálogo actualiza tanto los filtros como la sección destacada.
+
+## 24. Centro de documentación
+
+`docs/index.html` funciona como entrada visual de documentación.
+
+La navegación del centro carga Markdown local de forma dinámica y lo representa
+en HTML sin alterar los archivos fuente. Los documentos originales siguen
+disponibles mediante las acciones **Abrir Markdown** y **Descargar .md**.
+
+## 25. Contador de visitas
+
+El Hub incluye una integración opcional con GoatCounter configurada desde:
+
+`data/site-config.json`
+
+La vista local no incrementa visitas. El sitio configurado es
+`robdev512.goatcounter.com`; el footer consulta el total global y el conteo
+del día desde el contador público de GoatCounter.
+
+## 26. Favoritos locales
+
+Los favoritos pertenecen al visitante, no al catálogo editorial.
+
+Se almacenan en `localStorage` con la clave:
+
+`robdev512-hub-favorites-v1`
+
+El valor contiene únicamente IDs de proyectos. Esto permite:
+
+- marcar o desmarcar proyectos desde cualquier tarjeta;
+- conservar la selección al cerrar y volver a abrir el navegador;
+- filtrar el catálogo por favoritos;
+- mostrar el conteo personal en la acción del banner.
+
+La selección no se sincroniza entre dispositivos porque el Hub no mantiene
+cuentas de usuario ni backend propio.
+
+La propiedad `featured` sigue siendo independiente: representa la selección
+editorial del propietario del Hub y vive en `data/projects.json`.

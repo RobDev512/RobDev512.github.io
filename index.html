@@ -12,7 +12,7 @@
 
   <meta
     name="theme-color"
-    content="#0d1117"
+    content="#075cff"
   >
 
   <meta
@@ -21,8 +21,39 @@
   >
 
   <title>
-    RobDev512 · Proyectos
+    RobDev512 Hub · Proyectos
   </title>
+
+  <link
+    rel="icon"
+    href="./assets/branding/favicon.ico"
+    sizes="any"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="./assets/branding/favicon-32x32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="./assets/branding/favicon-16x16.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="./assets/branding/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="./site.webmanifest"
+  >
 
   <link
     rel="stylesheet"
@@ -44,27 +75,148 @@
     defer
   ></script>
 
+  <script
+    src="./js/site-stats.js"
+    defer
+  ></script>
+
 </head>
 
 
 <body>
+
+  <section
+        class="hub-brand-banner hub-brand-cover"
+        aria-labelledby="hubBannerTitle"
+      >
+
+        <div class="hub-brand-banner-glow" aria-hidden="true"></div>
+
+        <svg
+          class="hub-banner-tech-lines"
+          viewBox="0 0 1180 430"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <g class="hub-banner-circuit hub-banner-circuit-left">
+            <path d="M0 86h94l36 36h112"/>
+            <path d="M0 142h58l44 44h86"/>
+            <path d="M0 270h74l52-52h104"/>
+            <path d="M0 330h104l36-36h92"/>
+            <path d="M22 58h110l34 34h76"/>
+            <circle cx="94" cy="86" r="5"/>
+            <circle cx="130" cy="122" r="4"/>
+            <circle cx="102" cy="186" r="5"/>
+            <circle cx="126" cy="218" r="4"/>
+            <circle cx="104" cy="330" r="5"/>
+          </g>
+
+          <g class="hub-banner-circuit hub-banner-circuit-right">
+            <path d="M1180 86h-94l-36 36h-112"/>
+            <path d="M1180 142h-58l-44 44h-86"/>
+            <path d="M1180 270h-74l-52-52h-104"/>
+            <path d="M1180 330h-104l-36-36h-92"/>
+            <path d="M1158 58h-110l-34 34h-76"/>
+            <circle cx="1086" cy="86" r="5"/>
+            <circle cx="1050" cy="122" r="4"/>
+            <circle cx="1078" cy="186" r="5"/>
+            <circle cx="1054" cy="218" r="4"/>
+            <circle cx="1076" cy="330" r="5"/>
+          </g>
+
+          <g class="hub-banner-diagonals">
+            <path d="M0 0h120L40 90H0z"/>
+            <path d="M1180 0h-120l80 90h40z"/>
+            <path d="M0 430h140l-82-92H0z"/>
+            <path d="M1180 430h-140l82-92h58z"/>
+          </g>
+        </svg>
+
+        <div class="hub-banner-corner hub-banner-corner-tl" aria-hidden="true"></div>
+        <div class="hub-banner-corner hub-banner-corner-tr" aria-hidden="true"></div>
+        <div class="hub-banner-corner hub-banner-corner-bl" aria-hidden="true"></div>
+        <div class="hub-banner-corner hub-banner-corner-br" aria-hidden="true"></div>
+
+        <div class="hub-brand-banner-inner">
+
+          <img
+            class="hub-banner-logo"
+            src="./assets/branding/robdev512-hub-logo.png"
+            alt=""
+            aria-hidden="true"
+          >
+
+          <span class="hub-banner-kicker">
+            Portafolio de proyectos personales
+          </span>
+
+          <h2 id="hubBannerTitle">
+            Un solo punto para explorar proyectos, evolución y próximos pasos.
+          </h2>
+
+          <p>
+            Reúne aplicaciones, herramientas, videojuegos y experimentos bajo
+            una identidad común, sin perder el historial independiente de cada
+            proyecto.
+          </p>
+
+          <div class="hub-banner-actions">
+            <a
+              class="hub-banner-action"
+              id="bannerSearchProject"
+              href="#catalogSearch"
+            >
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-search"></use></svg>
+              <span>Buscar proyecto</span>
+            </a>
+
+            <a
+              class="hub-banner-action"
+              id="bannerFeaturedProjects"
+              href="#featuredProjects"
+            >
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-star"></use></svg>
+              <span>Ver destacados</span>
+            </a>
+
+            <a
+              class="hub-banner-action"
+              id="bannerFavoriteProjects"
+              href="#projects"
+            >
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-heart"></use></svg>
+              <span id="bannerFavoriteLabel">Mis favoritos</span>
+            </a>
+          </div>
+
+        </div>
+
+      </section>
 
   <div class="hub-shell">
 
 
     <header class="hub-header">
 
-      <div>
+      <div class="hub-brand">
 
-        <span class="hub-kicker">
-          Hub de proyectos
-        </span>
+        <a
+          class="hub-brand-link"
+          href="./"
+          aria-label="RobDev512 Hub · Inicio"
+        >
+          <img
+            class="hub-brand-lockup"
+            src="./assets/branding/robdev512-hub-lockup.png"
+            alt="RobDev512 Hub"
+          >
+        </a>
 
-        <h1>
-          RobDev512
+        <h1 class="visually-hidden">
+          RobDev512 Hub
         </h1>
 
-        <p>
+        <p class="hub-brand-description">
           Aplicaciones, videojuegos y proyectos personales desarrollados
           como parte de aprendizaje, experimentación y desarrollo continuo.
         </p>
@@ -72,13 +224,34 @@
       </div>
 
 
-      <div class="hub-header-actions">
+      <nav
+        class="hub-header-actions"
+        aria-label="Navegación principal del Hub"
+      >
+
+        <a class="github-link" href="#projects">
+          <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-grid"></use></svg>
+          <span>Proyectos</span>
+        </a>
+
+        <a class="github-link" href="#portfolioHistory">
+          <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-history"></use></svg>
+          <span>Historial</span>
+        </a>
+
+        <a class="github-link" href="#hubRoadmap">
+          <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-roadmap"></use></svg>
+          <span>Roadmap</span>
+        </a>
 
         <a
           class="github-link"
-          href="#portfolioHistory"
+          href="./docs/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Historial
+          <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-file"></use></svg>
+          <span>Documentación</span>
         </a>
 
         <a
@@ -87,10 +260,11 @@
           target="_blank"
           rel="noreferrer"
         >
-          GitHub
+          <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-code"></use></svg>
+          <span>GitHub</span>
         </a>
 
-      </div>
+      </nav>
 
     </header>
 
@@ -98,12 +272,55 @@
 
     <main>
 
-      <section class="projects-heading">
+
+      <section
+        class="featured-projects"
+        id="featuredProjects"
+        aria-labelledby="featuredProjectsTitle"
+      >
+
+        <div class="featured-projects-heading">
+          <div>
+            <span class="catalog-kicker section-kicker-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-star"></use></svg>
+              <span>Selección del Hub</span>
+            </span>
+
+            <h2 id="featuredProjectsTitle">
+              Proyectos destacados
+            </h2>
+          </div>
+
+          <p>
+            Selección curada directamente desde el catálogo. Los proyectos
+            aparecen aquí cuando están marcados como destacados en la fuente
+            de datos del Hub.
+          </p>
+        </div>
+
+        <div
+          class="featured-projects-grid"
+          id="featuredProjectsGrid"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <article class="featured-project-card featured-project-placeholder">
+            <span>Cargando proyectos destacados…</span>
+          </article>
+        </div>
+
+      </section>
+
+<section
+        class="projects-heading"
+        id="projects"
+      >
 
         <div>
 
-          <span>
-            Proyectos
+          <span class="section-kicker-with-icon">
+            <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-grid"></use></svg>
+            <span>Proyectos</span>
           </span>
 
           <h2>
@@ -132,8 +349,9 @@
 
           <div>
 
-            <span class="catalog-kicker">
-              Explorar catálogo
+            <span class="catalog-kicker section-kicker-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-search"></use></svg>
+              <span>Explorar catálogo</span>
             </span>
 
             <h2 id="catalogFiltersTitle">
@@ -161,8 +379,9 @@
             for="catalogSearch"
           >
 
-            <span>
-              Buscar
+            <span class="control-label-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-search"></use></svg>
+              <span>Buscar</span>
             </span>
 
             <input
@@ -182,7 +401,8 @@
             aria-expanded="false"
             aria-controls="advancedCatalogPanel"
           >
-            Búsqueda avanzada
+            <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-sliders"></use></svg>
+            <span class="button-label">Búsqueda avanzada</span>
           </button>
 
 
@@ -191,7 +411,8 @@
             id="resetCatalogFilters"
             type="button"
           >
-            Limpiar
+            <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-reset"></use></svg>
+            <span>Limpiar</span>
           </button>
 
         </div>
@@ -202,8 +423,9 @@
           aria-label="Filtrar proyectos por categoría"
         >
 
-          <span class="control-label">
-            Categoría
+          <span class="control-label control-label-with-icon">
+            <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-grid"></use></svg>
+            <span>Categoría</span>
           </span>
 
           <div
@@ -233,8 +455,9 @@
           <div class="advanced-panel-heading">
 
             <div>
-              <span class="catalog-kicker">
-                Filtros adicionales
+              <span class="catalog-kicker section-kicker-with-icon">
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-sliders"></use></svg>
+                <span>Filtros adicionales</span>
               </span>
 
               <strong>
@@ -253,8 +476,9 @@
 
             <label class="catalog-field">
 
-              <span>
-                Estado
+              <span class="control-label-with-icon">
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-status"></use></svg>
+                <span>Estado</span>
               </span>
 
               <select id="statusFilter">
@@ -268,8 +492,9 @@
 
             <label class="catalog-field">
 
-              <span>
-                Visibilidad
+              <span class="control-label-with-icon">
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-eye"></use></svg>
+                <span>Visibilidad</span>
               </span>
 
               <select id="visibilityFilter">
@@ -283,8 +508,9 @@
 
             <label class="catalog-field">
 
-              <span>
-                Tecnología
+              <span class="control-label-with-icon">
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-cpu"></use></svg>
+                <span>Tecnología</span>
               </span>
 
               <select id="technologyFilter">
@@ -298,8 +524,9 @@
 
             <label class="catalog-field">
 
-              <span>
-                Ordenar por
+              <span class="control-label-with-icon">
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-sort"></use></svg>
+                <span>Ordenar por</span>
               </span>
 
               <select id="sortOrder">
@@ -340,6 +567,22 @@
 
             <span>
               Mostrar sólo proyectos destacados
+            </span>
+
+          </label>
+
+          <label class="featured-filter">
+
+            <input
+              id="favoriteOnly"
+              type="checkbox"
+            >
+
+            <span class="featured-filter-box"></span>
+
+            <span class="control-label-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-heart"></use></svg>
+              <span>Mostrar sólo mis favoritos</span>
             </span>
 
           </label>
@@ -388,8 +631,9 @@
         <div class="history-heading">
 
           <div>
-            <span class="catalog-kicker">
-              Evolución real
+            <span class="catalog-kicker section-kicker-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-history"></use></svg>
+              <span>Evolución real</span>
             </span>
 
             <h2 id="portfolioHistoryTitle">
@@ -416,42 +660,42 @@
           <div class="history-filter-grid">
 
             <label class="history-field">
-              <span>Proyecto</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-project"></use></svg><span>Proyecto</span></span>
               <select id="historyProjectFilter">
                 <option value="">Todos los proyectos</option>
               </select>
             </label>
 
             <label class="history-field">
-              <span>Tipo de evento</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-tag"></use></svg><span>Tipo de evento</span></span>
               <select id="historyTypeFilter">
                 <option value="">Todos los tipos</option>
               </select>
             </label>
 
             <label class="history-field">
-              <span>Año</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-calendar"></use></svg><span>Año</span></span>
               <select id="historyYearFilter">
                 <option value="">Todos los años</option>
               </select>
             </label>
 
             <label class="history-field">
-              <span>Mes</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-calendar"></use></svg><span>Mes</span></span>
               <select id="historyMonthFilter">
                 <option value="">Todos los meses</option>
               </select>
             </label>
 
             <label class="history-field">
-              <span>Día</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-calendar"></use></svg><span>Día</span></span>
               <select id="historyDayFilter">
                 <option value="">Todos los días</option>
               </select>
             </label>
 
             <label class="history-field">
-              <span>Hora</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-clock"></use></svg><span>Hora</span></span>
               <select id="historyHourFilter">
                 <option value="">Todas las horas</option>
               </select>
@@ -462,7 +706,7 @@
           <div class="history-control-actions">
 
             <label class="history-granularity">
-              <span>Agrupar</span>
+              <span class="control-label-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-calendar"></use></svg><span>Agrupar</span></span>
               <select id="historyGranularity">
                 <option value="year">Año</option>
                 <option value="month" selected>Mes</option>
@@ -483,7 +727,8 @@
                 data-history-view="timeline"
                 aria-pressed="true"
               >
-                Cronología
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-timeline"></use></svg>
+                <span>Cronología</span>
               </button>
 
               <button
@@ -492,7 +737,8 @@
                 data-history-view="periods"
                 aria-pressed="false"
               >
-                Por periodo
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-calendar"></use></svg>
+                <span>Por periodo</span>
               </button>
             </div>
 
@@ -501,7 +747,8 @@
               id="historyReset"
               type="button"
             >
-              Limpiar filtros
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-reset"></use></svg>
+              <span>Limpiar filtros</span>
             </button>
 
           </div>
@@ -554,8 +801,9 @@
 
           <div>
 
-            <span class="catalog-kicker">
-              Evolución del Hub
+            <span class="catalog-kicker section-kicker-with-icon">
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-roadmap"></use></svg>
+              <span>Evolución del Hub</span>
             </span>
 
             <h2 id="hubRoadmapTitle">
@@ -580,7 +828,8 @@
                 data-view="cards"
                 aria-pressed="true"
               >
-                Tarjetas
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-cards"></use></svg>
+                <span>Tarjetas</span>
               </button>
 
               <button
@@ -589,7 +838,8 @@
                 data-view="timeline"
                 aria-pressed="false"
               >
-                Línea de tiempo
+                <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-timeline"></use></svg>
+                <span>Línea de tiempo</span>
               </button>
 
             </div>
@@ -599,7 +849,8 @@
               class="hub-roadmap-link"
               href="./docs/HUB-ROADMAP.md"
             >
-              Abrir ROADMAP.md
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-file"></use></svg>
+              <span>Abrir ROADMAP.md</span>
             </a>
 
 
@@ -608,7 +859,8 @@
               id="hubRoadmapPdfExport"
               type="button"
             >
-              Exportar PDF
+              <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-pdf"></use></svg>
+              <span class="button-label">Exportar PDF</span>
             </button>
 
           </div>
@@ -690,13 +942,44 @@
 
     <footer>
 
-      <span>
-        RobDev512 · Proyectos personales
-      </span>
+      <div class="hub-footer-brand">
+        <img
+          src="./assets/branding/robdev512-hub-icon.png"
+          alt=""
+          aria-hidden="true"
+        >
 
-      <span>
-        Repositorios independientes
-      </span>
+        <div>
+          <span>
+            RobDev512 Hub · Proyectos personales
+          </span>
+
+          <span class="hub-footer-subtitle">
+            Repositorios independientes
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="hub-visit-counter"
+        id="hubVisitCounter"
+        data-state="loading"
+        aria-live="polite"
+      >
+        <svg class="ui-icon" aria-hidden="true"><use href="./assets/icons/hub-icons.svg#icon-eye"></use></svg>
+
+        <div class="hub-visit-counter-copy">
+          <span>Visitas al Hub</span>
+
+          <strong id="hubVisitTotal">
+            —
+          </strong>
+
+          <small id="hubVisitMeta">
+            Preparando contador…
+          </small>
+        </div>
+      </div>
 
     </footer>
 

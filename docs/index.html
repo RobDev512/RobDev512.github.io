@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#075cff">
+  <meta name="description" content="Centro de documentación dinámica de RobDev512 Hub.">
+  <title>Documentación · RobDev512 Hub</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/branding/favicon-32x32.png">
+  <link rel="stylesheet" href="./docs.css">
+  <script src="./docs.js" defer></script>
+</head>
+<body>
+  <header class="docs-topbar">
+    <a class="docs-brand" href="../" aria-label="Volver a RobDev512 Hub">
+      <img src="../assets/branding/robdev512-hub-lockup.png" alt="RobDev512 Hub">
+    </a>
+    <div class="docs-topbar-actions">
+      <a class="docs-button" href="../">
+        <svg class="docs-icon" aria-hidden="true"><use href="../assets/icons/hub-icons.svg#icon-home"></use></svg>
+        <span>Volver al Hub</span>
+      </a>
+      <a class="docs-button" href="https://github.com/RobDev512/RobDev512.github.io" target="_blank" rel="noopener noreferrer">
+        <svg class="docs-icon" aria-hidden="true"><use href="../assets/icons/hub-icons.svg#icon-code"></use></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="docs-shell">
+    <aside class="docs-sidebar">
+      <span class="docs-kicker">Documentación</span>
+      <h1>RobDev512 Hub</h1>
+      <p>Consulta la documentación en una vista navegable y conserva el Markdown como fuente original.</p>
+      <nav class="docs-navigation" id="docsNavigation" aria-label="Documentos disponibles"></nav>
+    </aside>
+
+    <section class="docs-content-shell">
+      <header class="docs-document-header">
+        <div>
+          <span class="docs-document-kind" id="docsDocumentKind">Documento</span>
+          <h2 id="docsDocumentTitle">Cargando documentación…</h2>
+        </div>
+
+        <div class="docs-document-actions">
+          <a class="docs-button" id="docsOpenRaw" href="#" target="_blank" rel="noopener noreferrer">
+            <svg class="docs-icon" aria-hidden="true"><use href="../assets/icons/hub-icons.svg#icon-external"></use></svg>
+            <span>Abrir Markdown</span>
+          </a>
+          <a class="docs-button docs-button-primary" id="docsDownload" href="#" download>
+            <svg class="docs-icon" aria-hidden="true"><use href="../assets/icons/hub-icons.svg#icon-download"></use></svg>
+            <span>Descargar .md</span>
+          </a>
+        </div>
+      </header>
+
+      <p class="docs-status" id="docsStatus" aria-live="polite">Cargando…</p>
+      <article class="docs-rendered" id="docsRendered"></article>
+    </section>
+  </main>
+
+  <footer class="docs-footer">
+    <span>RobDev512 Hub · Centro de documentación</span>
+    <span>Markdown renderizado dinámicamente</span>
+  </footer>
+</body>
+</html>
