@@ -83,16 +83,20 @@ Las categorías visibles se generan automáticamente según los proyectos regist
 - Página: https://robdev512.github.io/projects/tecnet-finder/
 - Código no publicado desde el hub
 
-## Navegación por categorías
+## Navegación del catálogo
 
 El hub incluye:
 
-- opción Todos;
-- categorías con proyectos;
-- contador por categoría;
-- URL compartible con `?category=<id>`;
-- navegación Atrás / Adelante;
-- soporte interno para combinar categoría, estado, tecnología y visibilidad.
+- navegación por categorías;
+- búsqueda por nombre, descripción, tecnologías y metadata;
+- filtros por estado;
+- filtros por visibilidad;
+- filtros por tecnología;
+- opción para mostrar sólo proyectos destacados;
+- orden recomendado, por actividad reciente, destacados o nombre;
+- combinación simultánea de filtros;
+- URL compartible con el estado completo de la navegación;
+- navegación Atrás / Adelante conservando filtros y orden.
 
 ## Inventario inicial
 
@@ -126,11 +130,17 @@ aplicación pública.
 - `docs/HUB-ARCHITECTURE.md`
 - `docs/HUB-ROADMAP.md`
 
-## Próximo objetivo
+## Estado actual
 
-La siguiente fase es mejorar la representación visible de estado y visibilidad para que proyectos públicos, privados y locales puedan convivir claramente en el catálogo.
+Las Fases 1 a 5 del Hub están implementadas:
 
-Todos los proyectos registrados actualmente cuentan ya con una página de presentación o landing propia.
+1. catálogo dinámico;
+2. navegación por categorías;
+3. inventario inicial y páginas de proyecto;
+4. estado y visibilidad;
+5. búsqueda, filtros combinados y ordenamiento.
+
+Todos los proyectos registrados actualmente cuentan con una página de presentación o landing propia.
 
 ## Roadmaps por proyecto
 

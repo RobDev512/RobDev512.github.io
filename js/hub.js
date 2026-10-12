@@ -15,13 +15,37 @@ const state = {
     category: null,
     status: null,
     technology: null,
-    visibility: null
-  }
+    visibility: null,
+    query: null,
+    featured: false
+  },
+  sort: "curated"
 };
 
 const grid = document.querySelector("#projectsGrid");
 const categoryFilters = document.querySelector("#categoryFilters");
 const catalogSummary = document.querySelector("#catalogSummary");
+
+const catalogSearch =
+  document.querySelector("#catalogSearch");
+
+const statusFilter =
+  document.querySelector("#statusFilter");
+
+const visibilityFilter =
+  document.querySelector("#visibilityFilter");
+
+const technologyFilter =
+  document.querySelector("#technologyFilter");
+
+const sortOrder =
+  document.querySelector("#sortOrder");
+
+const featuredOnly =
+  document.querySelector("#featuredOnly");
+
+const resetCatalogFilters =
+  document.querySelector("#resetCatalogFilters");
 
 function createElement(tagName, className = "", text = "") {
   const element = document.createElement(tagName);
@@ -142,6 +166,23 @@ function validateProject(project, catalog, knownIds) {
 
   if (!Array.isArray(project.links)) {
     throw new Error(`${project.id}: links debe ser un arreglo.`);
+  }
+
+  if (
+    project.updatedAt !== undefined &&
+    (
+      typeof project.updatedAt !== "string" ||
+      Number.isNaN(Date.parse(project.updatedAt))
+    )
+  ) {
+    throw new Error(`${project.id}: updatedAt no es una fecha válida.`);
+  }
+
+  if (
+    project.featured !== undefined &&
+    typeof project.featured !== "boolean"
+  ) {
+    throw new Error(`${project.id}: featured debe ser booleano.`);
   }
 
   for (const link of project.links) {
@@ -536,19 +577,62 @@ function renderProjectCard(project) {
   }
 }
 
-function projectMatchesFilters(project, filters = state.filters) {
+function normalizeSearchText(value = "") {
+  return String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("es")
+    .trim();
+}
+
+
+function searchableProjectText(project) {
+  const values = [
+    project.name,
+    project.subtype,
+    project.description,
+    project.version,
+    project.codename,
+    project.statusDetail,
+    categoryLabel(project.category),
+    statusLabel(project.status),
+    visibilityLabel(project.visibility),
+    ...project.technologies,
+    ...(project.card?.badges ?? [])
+  ];
+
+  return normalizeSearchText(
+    values
+      .filter(Boolean)
+      .join(" ")
+  );
+}
+
+
+function projectMatchesFilters(
+  project,
+  filters = state.filters
+) {
   const {
     category,
     status,
     technology,
-    visibility
+    visibility,
+    query,
+    featured
   } = filters;
 
-  if (category && project.category !== category) {
+  if (
+    category &&
+    project.category !== category
+  ) {
     return false;
   }
 
-  if (status && project.status !== status) {
+  if (
+    status &&
+    project.status !== status
+  ) {
     return false;
   }
 
@@ -559,22 +643,106 @@ function projectMatchesFilters(project, filters = state.filters) {
     return false;
   }
 
-  if (visibility && project.visibility !== visibility) {
+  if (
+    visibility &&
+    project.visibility !== visibility
+  ) {
     return false;
+  }
+
+  if (
+    featured === true &&
+    project.featured !== true
+  ) {
+    return false;
+  }
+
+  if (query) {
+    const needle =
+      normalizeSearchText(query);
+
+    if (
+      needle &&
+      !searchableProjectText(project).includes(needle)
+    ) {
+      return false;
+    }
   }
 
   return true;
 }
 
+
+function projectTimestamp(project) {
+  const value =
+    Date.parse(project.updatedAt ?? "");
+
+  return Number.isNaN(value)
+    ? 0
+    : value;
+}
+
+
+function curatedOrder(a, b) {
+  return (
+    (a.displayOrder ?? 9999) -
+    (b.displayOrder ?? 9999)
+  );
+}
+
+
+function projectComparator(a, b) {
+  switch (state.sort) {
+    case "recent":
+      return (
+        projectTimestamp(b) -
+        projectTimestamp(a) ||
+        curatedOrder(a, b)
+      );
+
+    case "featured":
+      return (
+        Number(b.featured === true) -
+        Number(a.featured === true) ||
+        projectTimestamp(b) -
+        projectTimestamp(a) ||
+        curatedOrder(a, b)
+      );
+
+    case "name-asc":
+      return a.name.localeCompare(
+        b.name,
+        "es",
+        {
+          sensitivity: "base"
+        }
+      );
+
+    case "name-desc":
+      return b.name.localeCompare(
+        a.name,
+        "es",
+        {
+          sensitivity: "base"
+        }
+      );
+
+    case "curated":
+    default:
+      return curatedOrder(a, b);
+  }
+}
+
+
 function visibleProjects() {
   return state.projects
-    .filter((project) => projectMatchesFilters(project))
-    .sort(
-      (a, b) =>
-        (a.displayOrder ?? 9999) -
-        (b.displayOrder ?? 9999)
-    );
+    .filter(
+      (project) =>
+        projectMatchesFilters(project)
+    )
+    .sort(projectComparator);
 }
+
 
 function categoryLabel(categoryId) {
   return taxonomyLabel(
@@ -583,11 +751,25 @@ function categoryLabel(categoryId) {
   );
 }
 
-function categoryProjectCount(categoryId) {
+
+function projectCountFor(
+  property,
+  value
+) {
   return state.projects.filter(
-    (project) => project.category === categoryId
+    (project) =>
+      project[property] === value
   ).length;
 }
+
+
+function categoryProjectCount(categoryId) {
+  return projectCountFor(
+    "category",
+    categoryId
+  );
+}
+
 
 function activeCategories() {
   if (!state.catalog) {
@@ -595,16 +777,19 @@ function activeCategories() {
   }
 
   return state.catalog.taxonomy.categories.filter(
-    (category) => categoryProjectCount(category.id) > 0
+    (category) =>
+      categoryProjectCount(category.id) > 0
   );
 }
+
 
 function createCategoryButton({
   id,
   label,
   count
 }) {
-  const isActive = state.filters.category === id;
+  const isActive =
+    state.filters.category === id;
 
   const button = createElement(
     "button",
@@ -613,14 +798,27 @@ function createCategoryButton({
 
   button.type = "button";
   button.dataset.category = id ?? "";
-  button.setAttribute("aria-pressed", String(isActive));
+
+  button.setAttribute(
+    "aria-pressed",
+    String(isActive)
+  );
+
   button.setAttribute(
     "aria-label",
-    `${label}: ${count} ${count === 1 ? "proyecto" : "proyectos"}`
+    `${label}: ${count} ${
+      count === 1
+        ? "proyecto"
+        : "proyectos"
+    }`
   );
 
   button.append(
-    createElement("span", "", label),
+    createElement(
+      "span",
+      "",
+      label
+    ),
     createElement(
       "span",
       "category-filter-count",
@@ -628,26 +826,34 @@ function createCategoryButton({
     )
   );
 
-  button.addEventListener("click", () => {
-    setFilters(
-      {
-        category: id
-      },
-      {
-        historyMode: "push"
-      }
-    );
-  });
+  button.addEventListener(
+    "click",
+    () => {
+      setFilters(
+        {
+          category: id
+        },
+        {
+          historyMode: "push"
+        }
+      );
+    }
+  );
 
   return button;
 }
 
+
 function renderCategoryFilters() {
-  if (!categoryFilters || !state.catalog) {
+  if (
+    !categoryFilters ||
+    !state.catalog
+  ) {
     return;
   }
 
-  const fragment = document.createDocumentFragment();
+  const fragment =
+    document.createDocumentFragment();
 
   fragment.append(
     createCategoryButton({
@@ -657,63 +863,293 @@ function renderCategoryFilters() {
     })
   );
 
-  for (const category of activeCategories()) {
+  for (
+    const category
+    of activeCategories()
+  ) {
     fragment.append(
       createCategoryButton({
         id: category.id,
         label: category.label,
-        count: categoryProjectCount(category.id)
+        count:
+          categoryProjectCount(
+            category.id
+          )
       })
     );
   }
 
-  categoryFilters.replaceChildren(fragment);
+  categoryFilters.replaceChildren(
+    fragment
+  );
 }
+
+
+function uniqueTechnologies() {
+  return [
+    ...new Set(
+      state.projects.flatMap(
+        (project) =>
+          project.technologies
+      )
+    )
+  ].sort(
+    (a, b) =>
+      a.localeCompare(
+        b,
+        "es",
+        {
+          sensitivity: "base"
+        }
+      )
+  );
+}
+
+
+function activeTaxonomyItems(
+  groupName,
+  projectProperty
+) {
+  if (!state.catalog) {
+    return [];
+  }
+
+  return state.catalog.taxonomy[
+    groupName
+  ].filter(
+    (item) =>
+      projectCountFor(
+        projectProperty,
+        item.id
+      ) > 0
+  );
+}
+
+
+function populateSelect(
+  select,
+  items,
+  placeholder
+) {
+  if (!select) {
+    return;
+  }
+
+  const current =
+    select.value;
+
+  const fragment =
+    document.createDocumentFragment();
+
+  const empty =
+    document.createElement("option");
+
+  empty.value = "";
+  empty.textContent = placeholder;
+
+  fragment.append(empty);
+
+  for (const item of items) {
+    const option =
+      document.createElement("option");
+
+    option.value = item.id;
+    option.textContent =
+      item.label;
+
+    fragment.append(option);
+  }
+
+  select.replaceChildren(fragment);
+
+  if (
+    [
+      ...select.options
+    ].some(
+      (option) =>
+        option.value === current
+    )
+  ) {
+    select.value = current;
+  }
+}
+
+
+function populateAdvancedFilters() {
+  populateSelect(
+    statusFilter,
+    activeTaxonomyItems(
+      "statuses",
+      "status"
+    ),
+    "Todos los estados"
+  );
+
+  populateSelect(
+    visibilityFilter,
+    activeTaxonomyItems(
+      "visibilities",
+      "visibility"
+    ),
+    "Todas las visibilidades"
+  );
+
+  populateSelect(
+    technologyFilter,
+    uniqueTechnologies().map(
+      (technology) => ({
+        id: technology,
+        label: technology
+      })
+    ),
+    "Todas las tecnologías"
+  );
+}
+
+
+function syncControlValues() {
+  if (catalogSearch) {
+    catalogSearch.value =
+      state.filters.query ?? "";
+  }
+
+  if (statusFilter) {
+    statusFilter.value =
+      state.filters.status ?? "";
+  }
+
+  if (visibilityFilter) {
+    visibilityFilter.value =
+      state.filters.visibility ?? "";
+  }
+
+  if (technologyFilter) {
+    technologyFilter.value =
+      state.filters.technology ?? "";
+  }
+
+  if (sortOrder) {
+    sortOrder.value =
+      state.sort;
+  }
+
+  if (featuredOnly) {
+    featuredOnly.checked =
+      state.filters.featured === true;
+  }
+
+  if (resetCatalogFilters) {
+    resetCatalogFilters.disabled =
+      !hasActiveFilters();
+  }
+}
+
+
+function activeFilterCount() {
+  return [
+    state.filters.category,
+    state.filters.status,
+    state.filters.technology,
+    state.filters.visibility,
+    state.filters.query,
+    state.filters.featured === true
+      ? "featured"
+      : null
+  ].filter(Boolean).length;
+}
+
+
+function hasActiveFilters() {
+  return (
+    activeFilterCount() > 0 ||
+    state.sort !== "curated"
+  );
+}
+
 
 function renderCatalogSummary() {
   if (!catalogSummary) {
     return;
   }
 
-  const visible = visibleProjects().length;
-  const total = state.projects.length;
-  const activeLabel = categoryLabel(state.filters.category);
+  const visible =
+    visibleProjects().length;
 
-  if (activeLabel) {
+  const total =
+    state.projects.length;
+
+  const filterCount =
+    activeFilterCount();
+
+  if (
+    visible === total &&
+    filterCount === 0
+  ) {
     catalogSummary.textContent =
-      `${visible} ${visible === 1 ? "proyecto" : "proyectos"} · ${activeLabel}`;
+      `${total} ${
+        total === 1
+          ? "proyecto"
+          : "proyectos"
+      } en el catálogo`;
 
     return;
   }
 
   catalogSummary.textContent =
-    `${total} ${total === 1 ? "proyecto" : "proyectos"} en el catálogo`;
+    `${visible} de ${total} ${
+      total === 1
+        ? "proyecto"
+        : "proyectos"
+    } · ${filterCount} ${
+      filterCount === 1
+        ? "filtro activo"
+        : "filtros activos"
+    }`;
 }
 
+
 function renderProjects() {
-  const projects = visibleProjects();
-  const fragment = document.createDocumentFragment();
+  const projects =
+    visibleProjects();
+
+  const fragment =
+    document.createDocumentFragment();
 
   for (const project of projects) {
-    fragment.append(renderProjectCard(project));
+    fragment.append(
+      renderProjectCard(project)
+    );
   }
 
   grid.replaceChildren(fragment);
-  grid.setAttribute("aria-busy", "false");
+
+  grid.setAttribute(
+    "aria-busy",
+    "false"
+  );
 
   if (projects.length === 0) {
-    const emptyCard = createElement(
-      "article",
-      "project-card project-card-placeholder"
-    );
+    const emptyCard =
+      createElement(
+        "article",
+        "project-card project-card-placeholder"
+      );
 
     emptyCard.append(
-      createElement("span", "project-type", "Catálogo"),
-      createElement("h3", "", "No hay proyectos para mostrar"),
+      createElement(
+        "span",
+        "project-type",
+        "Catálogo"
+      ),
+      createElement(
+        "h3",
+        "",
+        "No hay proyectos para mostrar"
+      ),
       createElement(
         "p",
         "",
-        "Los filtros actuales no coinciden con ningún proyecto."
+        "La búsqueda o los filtros actuales no coinciden con ningún proyecto."
       )
     );
 
@@ -721,126 +1157,502 @@ function renderProjects() {
   }
 }
 
+
 function renderCatalog() {
   renderCategoryFilters();
   renderCatalogSummary();
+  syncControlValues();
   renderProjects();
 }
 
-function categoryExists(categoryId) {
-  if (!categoryId || !state.catalog) {
+
+function taxonomyItemExists(
+  groupName,
+  itemId
+) {
+  if (
+    !itemId ||
+    !state.catalog
+  ) {
     return false;
   }
 
-  return state.catalog.taxonomy.categories.some(
-    (category) => category.id === categoryId
+  return state.catalog.taxonomy[
+    groupName
+  ].some(
+    (item) =>
+      item.id === itemId
   );
 }
 
-function categoryHasProjects(categoryId) {
-  return categoryProjectCount(categoryId) > 0;
-}
 
-function readCategoryFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get("category");
-
-  if (
-    category &&
-    categoryExists(category) &&
-    categoryHasProjects(category)
-  ) {
-    return category;
-  }
-
-  return null;
-}
-
-function syncCategoryUrl(historyMode = "replace") {
-  const url = new URL(window.location.href);
-  const category = state.filters.category;
-
-  if (category) {
-    url.searchParams.set("category", category);
-  } else {
-    url.searchParams.delete("category");
-  }
-
-  const method = historyMode === "push"
-    ? "pushState"
-    : "replaceState";
-
-  window.history[method](
-    { category },
-    "",
-    url
+function categoryHasProjects(
+  categoryId
+) {
+  return (
+    categoryProjectCount(
+      categoryId
+    ) > 0
   );
 }
 
-function normalizeFilters(filters) {
+
+function technologyExists(
+  technology
+) {
+  return (
+    !technology ||
+    uniqueTechnologies().includes(
+      technology
+    )
+  );
+}
+
+
+function normalizeFilters(
+  filters
+) {
   const next = {
     ...state.filters,
     ...filters
   };
 
-  for (const key of Object.keys(next)) {
-    if (next[key] === "" || next[key] === undefined) {
+  for (
+    const key
+    of [
+      "category",
+      "status",
+      "technology",
+      "visibility",
+      "query"
+    ]
+  ) {
+    if (
+      next[key] === "" ||
+      next[key] === undefined
+    ) {
       next[key] = null;
     }
   }
 
+  next.featured =
+    next.featured === true;
+
   return next;
 }
+
+
+const VALID_SORTS =
+  new Set([
+    "curated",
+    "recent",
+    "featured",
+    "name-asc",
+    "name-desc"
+  ]);
+
+
+function normalizeSort(sort) {
+  return VALID_SORTS.has(sort)
+    ? sort
+    : "curated";
+}
+
+
+function readViewStateFromUrl() {
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const category =
+    params.get("category");
+
+  const status =
+    params.get("status");
+
+  const visibility =
+    params.get("visibility");
+
+  const technology =
+    params.get("tech");
+
+  const query =
+    params.get("q");
+
+  const featured =
+    params.get("featured") === "1";
+
+  const sort =
+    normalizeSort(
+      params.get("sort")
+    );
+
+  return {
+    filters: normalizeFilters({
+      category:
+        category &&
+        taxonomyItemExists(
+          "categories",
+          category
+        ) &&
+        categoryHasProjects(category)
+          ? category
+          : null,
+
+      status:
+        status &&
+        taxonomyItemExists(
+          "statuses",
+          status
+        )
+          ? status
+          : null,
+
+      visibility:
+        visibility &&
+        taxonomyItemExists(
+          "visibilities",
+          visibility
+        )
+          ? visibility
+          : null,
+
+      technology:
+        technologyExists(
+          technology
+        )
+          ? technology
+          : null,
+
+      query:
+        query?.trim()
+          ? query.trim()
+          : null,
+
+      featured
+    }),
+
+    sort
+  };
+}
+
+
+function syncUrl(
+  historyMode = "replace"
+) {
+  const url =
+    new URL(
+      window.location.href
+    );
+
+  const entries = {
+    category:
+      state.filters.category,
+
+    status:
+      state.filters.status,
+
+    visibility:
+      state.filters.visibility,
+
+    tech:
+      state.filters.technology,
+
+    q:
+      state.filters.query,
+
+    featured:
+      state.filters.featured
+        ? "1"
+        : null,
+
+    sort:
+      state.sort !== "curated"
+        ? state.sort
+        : null
+  };
+
+  for (
+    const [
+      key,
+      value
+    ]
+    of Object.entries(entries)
+  ) {
+    if (value) {
+      url.searchParams.set(
+        key,
+        value
+      );
+    }
+    else {
+      url.searchParams.delete(
+        key
+      );
+    }
+  }
+
+  const method =
+    historyMode === "push"
+      ? "pushState"
+      : "replaceState";
+
+  window.history[method](
+    {
+      filters:
+        getFilters(),
+
+      sort:
+        state.sort
+    },
+    "",
+    url
+  );
+}
+
+
+function validateFilterState() {
+  if (
+    state.filters.category &&
+    (
+      !taxonomyItemExists(
+        "categories",
+        state.filters.category
+      ) ||
+      !categoryHasProjects(
+        state.filters.category
+      )
+    )
+  ) {
+    state.filters.category =
+      null;
+  }
+
+  if (
+    state.filters.status &&
+    !taxonomyItemExists(
+      "statuses",
+      state.filters.status
+    )
+  ) {
+    state.filters.status =
+      null;
+  }
+
+  if (
+    state.filters.visibility &&
+    !taxonomyItemExists(
+      "visibilities",
+      state.filters.visibility
+    )
+  ) {
+    state.filters.visibility =
+      null;
+  }
+
+  if (
+    state.filters.technology &&
+    !technologyExists(
+      state.filters.technology
+    )
+  ) {
+    state.filters.technology =
+      null;
+  }
+}
+
 
 function setFilters(
   filters = {},
   {
     historyMode = "replace",
-    syncUrl = true
+    syncUrlState = true,
+    sort = state.sort
   } = {}
 ) {
-  state.filters = normalizeFilters(filters);
+  state.filters =
+    normalizeFilters(filters);
 
-  if (
-    state.filters.category &&
-    (
-      !categoryExists(state.filters.category) ||
-      !categoryHasProjects(state.filters.category)
-    )
-  ) {
-    state.filters.category = null;
-  }
+  state.sort =
+    normalizeSort(sort);
 
-  if (syncUrl) {
-    syncCategoryUrl(historyMode);
+  validateFilterState();
+
+  if (syncUrlState) {
+    syncUrl(historyMode);
   }
 
   renderCatalog();
 }
+
+
+function setSort(
+  sort,
+  {
+    historyMode = "push"
+  } = {}
+) {
+  state.sort =
+    normalizeSort(sort);
+
+  syncUrl(historyMode);
+  renderCatalog();
+}
+
 
 function resetFilters() {
   state.filters = {
     category: null,
     status: null,
     technology: null,
-    visibility: null
+    visibility: null,
+    query: null,
+    featured: false
   };
 
-  syncCategoryUrl("push");
+  state.sort = "curated";
+
+  syncUrl("push");
   renderCatalog();
 }
+
 
 function getCatalog() {
   return state.catalog;
 }
 
+
 function getProjects() {
-  return [...state.projects];
+  return [
+    ...state.projects
+  ];
 }
 
+
 function getFilters() {
-  return { ...state.filters };
+  return {
+    ...state.filters
+  };
 }
+
+
+function getViewState() {
+  return {
+    filters:
+      getFilters(),
+
+    sort:
+      state.sort,
+
+    visibleProjects:
+      visibleProjects()
+        .map(
+          (project) =>
+            project.id
+        )
+  };
+}
+
+
+function bindAdvancedControls() {
+  catalogSearch?.addEventListener(
+    "input",
+    () => {
+      setFilters(
+        {
+          query:
+            catalogSearch.value
+        },
+        {
+          historyMode:
+            "replace"
+        }
+      );
+    }
+  );
+
+  statusFilter?.addEventListener(
+    "change",
+    () => {
+      setFilters(
+        {
+          status:
+            statusFilter.value
+        },
+        {
+          historyMode:
+            "push"
+        }
+      );
+    }
+  );
+
+  visibilityFilter?.addEventListener(
+    "change",
+    () => {
+      setFilters(
+        {
+          visibility:
+            visibilityFilter.value
+        },
+        {
+          historyMode:
+            "push"
+        }
+      );
+    }
+  );
+
+  technologyFilter?.addEventListener(
+    "change",
+    () => {
+      setFilters(
+        {
+          technology:
+            technologyFilter.value
+        },
+        {
+          historyMode:
+            "push"
+        }
+      );
+    }
+  );
+
+  sortOrder?.addEventListener(
+    "change",
+    () => {
+      setSort(
+        sortOrder.value
+      );
+    }
+  );
+
+  featuredOnly?.addEventListener(
+    "change",
+    () => {
+      setFilters(
+        {
+          featured:
+            featuredOnly.checked
+        },
+        {
+          historyMode:
+            "push"
+        }
+      );
+    }
+  );
+
+  resetCatalogFilters?.addEventListener(
+    "click",
+    () => {
+      resetFilters();
+    }
+  );
+}
+
 
 function showCatalogError(error) {
   console.error(
@@ -863,14 +1675,23 @@ function showCatalogError(error) {
       "No se pudo cargar el catálogo";
   }
 
-  const errorCard = createElement(
-    "article",
-    "project-card project-card-placeholder"
-  );
+  const errorCard =
+    createElement(
+      "article",
+      "project-card project-card-placeholder"
+    );
 
   errorCard.append(
-    createElement("span", "project-type", "Catálogo"),
-    createElement("h3", "", "No se pudo cargar el catálogo"),
+    createElement(
+      "span",
+      "project-type",
+      "Catálogo"
+    ),
+    createElement(
+      "h3",
+      "",
+      "No se pudo cargar el catálogo"
+    ),
     createElement(
       "p",
       "",
@@ -878,25 +1699,37 @@ function showCatalogError(error) {
     )
   );
 
-  grid.replaceChildren(errorCard);
-  grid.setAttribute("aria-busy", "false");
+  grid.replaceChildren(
+    errorCard
+  );
+
+  grid.setAttribute(
+    "aria-busy",
+    "false"
+  );
 }
+
 
 async function loadCatalog() {
   if (!grid) {
-    throw new Error("No existe #projectsGrid en index.html.");
+    throw new Error(
+      "No existe #projectsGrid en index.html."
+    );
   }
 
   if (!categoryFilters) {
-    throw new Error("No existe #categoryFilters en index.html.");
+    throw new Error(
+      "No existe #categoryFilters en index.html."
+    );
   }
 
-  const response = await fetch(
-    CATALOG_URL,
-    {
-      cache: "no-store"
-    }
-  );
+  const response =
+    await fetch(
+      CATALOG_URL,
+      {
+        cache: "no-store"
+      }
+    );
 
   if (!response.ok) {
     throw new Error(
@@ -904,32 +1737,69 @@ async function loadCatalog() {
     );
   }
 
-  const catalog = await response.json();
+  const catalog =
+    await response.json();
+
   validateCatalog(catalog);
 
-  state.catalog = catalog;
-  state.projects = [...catalog.projects];
-  state.filters.category = readCategoryFromUrl();
+  state.catalog =
+    catalog;
 
-  syncCategoryUrl("replace");
+  state.projects =
+    [
+      ...catalog.projects
+    ];
+
+  populateAdvancedFilters();
+
+  const initial =
+    readViewStateFromUrl();
+
+  state.filters =
+    initial.filters;
+
+  state.sort =
+    initial.sort;
+
+  bindAdvancedControls();
+
+  syncUrl("replace");
   renderCatalog();
 }
 
-window.addEventListener("popstate", () => {
-  if (!state.catalog) {
-    return;
-  }
 
-  state.filters.category = readCategoryFromUrl();
-  renderCatalog();
-});
+window.addEventListener(
+  "popstate",
+  () => {
+    if (!state.catalog) {
+      return;
+    }
+
+    const next =
+      readViewStateFromUrl();
+
+    state.filters =
+      next.filters;
+
+    state.sort =
+      next.sort;
+
+    renderCatalog();
+  }
+);
+
 
 window.HubCatalog = {
   getCatalog,
   getProjects,
   getFilters,
+  getViewState,
   setFilters,
+  setSort,
   resetFilters
 };
 
-loadCatalog().catch(showCatalogError);
+
+loadCatalog().catch(
+  showCatalogError
+);
