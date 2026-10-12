@@ -10,11 +10,18 @@ El hub ya cuenta con:
 - renderizado mediante `js/hub.js`;
 - taxonomía de categorías, estados y visibilidades;
 - navegación visible por categoría;
-- contadores por categoría;
-- URL compartible;
-- soporte interno para filtros combinados;
+- búsqueda simple;
+- búsqueda avanzada opcional;
+- filtros combinados y ordenamiento;
 - inventario inicial de proyectos personales;
-- cuatro proyectos registrados en el catálogo.
+- páginas individuales para los proyectos ya registrados;
+- sección pública del roadmap del propio hub.
+
+## Criterio general
+
+El hub se organiza por **tipo de proyecto/producto**, no por lenguaje de
+programación. Los lenguajes, frameworks, plataformas y bases de datos se
+tratan como metadata secundaria.
 
 ---
 
@@ -22,14 +29,22 @@ El hub ya cuenta con:
 
 **Estado:** Completada.
 
+## Objetivo
+
+Separar el catálogo de proyectos de `index.html` y mover la información del hub
+a una fuente de verdad centralizada.
+
 ## Implementado
 
-- [x] Crear `data/projects.json`.
-- [x] Crear `js/hub.js`.
-- [x] Renderizar proyectos desde JavaScript.
-- [x] Mantener las tarjetas de AWS ORBISHOT y LabNotes.
-- [x] Validar la estructura del catálogo.
-- [x] Preparar filtros internos.
+- `data/projects.json` como catálogo principal;
+- carga dinámica desde `js/hub.js`;
+- renderizado de tarjetas sin hardcodear cada proyecto en HTML;
+- estructura preparada para ampliar el catálogo sin rediseñar la portada.
+
+## Impacto
+
+Esta fase convirtió la portada en una vista renderizada desde datos, lo que
+permitió que el hub pudiera crecer sin duplicar estructura manual en el HTML.
 
 ---
 
@@ -37,18 +52,23 @@ El hub ya cuenta con:
 
 **Estado:** Completada.
 
+## Objetivo
+
+Agrupar el catálogo por categoría de proyecto y permitir navegación clara desde
+la portada.
+
 ## Implementado
 
-- [x] Navegación visible por categoría.
-- [x] Opción Todos.
-- [x] Filtros generados desde la taxonomía.
-- [x] Ocultar categorías vacías.
-- [x] Contadores.
-- [x] `aria-pressed`.
-- [x] Resumen dinámico.
-- [x] `?category=<id>`.
-- [x] Atrás / Adelante.
-- [x] Aparición automática de nuevas categorías con proyectos.
+- categorías visibles como navegación;
+- opción `Todos`;
+- contadores por categoría;
+- sincronización con la URL;
+- navegación compatible con Atrás / Adelante del navegador.
+
+## Impacto
+
+El hub dejó de ser un listado lineal y empezó a comportarse como un catálogo
+navegable.
 
 ---
 
@@ -58,32 +78,21 @@ El hub ya cuenta con:
 
 ## Objetivo
 
-Revisar los proyectos personales existentes y registrar en el catálogo los que ya tienen identidad suficiente para el portafolio.
+Registrar proyectos personales ya existentes, aunque no todos estuvieran
+publicados en GitHub o completamente documentados.
 
-## Resultado del inventario inicial
+## Implementado
 
-### Registrados
+- incorporación inicial de AWS ORBISHOT, LabNotes, Convertidor de Archivos y
+  TecNet Finder;
+- logos de proyectos con identidad propia;
+- páginas individuales o landing para cada uno;
+- roadmaps individuales conectados con su documentación.
 
-- AWS ORBISHOT.
-- LabNotes.
-- Convertidor de Archivos.
-- TecNet Finder.
+## Impacto
 
-### No registrados como proyectos independientes
-
-Se descartaron del catálogo público inicial:
-
-- carpetas técnicas de entorno o editor;
-- el propio repositorio del Hub;
-- variantes históricas de un mismo proyecto;
-- ejercicios introductorios aislados de C++;
-- colecciones de prácticas de Go sin identidad de producto independiente.
-
-### Pendientes de promoción futura
-
-Algunos proyectos locales pequeños permanecen fuera del catálogo hasta contar con suficiente descripción, alcance o identidad propia.
-
-Esto evita publicar nombres o información insuficiente únicamente por existir como carpeta local.
+Esta fase hizo que el hub representara proyectos reales y no sólo una
+arquitectura vacía.
 
 ---
 
@@ -91,15 +100,23 @@ Esto evita publicar nombres o información insuficiente únicamente por existir 
 
 **Estado:** Completada.
 
+## Objetivo
+
+Hacer explícito si un proyecto está estable, en desarrollo o privado, sin
+mezclar ese significado con las tecnologías de la tarjeta.
+
 ## Implementado
 
-- [x] Mostrar el estado en cada tarjeta.
-- [x] Mostrar la visibilidad en cada tarjeta.
-- [x] Diferenciar visualmente proyectos públicos, privados y locales.
-- [x] Mantener estado y visibilidad como propiedades independientes.
-- [x] Mostrar `statusDetail` cuando aporta contexto adicional.
-- [x] Separar tecnologías de estado y visibilidad.
-- [x] Conservar `data-status` y `data-visibility` para filtros posteriores.
+- estados independientes del resto de etiquetas;
+- visibilidad independiente del resto de etiquetas;
+- estilos visuales para cada combinación;
+- soporte para proyectos públicos, privados, locales o de código privado con
+  app pública.
+
+## Impacto
+
+El catálogo empezó a comunicar claramente la situación de cada proyecto y no
+sólo su stack técnico.
 
 ---
 
@@ -107,79 +124,89 @@ Esto evita publicar nombres o información insuficiente únicamente por existir 
 
 **Estado:** Completada.
 
+## Objetivo
+
+Mejorar la exploración del catálogo con búsqueda, filtros combinados y
+ordenamiento, manteniendo una navegación simple para el uso diario.
+
 ## Implementado
 
-- [x] Buscador.
-- [x] Filtro por estado.
-- [x] Filtro por tecnología.
-- [x] Filtro por visibilidad.
-- [x] Ordenamiento recomendado.
-- [x] Ordenamiento por actividad reciente.
-- [x] Ordenamiento alfabético.
-- [x] Destacados primero.
-- [x] Filtro sólo destacados.
-- [x] Combinación simultánea de filtros.
-- [x] Estado completo de navegación en la URL.
-- [x] Atrás / Adelante con restauración de filtros.
-- [x] Botón para limpiar filtros.
+- búsqueda simple siempre visible;
+- panel de búsqueda avanzada opcional;
+- filtros por estado, visibilidad y tecnología;
+- orden recomendado, recientes, destacados y orden alfabético;
+- opción para mostrar sólo proyectos destacados;
+- persistencia de la vista en la URL;
+- sección pública del roadmap del hub.
+
+## Impacto
+
+La portada se convirtió en un explorador funcional del catálogo sin perder la
+simplicidad de uso.
 
 ---
 
 # Fase 6 - Páginas individuales
 
-**Estado:** Parcialmente adelantada.
+**Estado:** Completada.
 
-Los proyectos importantes podrán disponer de una página:
+## Objetivo
 
-`/projects/<id>/`
+Definir un patrón reutilizable para futuras páginas de proyecto con identidad
+propia, metadata común y roadmap coherente.
 
-Cobertura actual:
+## Implementado
 
-- AWS ORBISHOT: página propia.
-- LabNotes: página propia.
-- Convertidor de Archivos: página propia.
-- TecNet Finder: página propia.
+- `data/project-pages.json` como fuente de contenido para páginas estándar;
+- renderer compartido `projects/project-page.js`;
+- estilos compartidos mediante `projects/project-page.css`;
+- integración automática con `projects/project-roadmap.js`;
+- shell HTML mínimo basado en `data-project-id`;
+- Convertidor de Archivos migrado al patrón común;
+- TecNet Finder migrado al patrón común;
+- plantilla `projects/_template/`;
+- script `scripts/new-project-page.mjs` para crear nuevas páginas;
+- guía `docs/PROJECT-PAGE-STANDARD.md`;
+- soporte explícito para mantener páginas personalizadas cuando el proyecto lo
+  requiera;
+- exportación y descarga de respaldos PDF para el roadmap del Hub y los
+  roadmaps de AWS ORBISHOT, LabNotes, Convertidor de Archivos y TecNet Finder.
 
-Los futuros proyectos importantes podrán adoptar la misma estructura.
+## Impacto
 
+Agregar un proyecto estándar ya no requiere copiar y mantener una página HTML
+completa. La estructura visual y el comportamiento viven en recursos
+compartidos, mientras que cada proyecto conserva su contenido y roadmap.
 ---
 
 # Fase 7 - Historial del portafolio
 
 **Estado:** Visión futura.
 
-Posibles funciones:
+## Objetivo
 
-- timeline;
-- año de creación;
-- fecha de última actualización;
-- proyectos activos;
-- proyectos terminados;
-- estadísticas por categoría;
-- estadísticas por tecnología;
-- evolución histórica.
+Registrar la evolución del portafolio como un sistema vivo, mostrando cómo ha
+crecido el conjunto de proyectos con el tiempo.
 
----
+## Posibles funciones
 
-# Principio principal
+- historial de altas de proyectos;
+- timeline de releases relevantes del portafolio;
+- vista por etapas o temporadas de desarrollo;
+- destacados por año o ciclo;
+- conexiones entre proyectos relacionados.
 
-La navegación debe responder primero:
+## Impacto esperado
 
-**¿Qué tipo de proyecto es?**
-
-y después:
-
-**¿Con qué tecnologías está construido?**
-
-Los lenguajes son metadata secundaria.
+Convertir el hub no sólo en un catálogo, sino también en un registro narrativo
+de evolución personal y técnica.
 
 ---
 
 # Próximo paso
 
-Continuar con la Fase 6:
+Evaluar la Fase 7:
 
-**consolidar el patrón de páginas individuales para proyectos futuros**.
+**historial del portafolio y evolución temporal de los proyectos**.
 
-La cobertura del catálogo actual ya está adelantada: los cuatro proyectos
-registrados disponen de una landing o página propia.
+La Fase 6 queda cerrada con un estándar reutilizable para páginas futuras.

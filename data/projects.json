@@ -139,7 +139,14 @@
           "external": true
         }
       ],
-      "updatedAt": "2026-10-12"
+      "updatedAt": "2026-10-12",
+      "roadmapExport": {
+        "type": "markdown",
+        "url": "https://raw.githubusercontent.com/RobDev512/AWS-ORBISHOT/main/AWS-Game/docs/ROADMAP.md",
+        "title": "AWS ORBISHOT",
+        "subtitle": "Roadmap del videojuego",
+        "filename": "AWS-ORBISHOT-Roadmap.pdf"
+      }
     },
     {
       "id": "labnotes",
@@ -199,7 +206,15 @@
           "external": true
         }
       ],
-      "updatedAt": "2026-09-30"
+      "updatedAt": "2026-09-30",
+      "roadmapExport": {
+        "type": "script-array",
+        "url": "./projects/labnotes/roadmap.js",
+        "variableName": "roadmapItems",
+        "title": "LabNotes",
+        "subtitle": "Roadmap de la plataforma",
+        "filename": "LabNotes-Roadmap.pdf"
+      }
     },
     {
       "id": "convertidor-archivos",
@@ -257,7 +272,14 @@
         "src": "./assets/convertidor-archivos-logo.png",
         "alt": "Logo de Convertidor de Archivos"
       },
-      "updatedAt": "2026-09-05"
+      "updatedAt": "2026-09-05",
+      "roadmapExport": {
+        "type": "markdown",
+        "url": "./projects/convertidor-archivos/ROADMAP.md",
+        "title": "Convertidor de Archivos",
+        "subtitle": "Roadmap de la aplicación de escritorio",
+        "filename": "Convertidor-de-Archivos-Roadmap.pdf"
+      }
     },
     {
       "id": "tecnet-finder",
@@ -314,7 +336,14 @@
         "src": "./assets/tecnet-finder-logo.png",
         "alt": "Logo de TecNet Finder"
       },
-      "updatedAt": "2026-09-24"
+      "updatedAt": "2026-09-24",
+      "roadmapExport": {
+        "type": "markdown",
+        "url": "./projects/tecnet-finder/ROADMAP.md",
+        "title": "TecNet Finder",
+        "subtitle": "Roadmap del DSL / compilador",
+        "filename": "TecNet-Finder-Roadmap.pdf"
+      }
     }
   ]
 }

@@ -271,3 +271,169 @@ El catálogo admite:
 
 `updatedAt` representa la actividad más reciente conocida del repositorio del
 proyecto y permite ordenar sin depender del orden manual del catálogo.
+
+
+## 15. Búsqueda simple y avanzada
+
+La navegación tiene dos niveles:
+
+### Modo normal
+
+Siempre visible:
+
+- búsqueda de texto;
+- categorías.
+
+### Modo avanzado
+
+Se activa explícitamente mediante el botón `Búsqueda avanzada` e incluye:
+
+- estado;
+- visibilidad;
+- tecnología;
+- ordenamiento;
+- sólo destacados.
+
+Al cerrar el modo avanzado se eliminan sus filtros y se conserva la navegación
+simple.
+
+Si una URL contiene parámetros avanzados válidos, el panel se abre
+automáticamente para hacer visible el estado que está afectando al catálogo.
+
+## 16. Roadmap público
+
+La portada puede presentar el roadmap del propio Hub como una sección
+independiente.
+
+La interfaz no duplica la planificación: obtiene las fases directamente de
+`docs/HUB-ROADMAP.md`, mostrando número de fase, título, estado y un resumen.
+
+La sección puede retirarse posteriormente sin modificar el archivo Markdown
+ni la arquitectura del catálogo.
+
+
+## 17. Roadmap enriquecido
+
+La sección pública del roadmap del Hub ya no se limita a tarjetas mínimas.
+
+Ahora soporta:
+
+- resumen visible por fase;
+- lista corta de highlights;
+- panel `Ver detalle`;
+- vista en tarjetas;
+- vista en árbol vertical;
+- vista en árbol horizontal.
+
+La fuente sigue siendo `docs/HUB-ROADMAP.md`, por lo que la portada sólo actúa
+como una visualización derivada del documento real.
+
+
+## 18. Roadmap timeline en canvas
+
+El roadmap público del Hub soporta una visualización tipo línea de tiempo
+renderizada con `<canvas>`.
+
+Características:
+
+- nodos por fase;
+- línea base cronológica;
+- selección interactiva mediante clic;
+- panel de detalle desacoplado;
+- coexistencia con una vista alternativa en tarjetas.
+
+Esto permite una representación más visual sin abandonar el documento fuente
+`docs/HUB-ROADMAP.md`.
+
+
+## 19. Estándar reutilizable de páginas
+
+La Fase 6 separa el contenido largo de una página estándar de su HTML.
+
+### Fuente de contenido
+
+`data/project-pages.json`
+
+### Renderer
+
+`projects/project-page.js`
+
+### Estilos
+
+`projects/project-page.css`
+
+### Roadmap
+
+`projects/project-roadmap.js`
+
+### Shell
+
+Cada página estándar sólo necesita declarar:
+
+`data-project-id="<id>"`
+
+El renderer busca ese ID en `data/project-pages.json` y construye la página.
+
+### Excepciones deliberadas
+
+AWS ORBISHOT y LabNotes continúan como páginas personalizadas. El estándar no
+pretende eliminar identidades especiales; pretende evitar duplicación en los
+proyectos que sí pueden compartir una estructura común.
+
+### Scaffold
+
+`scripts/new-project-page.mjs` crea la carpeta inicial de un proyecto nuevo a
+partir de `projects/_template/`.
+
+
+## 20. Exportación PDF de roadmaps
+
+`js/roadmap-pdf.js` genera PDFs A4 directamente en el navegador sin bibliotecas
+externas.
+
+El catálogo puede declarar `roadmapExport` por proyecto. La configuración
+define la fuente, título y nombre del archivo.
+
+Tipos soportados:
+
+- `markdown`: descarga y convierte un `ROADMAP.md`;
+- `script-array`: extrae un arreglo estático de roadmap desde un script propio.
+
+Esto permite respaldar roadmaps incluso cuando un proyecto, como LabNotes,
+mantiene su información de roadmap en JavaScript.
+
+Los nombres de archivo incluyen automáticamente la fecha de exportación.
+
+
+### Ajuste de exportación PDF diseñada
+
+La exportación PDF evolucionó de una generación textual simple a una
+**renderización HTML de impresión**.
+
+`js/roadmap-pdf.js` ahora:
+
+- interpreta el roadmap fuente;
+- construye una composición visual para impresión;
+- la renderiza en un `iframe` oculto;
+- lanza `window.print()` para que el usuario guarde el resultado como PDF.
+
+Esto permite mantener portada, bloques, tarjetas, estados y jerarquía visual
+sin introducir librerías externas.
+
+
+### Exportador PDF visual directo
+
+La implementación definitiva de `js/roadmap-pdf.js` genera el archivo PDF en el
+navegador y lo descarga mediante `Blob` + `URL.createObjectURL`.
+
+El documento se dibuja como PDF vectorial con:
+
+- fondos y paneles;
+- colores de identidad por proyecto;
+- badges de estado;
+- tarjetas de contenido;
+- portada y estadísticas;
+- paginación.
+
+Esto evita depender del cuadro de impresión y mantiene una apariencia
+consistente en el archivo descargado.
