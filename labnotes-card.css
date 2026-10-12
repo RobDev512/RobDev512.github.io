@@ -1,18 +1,35 @@
 .project-card-labnotes {
   position: relative;
 
-  justify-content: flex-start;
+  display: grid;
+
+  grid-template-columns:
+    minmax(330px, .82fr)
+    minmax(0, 1.18fr);
+
+  grid-template-areas:
+    "logo meta"
+    "logo title"
+    "logo description"
+    "logo tags"
+    "logo actions";
+
+  align-items: center;
+
+  min-height: 390px;
+
+  padding: 0;
 
   background:
     radial-gradient(
       circle at 80% 8%,
       rgba(45, 212, 191, 0.10),
-      transparent 15rem
+      transparent 24rem
     ),
     radial-gradient(
       circle at 20% 25%,
       rgba(20, 125, 245, 0.09),
-      transparent 15rem
+      transparent 24rem
     ),
     linear-gradient(
       155deg,
@@ -40,39 +57,86 @@
 }
 
 
+/* =========================================================
+   LOGO PANEL
+   ========================================================= */
+
 .labnotes-logo-shell {
+  grid-area: logo;
+
   position: relative;
   z-index: 1;
 
-  width: 96px;
-  height: 96px;
+  width: 100%;
+  height: 100%;
 
-  flex: 0 0 auto;
+  min-height: 390px;
 
   display: grid;
   place-items: center;
 
-  margin-bottom: 24px;
+  margin: 0;
 
-  border: 1px solid rgba(20, 125, 245, 0.28);
-  border-radius: 24px;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 0;
 
   background:
+    radial-gradient(
+      circle,
+      rgba(20, 125, 245, 0.16),
+      transparent 48%
+    ),
     linear-gradient(
       145deg,
-      rgba(20, 125, 245, 0.12),
-      rgba(54, 197, 240, 0.035)
+      rgba(20, 125, 245, 0.09),
+      rgba(54, 197, 240, 0.025)
     );
 
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.16),
-    inset 0 1px rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+
+.labnotes-logo-shell::before,
+.labnotes-logo-shell::after {
+  content: "";
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+.labnotes-logo-shell::before {
+  width: 58%;
+
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(105, 174, 252, 0.13);
+}
+
+
+.labnotes-logo-shell::after {
+  width: 78%;
+
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
 }
 
 
 .labnotes-logo {
-  width: 74px;
-  height: 74px;
+  position: relative;
+  z-index: 2;
+
+  width: min(
+    165px,
+    48%
+  );
+
+  height: auto;
 
   display: block;
 
@@ -80,29 +144,42 @@
 
   filter:
     drop-shadow(
-      0 9px 16px rgba(20, 125, 245, 0.18)
+      0 18px 32px rgba(20, 125, 245, 0.20)
     );
+}
+
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.labnotes-meta {
+  grid-area: meta;
+
+  position: relative;
+  z-index: 1;
+
+  width: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  align-self: end;
+
+  margin: 0;
+
+  padding:
+    42px
+    48px
+    0;
 }
 
 
 .project-card-labnotes .project-type {
   color: #69aefc;
-}
-
-
-.labnotes-meta {
-  position: relative;
-  z-index: 1;
-
-  width: 100%;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 12px;
-
-  margin-bottom: 2px;
 }
 
 
@@ -115,44 +192,97 @@
 }
 
 
-.project-card-labnotes h3,
-.project-card-labnotes p,
-.project-card-labnotes .project-tags,
-.project-card-labnotes .project-actions {
-  position: relative;
-  z-index: 1;
-}
-
+/* =========================================================
+   CONTENT
+   ========================================================= */
 
 .project-card-labnotes h3 {
-  margin-top: 28px;
+  grid-area: title;
 
-  font-size: 27px;
+  position: relative;
+  z-index: 1;
+
+  margin: 22px 0 0;
+
+  padding:
+    0
+    48px;
+
+  font-size: 32px;
+
+  letter-spacing: -.025em;
 }
 
 
-.project-card-labnotes p {
-  font-size: 15px;
+.project-card-labnotes > p {
+  grid-area: description;
+
+  position: relative;
+  z-index: 1;
+
+  max-width: 720px;
+
+  margin: 12px 0 0;
+
+  padding:
+    0
+    48px;
+
+  color: #97a6b6;
+
+  font-size: 16px;
   line-height: 1.75;
 }
 
 
-.labnotes-actions {
-  width: 100%;
+.project-card-labnotes .project-tags {
+  grid-area: tags;
+
+  position: relative;
+  z-index: 1;
+
+  margin-top: 22px;
+
+  padding:
+    0
+    48px;
 }
 
 
+.project-card-labnotes .project-actions {
+  grid-area: actions;
+
+  position: relative;
+  z-index: 1;
+
+  align-self: start;
+
+  width: auto;
+
+  margin-top: 26px;
+
+  padding:
+    0
+    48px
+    42px;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
 .labnotes-button {
+  color: #ffffff;
+
+  border: 1px solid rgba(105, 174, 252, 0.32);
+
   background:
     linear-gradient(
       135deg,
       #147df5,
       #278cf7
     );
-
-  color: #ffffff;
-
-  border: 1px solid rgba(105, 174, 252, 0.32);
 
   box-shadow:
     0 12px 32px rgba(20, 125, 245, 0.14);
@@ -169,20 +299,75 @@
 }
 
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 900px) {
 
   .project-card-labnotes {
-    min-height: 370px;
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "logo"
+      "meta"
+      "title"
+      "description"
+      "tags"
+      "actions";
+
+    min-height: auto;
   }
+
 
   .labnotes-logo-shell {
-    width: 88px;
-    height: 88px;
+    min-height: 280px;
+
+    border-right: 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .09);
   }
 
+
   .labnotes-logo {
-    width: 68px;
-    height: 68px;
+    width: 125px;
+  }
+
+
+  .labnotes-meta {
+    padding:
+      32px
+      32px
+      0;
+  }
+
+
+  .project-card-labnotes h3 {
+    padding:
+      0
+      32px;
+  }
+
+
+  .project-card-labnotes > p {
+    padding:
+      0
+      32px;
+  }
+
+
+  .project-card-labnotes .project-tags {
+    padding:
+      0
+      32px;
+  }
+
+
+  .project-card-labnotes .project-actions {
+    padding:
+      0
+      32px
+      32px;
   }
 
 }
@@ -190,24 +375,75 @@
 
 @media (max-width: 680px) {
 
-  .project-card-labnotes {
-    min-height: auto;
+  .labnotes-logo-shell {
+    min-height: 230px;
   }
 
-  .labnotes-meta {
-    flex-direction: column;
+
+  .labnotes-logo {
+    width: 105px;
   }
+
+
+  .labnotes-meta {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding:
+      28px
+      24px
+      0;
+  }
+
 
   .labnotes-version {
     text-align: left;
   }
 
-  .labnotes-actions {
-    display: grid;
-    grid-template-columns: 1fr;
+
+  .project-card-labnotes h3 {
+    margin-top: 20px;
+
+    padding:
+      0
+      24px;
+
+    font-size: 28px;
   }
 
-  .labnotes-actions .btn {
+
+  .project-card-labnotes > p {
+    padding:
+      0
+      24px;
+
+    font-size: 15px;
+  }
+
+
+  .project-card-labnotes .project-tags {
+    padding:
+      0
+      24px;
+  }
+
+
+  .project-card-labnotes .project-actions {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    padding:
+      0
+      24px
+      28px;
+  }
+
+
+  .project-card-labnotes .project-actions .btn {
     width: 100%;
   }
 

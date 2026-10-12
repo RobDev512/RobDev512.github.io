@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+
+  "taxonomy": {
+    "categories": [
+      {
+        "id": "web",
+        "label": "Desarrollo Web"
+      },
+      {
+        "id": "desktop",
+        "label": "Desarrollo de Aplicaciones de Escritorio"
+      },
+      {
+        "id": "mobile",
+        "label": "Desarrollo de Aplicaciones Móviles"
+      },
+      {
+        "id": "games",
+        "label": "Desarrollo de Videojuegos"
+      },
+      {
+        "id": "automation",
+        "label": "Automatización y Scripts"
+      },
+      {
+        "id": "backend",
+        "label": "Backend y Servicios"
+      },
+      {
+        "id": "data",
+        "label": "Datos y Bases de Datos"
+      },
+      {
+        "id": "systems",
+        "label": "Sistemas y Experimentación"
+      },
+      {
+        "id": "other",
+        "label": "Otros"
+      }
+    ],
+
+    "statuses": [
+      {
+        "id": "development",
+        "label": "En desarrollo"
+      },
+      {
+        "id": "stable",
+        "label": "Estable"
+      },
+      {
+        "id": "experimental",
+        "label": "Experimental"
+      },
+      {
+        "id": "paused",
+        "label": "Pausado"
+      },
+      {
+        "id": "completed",
+        "label": "Terminado"
+      },
+      {
+        "id": "archived",
+        "label": "Archivado"
+      }
+    ],
+
+    "visibilities": [
+      {
+        "id": "public",
+        "label": "Público"
+      },
+      {
+        "id": "private-code-public-app",
+        "label": "Código privado / aplicación pública"
+      },
+      {
+        "id": "private",
+        "label": "Privado"
+      },
+      {
+        "id": "local",
+        "label": "Local"
+      }
+    ]
+  },
+
+  "projects": [
+    {
+      "id": "aws-orbishot",
+
+      "displayOrder": 10,
+
+      "name": "AWS ORBISHOT",
+
+      "category": "games",
+
+      "subtype": "Videojuego web",
+
+      "technologies": [
+        "HTML5 Canvas",
+        "JavaScript",
+        "CSS"
+      ],
+
+      "status": "stable",
+
+      "statusDetail": "Estable con roadmap activo",
+
+      "visibility": "public",
+
+      "version": "v1.4.3.2",
+
+      "codename": "Structure & Boss HUD Hotfix",
+
+      "description": "Arcade web de timing y precisión con Boss Levels, Power Cores, Power-Ups, economía, vidas, tienda, música procedural y progresión.",
+
+      "featured": true,
+
+      "logo": {
+        "src": "./assets/aws-orbishot-logo.png",
+        "alt": "Logo de AWS ORBISHOT"
+      },
+
+      "card": {
+        "variant": "featured",
+        "eyebrow": "Videojuegos · Precision Arcade",
+
+        "badges": [
+          "HTML5 Canvas",
+          "JavaScript",
+          "PC + móvil"
+        ]
+      },
+
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "https://robdev512.github.io/AWS-ORBISHOT/",
+          "style": "primary",
+          "external": false
+        },
+        {
+          "id": "play",
+          "label": "Jugar",
+          "url": "https://robdev512.github.io/AWS-ORBISHOT/AWS-Game/",
+          "style": "secondary",
+          "external": false
+        },
+        {
+          "id": "repository",
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/AWS-ORBISHOT",
+          "style": "secondary",
+          "external": true
+        }
+      ]
+    },
+
+    {
+      "id": "labnotes",
+
+      "displayOrder": 20,
+
+      "name": "LabNotes",
+
+      "category": "web",
+
+      "subtype": "Aplicación web full-stack",
+
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Node.js",
+        "Express",
+        "SQL Server",
+        "Azure"
+      ],
+
+      "status": "development",
+
+      "statusDetail": "En desarrollo",
+
+      "visibility": "private-code-public-app",
+
+      "version": "v1.1.0-alpha.1",
+
+      "codename": "Night Shift",
+
+      "description": "Plataforma colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo.",
+
+      "featured": true,
+
+      "logo": {
+        "src": "./assets/labnotes-logo.png",
+        "alt": "Logo de LabNotes"
+      },
+
+      "card": {
+        "variant": "labnotes",
+        "eyebrow": "Aplicación · Knowledge Base",
+
+        "badges": [
+          "Node.js",
+          "SQL Server",
+          "Night Shift",
+          "En desarrollo"
+        ]
+      },
+
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "./projects/labnotes/",
+          "style": "labnotes-primary",
+          "external": false
+        },
+        {
+          "id": "app",
+          "label": "Abrir app",
+          "url": "https://labnotes-robert-c5dhcdcfgsfpe7ec.canadacentral-01.azurewebsites.net/",
+          "style": "secondary",
+          "external": true
+        }
+      ]
+    }
+  ]
+}

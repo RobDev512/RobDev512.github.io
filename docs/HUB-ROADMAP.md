@@ -10,28 +10,37 @@ El hub ya cuenta con:
 - página individual de AWS ORBISHOT;
 - LabNotes;
 - página individual de LabNotes;
-- enlaces hacia aplicaciones y proyectos.
-
-Actualmente parte del catálogo todavía está definido directamente en HTML.
+- catálogo dinámico;
+- fuente central data/projects.json;
+- renderizado mediante js/hub.js;
+- taxonomía inicial de categorías, estados y visibilidades;
+- soporte interno para filtros por categoría, estado y tecnología.
 
 ---
 
 # Fase 1 - Catálogo dinámico
 
-**Estado:** Siguiente objetivo.
+**Estado:** Completada.
 
 ## Objetivo
 
-Transformar el hub en un catálogo centralizado.
+Transformar el hub en un catálogo centralizado y eliminar la información individual de proyectos de index.html.
 
-## Alcance
+## Implementado
 
-- Crear data/projects.json.
-- Crear js/hub.js.
-- Extraer la información de proyectos de index.html.
-- Generar tarjetas mediante JavaScript.
-- Mantener proyectos destacados.
-- Mantener las páginas individuales.
+- [x] Crear data/projects.json.
+- [x] Crear js/hub.js.
+- [x] Extraer la información individual de proyectos de index.html.
+- [x] Generar las tarjetas mediante JavaScript.
+- [x] Mantener el diseño destacado de AWS ORBISHOT.
+- [x] Mantener el diseño específico de LabNotes.
+- [x] Mantener las páginas individuales.
+- [x] Mantener los enlaces actuales.
+- [x] Validar la estructura del catálogo.
+- [x] Preparar filtros internos por categoría.
+- [x] Preparar filtros internos por estado.
+- [x] Preparar filtros internos por tecnología.
+- [x] Añadir estado de error si projects.json no puede cargarse.
 
 ## Primeros proyectos
 
@@ -40,11 +49,15 @@ Transformar el hub en un catálogo centralizado.
 
 ---
 
-# Fase 2 - Categorías por tipo de proyecto
+# Fase 2 - Categorías y navegación del catálogo
 
-**Estado:** Planeado.
+**Estado:** Siguiente objetivo.
 
-## Categorías
+## Objetivo
+
+Permitir explorar el catálogo por tipo de proyecto sin clasificarlo principalmente por lenguaje.
+
+## Categorías iniciales
 
 - Desarrollo Web.
 - Desarrollo de Aplicaciones de Escritorio.
@@ -56,11 +69,14 @@ Transformar el hub en un catálogo centralizado.
 - Sistemas y Experimentación.
 - Otros.
 
-## Objetivo
+## Alcance previsto
 
-Clasificar primero por el tipo de producto.
-
-Las tecnologías permanecerán como etiquetas secundarias.
+- Mostrar filtros visibles por categoría.
+- Añadir opción Todos.
+- Conectar los controles con HubCatalog.setFilters().
+- Mantener tecnologías como etiquetas secundarias.
+- Preparar filtros combinados posteriores.
+- Mantener el diseño responsive.
 
 ---
 
@@ -137,12 +153,11 @@ Permitir que proyectos todavía no publicados tengan presencia en el portafolio.
 - filtros por categoría;
 - filtros por estado;
 - filtros por tecnología;
+- filtros por visibilidad;
 - ordenamiento;
 - proyectos destacados;
 - proyectos recientes;
 - combinación de filtros.
-
-El objetivo es evitar tener que crear una página HTML separada para cada categoría.
 
 ---
 
@@ -204,11 +219,8 @@ Los lenguajes son metadata secundaria.
 
 # Próximo paso
 
-Implementar la Fase 1:
+Implementar la Fase 2:
 
-**data/projects.json + js/hub.js**
+**categorías y navegación visible del catálogo**
 
-manteniendo inicialmente:
-
-- AWS ORBISHOT;
-- LabNotes.
+utilizando la infraestructura dinámica creada durante la Fase 1.
