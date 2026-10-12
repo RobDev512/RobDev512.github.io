@@ -1,42 +1,214 @@
 .project-card-labnotes {
+  position: relative;
+
+  justify-content: flex-start;
+
   background:
-    radial-gradient(circle at 85% 14%, rgba(45,212,191,.08), transparent 15rem),
-    linear-gradient(155deg, rgba(20,125,245,.06), rgba(167,139,250,.04)),
-    rgba(18,25,34,.78);
+    radial-gradient(
+      circle at 80% 8%,
+      rgba(45, 212, 191, 0.10),
+      transparent 15rem
+    ),
+    radial-gradient(
+      circle at 20% 25%,
+      rgba(20, 125, 245, 0.09),
+      transparent 15rem
+    ),
+    linear-gradient(
+      155deg,
+      rgba(20, 125, 245, 0.055),
+      rgba(167, 139, 250, 0.035)
+    ),
+    rgba(18, 25, 34, 0.82);
 }
+
+
+.project-card-labnotes::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      130deg,
+      transparent 0 60%,
+      rgba(105, 174, 252, 0.04)
+    );
+}
+
+
+.labnotes-logo-shell {
+  position: relative;
+  z-index: 1;
+
+  width: 96px;
+  height: 96px;
+
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 24px;
+
+  border: 1px solid rgba(20, 125, 245, 0.28);
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 125, 245, 0.12),
+      rgba(54, 197, 240, 0.035)
+    );
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.16),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+
+.labnotes-logo {
+  width: 74px;
+  height: 74px;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 9px 16px rgba(20, 125, 245, 0.18)
+    );
+}
+
 
 .project-card-labnotes .project-type {
   color: #69aefc;
 }
 
-.labnotes-mark {
-  width: 72px;
-  height: 72px;
-  border-style: solid;
-  border-color: rgba(20,125,245,.22);
-  color: #69aefc;
-  background: rgba(20,125,245,.07);
-}
-
-.labnotes-mark svg {
-  width: 42px;
-  height: 42px;
-}
 
 .labnotes-meta {
+  position: relative;
+  z-index: 1;
+
   width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+
   margin-bottom: 2px;
 }
 
+
 .labnotes-version {
+  flex: 0 0 auto;
+
   color: #b9a7ff;
+
+  text-align: right;
 }
+
+
+.project-card-labnotes h3,
+.project-card-labnotes p,
+.project-card-labnotes .project-tags,
+.project-card-labnotes .project-actions {
+  position: relative;
+  z-index: 1;
+}
+
+
+.project-card-labnotes h3 {
+  margin-top: 28px;
+
+  font-size: 27px;
+}
+
+
+.project-card-labnotes p {
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+.labnotes-actions {
+  width: 100%;
+}
+
 
 .labnotes-button {
-  background: #147df5;
-  color: #fff;
+  background:
+    linear-gradient(
+      135deg,
+      #147df5,
+      #278cf7
+    );
+
+  color: #ffffff;
+
+  border: 1px solid rgba(105, 174, 252, 0.32);
+
+  box-shadow:
+    0 12px 32px rgba(20, 125, 245, 0.14);
 }
 
+
 .labnotes-button:hover {
-  background: #2e8cf7;
+  background:
+    linear-gradient(
+      135deg,
+      #278cf7,
+      #429cff
+    );
+}
+
+
+@media (max-width: 900px) {
+
+  .project-card-labnotes {
+    min-height: 370px;
+  }
+
+  .labnotes-logo-shell {
+    width: 88px;
+    height: 88px;
+  }
+
+  .labnotes-logo {
+    width: 68px;
+    height: 68px;
+  }
+
+}
+
+
+@media (max-width: 680px) {
+
+  .project-card-labnotes {
+    min-height: auto;
+  }
+
+  .labnotes-meta {
+    flex-direction: column;
+  }
+
+  .labnotes-version {
+    text-align: left;
+  }
+
+  .labnotes-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .labnotes-actions .btn {
+    width: 100%;
+  }
+
 }
