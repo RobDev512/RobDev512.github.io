@@ -10,26 +10,15 @@ https://robdev512.github.io/
 
 Este repositorio funciona como el hub general de proyectos personales.
 
-El portal puede representar:
-
-- proyectos públicos;
-- proyectos con código privado;
-- aplicaciones desplegadas;
-- proyectos locales;
-- proyectos en desarrollo;
-- experimentos;
-- proyectos terminados;
-- proyectos archivados.
-
-Un proyecto no necesita estar publicado en GitHub para poder formar parte del catálogo.
+El portal puede representar proyectos públicos, privados, locales, desplegados, experimentales, terminados o todavía en desarrollo.
 
 Nunca deben publicarse rutas locales, credenciales, secretos ni información privada.
 
 ## Clasificación
 
-Los proyectos se clasifican principalmente por su tipo de producto o área de desarrollo.
+Los proyectos se clasifican principalmente por su tipo de producto o área de desarrollo, no por el lenguaje utilizado.
 
-Categorías iniciales:
+Categorías:
 
 - Desarrollo Web
 - Desarrollo de Aplicaciones de Escritorio
@@ -41,134 +30,106 @@ Categorías iniciales:
 - Sistemas y Experimentación
 - Otros
 
-Los lenguajes, frameworks, bases de datos y plataformas se utilizan como tecnologías o etiquetas secundarias.
-
-## Estados
-
-- En desarrollo
-- Estable
-- Experimental
-- Pausado
-- Terminado
-- Archivado
-
-## Visibilidad
-
-- Público
-- Código privado / aplicación pública
-- Privado
-- Local
-
 ## Arquitectura actual
 
-El catálogo funciona de manera dinámica.
+La fuente central del catálogo es:
 
-La fuente central de verdad es:
+`data/projects.json`
 
-data/projects.json
+La lógica de carga, validación, navegación, filtros y renderizado se encuentra en:
 
-La lógica del catálogo y la navegación se encuentran en:
+`js/hub.js`
 
-js/hub.js
+`index.html` contiene la estructura general y la navegación visible por categorías.
 
-index.html contiene la estructura general, la navegación visible por categorías y el contenedor donde JavaScript renderiza las tarjetas.
-
-La información individual de los proyectos no se mantiene directamente dentro de index.html.
-
-## Navegación por categorías
-
-El hub genera automáticamente los filtros visibles usando la taxonomía de data/projects.json.
-
-La navegación incluye:
-
-- opción Todos;
-- categorías que actualmente contienen al menos un proyecto;
-- contador de proyectos por categoría;
-- estado activo accesible mediante aria-pressed;
-- URL compartible mediante el parámetro category;
-- compatibilidad con los botones Atrás y Adelante del navegador.
-
-Las categorías sin proyectos permanecen en la taxonomía, pero no ocupan espacio visual. Cuando se registre el primer proyecto de una categoría, su filtro aparecerá automáticamente.
-
-Los filtros internos por estado, tecnología y visibilidad permanecen preparados para fases posteriores.
+Las categorías visibles se generan automáticamente según los proyectos registrados.
 
 ## Proyectos actuales
 
 ### AWS ORBISHOT
 
-Categoría:
-
-Desarrollo de Videojuegos
-
-Subtipo:
-
-Videojuego web
-
-Estado:
-
-Estable con roadmap activo
-
-Versión:
-
-v1.4.3.2
-
-Página:
-
-https://robdev512.github.io/AWS-ORBISHOT/
+- Categoría: Desarrollo de Videojuegos
+- Subtipo: Videojuego web
+- Estado: Estable con roadmap activo
+- Versión: v1.4.3.2
+- Visibilidad: Público
+- Página: https://robdev512.github.io/AWS-ORBISHOT/
 
 ### LabNotes
 
-Categoría:
+- Categoría: Desarrollo Web
+- Subtipo: Aplicación web full-stack
+- Estado: En desarrollo
+- Release: v1.1.0-alpha.1 - Night Shift
+- Visibilidad: Código privado / aplicación pública
+- Página: https://robdev512.github.io/projects/labnotes/
 
-Desarrollo Web
+### Convertidor de Archivos
 
-Subtipo:
+- Categoría: Desarrollo de Aplicaciones de Escritorio
+- Subtipo: Utilidad de conversión y procesamiento de archivos
+- Estado: Estable
+- Versión: v1.1.1
+- Visibilidad: Público
+- Página: https://robdev512.github.io/projects/convertidor-archivos/
+- Repositorio: https://github.com/RobDev512/ConvertidorArchivos
 
-Aplicación web full-stack
+### TecNet Finder
 
-Estado:
+- Categoría: Sistemas y Experimentación
+- Subtipo: DSL / compilador para análisis de redes
+- Estado: En desarrollo
+- Visibilidad: Privado
+- Página: https://robdev512.github.io/projects/tecnet-finder/
+- Código no publicado desde el hub
 
-En desarrollo
+## Navegación por categorías
 
-Release actual:
+El hub incluye:
 
-v1.1.0-alpha.1 - Night Shift
+- opción Todos;
+- categorías con proyectos;
+- contador por categoría;
+- URL compartible con `?category=<id>`;
+- navegación Atrás / Adelante;
+- soporte interno para combinar categoría, estado, tecnología y visibilidad.
 
-Visibilidad:
+## Inventario inicial
 
-Código privado / aplicación pública
+La Fase 3 revisó los proyectos personales existentes y separó:
 
-Página:
+- proyectos adecuados para el portafolio;
+- prácticas pequeñas;
+- variantes históricas;
+- carpetas técnicas;
+- proyectos que necesitan más información antes de publicarse.
 
-https://robdev512.github.io/projects/labnotes/
-
-## Estructura principal
-
-    RobDev512.github.io/
-    ├── assets/
-    ├── data/
-    │   └── projects.json
-    ├── docs/
-    │   ├── HUB-ARCHITECTURE.md
-    │   └── HUB-ROADMAP.md
-    ├── js/
-    │   └── hub.js
-    ├── projects/
-    │   └── labnotes/
-    ├── index.html
-    ├── styles.css
-    └── labnotes-card.css
+El catálogo público no refleja directamente la estructura local de carpetas.
 
 ## Documentación
 
-Arquitectura:
-
-docs/HUB-ARCHITECTURE.md
-
-Roadmap:
-
-docs/HUB-ROADMAP.md
+- `docs/HUB-ARCHITECTURE.md`
+- `docs/HUB-ROADMAP.md`
 
 ## Próximo objetivo
 
-La siguiente fase es realizar el inventario de proyectos personales existentes e incorporarlos progresivamente al catálogo sin publicar rutas locales ni información sensible.
+La siguiente fase es mejorar la representación visible de estado y visibilidad para que proyectos públicos, privados y locales puedan convivir claramente en el catálogo.
+
+Todos los proyectos registrados actualmente cuentan ya con una página de presentación o landing propia.
+
+## Roadmaps por proyecto
+
+Los proyectos con planificación propia pueden exponer un `ROADMAP.md` dentro
+de su página de presentación.
+
+Actualmente:
+
+- `projects/convertidor-archivos/ROADMAP.md`
+- `projects/tecnet-finder/ROADMAP.md`
+
+Las páginas HTML muestran un resumen visual del roadmap y el Markdown conserva
+el detalle de versiones.
+
+Los logos del Hub son copias de los recursos de marca oficiales de cada
+proyecto y se almacenan en `assets/` para que el catálogo público no dependa
+de repositorios privados.

@@ -1,6 +1,5 @@
 {
   "schemaVersion": 1,
-
   "taxonomy": {
     "categories": [
       {
@@ -40,7 +39,6 @@
         "label": "Otros"
       }
     ],
-
     "statuses": [
       {
         "id": "development",
@@ -67,7 +65,6 @@
         "label": "Archivado"
       }
     ],
-
     "visibilities": [
       {
         "id": "public",
@@ -87,55 +84,38 @@
       }
     ]
   },
-
   "projects": [
     {
       "id": "aws-orbishot",
-
       "displayOrder": 10,
-
       "name": "AWS ORBISHOT",
-
       "category": "games",
-
       "subtype": "Videojuego web",
-
       "technologies": [
         "HTML5 Canvas",
         "JavaScript",
         "CSS"
       ],
-
       "status": "stable",
-
       "statusDetail": "Estable con roadmap activo",
-
       "visibility": "public",
-
       "version": "v1.4.3.2",
-
       "codename": "Structure & Boss HUD Hotfix",
-
       "description": "Arcade web de timing y precisión con Boss Levels, Power Cores, Power-Ups, economía, vidas, tienda, música procedural y progresión.",
-
       "featured": true,
-
       "logo": {
         "src": "./assets/aws-orbishot-logo.png",
         "alt": "Logo de AWS ORBISHOT"
       },
-
       "card": {
         "variant": "featured",
         "eyebrow": "Videojuegos · Precision Arcade",
-
         "badges": [
           "HTML5 Canvas",
           "JavaScript",
           "PC + móvil"
         ]
       },
-
       "links": [
         {
           "id": "project",
@@ -160,18 +140,12 @@
         }
       ]
     },
-
     {
       "id": "labnotes",
-
       "displayOrder": 20,
-
       "name": "LabNotes",
-
       "category": "web",
-
       "subtype": "Aplicación web full-stack",
-
       "technologies": [
         "HTML",
         "CSS",
@@ -181,30 +155,20 @@
         "SQL Server",
         "Azure"
       ],
-
       "status": "development",
-
       "statusDetail": "En desarrollo",
-
       "visibility": "private-code-public-app",
-
       "version": "v1.1.0-alpha.1",
-
       "codename": "Night Shift",
-
       "description": "Plataforma colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo.",
-
       "featured": true,
-
       "logo": {
         "src": "./assets/labnotes-logo.png",
         "alt": "Logo de LabNotes"
       },
-
       "card": {
         "variant": "labnotes",
         "eyebrow": "Aplicación · Knowledge Base",
-
         "badges": [
           "Node.js",
           "SQL Server",
@@ -212,7 +176,6 @@
           "En desarrollo"
         ]
       },
-
       "links": [
         {
           "id": "project",
@@ -229,6 +192,121 @@
           "external": true
         }
       ]
+    },
+    {
+      "id": "convertidor-archivos",
+      "displayOrder": 30,
+      "name": "Convertidor de Archivos",
+      "category": "desktop",
+      "subtype": "Utilidad de conversión y procesamiento de archivos",
+      "technologies": [
+        "Python",
+        "PySide6",
+        "Pillow",
+        "PDF",
+        "ONNX Runtime",
+        "Real-ESRGAN"
+      ],
+      "status": "stable",
+      "statusDetail": "Estable",
+      "visibility": "public",
+      "version": "v1.1.1",
+      "description": "Aplicación de escritorio para Windows que convierte documentos, imágenes, PDF y otros formatos de forma local, e integra herramientas de imagen y procesamiento asistido por modelos locales.",
+      "featured": false,
+      "card": {
+        "variant": "standard",
+        "eyebrow": "Escritorio · Conversión de archivos",
+        "badges": [
+          "Python",
+          "PySide6",
+          "Windows 64-bit",
+          "Público"
+        ]
+      },
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "./projects/convertidor-archivos/",
+          "style": "primary",
+          "external": false
+        },
+        {
+          "id": "download",
+          "label": "Descargar",
+          "url": "https://github.com/RobDev512/ConvertidorArchivos/releases/download/v1.1.1/ConvertidorArchivos_Setup_1.1.1.exe",
+          "style": "secondary",
+          "external": true
+        },
+        {
+          "id": "repository",
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/ConvertidorArchivos",
+          "style": "secondary",
+          "external": true
+        }
+      ],
+      "logo": {
+        "src": "./assets/convertidor-archivos-logo.png",
+        "alt": "Logo de Convertidor de Archivos"
+      }
+    },
+    {
+      "id": "tecnet-finder",
+      "displayOrder": 40,
+      "name": "TecNet Finder",
+      "category": "systems",
+      "subtype": "DSL / compilador para análisis de redes",
+      "technologies": [
+        "Python",
+        "PySide6",
+        "Compiladores",
+        "VLSM",
+        "IPv4"
+      ],
+      "status": "development",
+      "statusDetail": "v1.2.1 cerrada funcionalmente; roadmap activo",
+      "visibility": "private",
+      "description": "Lenguaje específico de dominio orientado al análisis y planificación de redes mediante VLSM, con análisis léxico, sintáctico y semántico, diagnósticos y herramientas de apoyo.",
+      "featured": false,
+      "card": {
+        "variant": "standard",
+        "eyebrow": "Sistemas · DSL / Compilador",
+        "badges": [
+          "Python",
+          "PySide6",
+          "v1.2.1",
+          "Privado"
+        ]
+      },
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "./projects/tecnet-finder/",
+          "style": "primary",
+          "external": false
+        },
+        {
+          "id": "download",
+          "label": "Descargar",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/download/v1.2.1/TecNet.Finder.1.2.1.Setup.exe",
+          "style": "secondary",
+          "external": true
+        },
+        {
+          "id": "repository",
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/TecNet-Finder",
+          "style": "secondary",
+          "external": true
+        }
+      ],
+      "version": "v1.2.1",
+      "logo": {
+        "src": "./assets/tecnet-finder-logo.png",
+        "alt": "Logo de TecNet Finder"
+      }
     }
   ]
 }

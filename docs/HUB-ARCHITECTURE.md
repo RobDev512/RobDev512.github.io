@@ -2,562 +2,201 @@
 
 ## 1. Objetivo
 
-robdev512.github.io funciona como el portal central de proyectos personales de RobDev512.
+`robdev512.github.io` funciona como el portal central de proyectos personales de RobDev512.
 
-Su función no es reflejar directamente la estructura de carpetas del equipo ni limitarse a repositorios públicos.
+El hub representa proyectos por lo que son, no por la carpeta local donde se encuentran ni por el lenguaje principal.
 
-El hub puede representar proyectos independientemente de:
+## 2. Modelo de clasificación
 
-- dónde estén almacenados;
-- qué lenguaje utilicen;
-- si su código es público o privado;
-- si están desplegados;
-- si siguen en desarrollo;
-- si están terminados;
-- si son experimentales.
+Cada proyecto se describe mediante:
 
----
-
-## 2. Principio de clasificación
-
-Los proyectos se clasifican principalmente por:
-
-**tipo de producto o área de desarrollo**
-
-No se clasifican principalmente por lenguaje de programación.
-
-La separación conceptual es:
-
-### Qué es
-
-Categoría y subtipo.
-
-### Cómo está construido
-
-Tecnologías.
-
-### En qué estado se encuentra
-
-Estado de desarrollo.
-
-### Cómo puede accederse
-
-Visibilidad y enlaces.
-
----
-
-## 3. Ejemplo conceptual
-
-LabNotes no es solamente un proyecto Node.js.
-
-Es una:
-
-**Aplicación web full-stack**
-
-Node.js, Express, SQL Server y Azure son tecnologías utilizadas para construirla.
-
-AWS ORBISHOT no es solamente un proyecto JavaScript.
-
-Es un:
-
-**Videojuego web**
-
-HTML5 Canvas, JavaScript y CSS son tecnologías utilizadas para desarrollarlo.
-
----
-
-# 4. Categorías principales
-
-## Desarrollo Web
-
-Incluye:
-
-- aplicaciones web;
-- sitios web;
-- plataformas;
-- dashboards;
-- portales;
-- PWAs;
-- sistemas full-stack.
-
-Ejemplo actual:
-
-- LabNotes
-
----
-
-## Desarrollo de Aplicaciones de Escritorio
-
-Incluye:
-
-- aplicaciones nativas;
-- utilidades;
-- herramientas administrativas;
-- software de productividad;
-- programas locales;
-- interfaces gráficas de escritorio.
-
-Una aplicación de escritorio puede estar construida con Python, C++, C#, Java, Electron u otras tecnologías.
-
-El lenguaje no define la categoría.
-
----
-
-## Desarrollo de Aplicaciones Móviles
-
-Incluye:
-
-- aplicaciones Android;
-- aplicaciones iOS;
-- aplicaciones multiplataforma;
-- herramientas diseñadas principalmente para teléfonos o tablets.
-
-Tecnologías posibles:
-
-- Kotlin;
-- Java;
-- Flutter;
-- React Native;
-- .NET MAUI;
-- otras.
-
----
-
-## Desarrollo de Videojuegos
-
-Incluye:
-
-- videojuegos web;
-- videojuegos de escritorio;
-- videojuegos móviles;
-- prototipos jugables;
-- experimentos de gameplay.
-
-Ejemplo actual:
-
-- AWS ORBISHOT
-
----
-
-## Automatización y Scripts
-
-Incluye:
-
-- scripts de utilidad;
-- automatizaciones;
-- procesamiento de archivos;
-- mantenimiento;
-- procesamiento de datos;
-- tareas repetitivas.
-
-Tecnologías posibles:
-
-- Python;
-- PowerShell;
-- Bash;
-- JavaScript;
-- otras.
-
----
-
-## Backend y Servicios
-
-Incluye proyectos cuyo producto principal sea:
-
-- una API;
-- un servicio web;
-- un microservicio;
-- una integración;
-- un servicio interno.
-
-Si un backend forma parte de una aplicación web completa, normalmente el proyecto debe clasificarse como Desarrollo Web.
-
----
-
-## Datos y Bases de Datos
-
-Incluye proyectos cuyo objetivo principal sea:
-
-- procesamiento de datos;
-- bases de datos;
-- análisis;
-- visualización;
-- ETL;
-- herramientas SQL;
-- herramientas NoSQL.
-
-Utilizar una base de datos dentro de otra aplicación no convierte automáticamente ese proyecto en un proyecto de datos.
-
----
-
-## Sistemas y Experimentación
-
-Incluye:
-
-- proyectos de bajo nivel;
-- redes;
-- concurrencia;
-- rendimiento;
-- herramientas de consola;
-- experimentos técnicos;
-- proyectos de sistemas;
-- pruebas con C++, Go, ensamblador u otras tecnologías.
-
----
-
-## Otros
-
-Categoría temporal para proyectos que no tengan todavía una clasificación suficientemente clara.
-
-Debe evitarse si existe una categoría más específica.
-
----
-
-# 5. Subtipos
-
-Cada proyecto puede tener un subtipo.
-
-Ejemplos:
-
-- Aplicación web full-stack
-- Sitio web
-- PWA
-- Videojuego web
-- Videojuego de escritorio
-- Aplicación de escritorio
-- Herramienta de productividad
-- Aplicación Android
-- API REST
-- Script de automatización
-- Herramienta de datos
-- Experimento técnico
-
----
-
-# 6. Tecnologías
-
-Las tecnologías son metadata secundaria.
-
-Ejemplos:
-
-- HTML
-- CSS
-- JavaScript
-- TypeScript
-- Node.js
-- Express
-- Python
-- C++
-- Go
-- Java
-- Kotlin
-- SQL Server
-- MongoDB
-- Azure
-- GitHub Actions
-- HTML5 Canvas
-
-Un proyecto puede contener múltiples tecnologías.
-
-Las tecnologías no sustituyen la categoría principal.
-
----
-
-# 7. Estados
-
-## En desarrollo
-
-Proyecto actualmente activo.
-
-## Estable
-
-Proyecto funcional con una versión considerada estable.
-
-Puede seguir teniendo roadmap activo.
-
-## Experimental
-
-Prueba, prototipo o exploración técnica.
-
-## Pausado
-
-Proyecto cuyo desarrollo está detenido temporalmente.
-
-## Terminado
-
-Proyecto cuyo objetivo fue completado.
-
-## Archivado
-
-Proyecto conservado por historial o referencia y que ya no forma parte del desarrollo activo.
-
----
-
-# 8. Visibilidad
-
-La visibilidad es independiente del estado del proyecto.
-
-## Público
-
-Código y proyecto accesibles públicamente.
-
-## Código privado / aplicación pública
-
-El código es privado pero existe una aplicación o demostración pública.
-
-Ejemplo:
-
-- LabNotes
-
-## Privado
-
-Repositorio o proyecto sin acceso público.
-
-## Local
-
-Proyecto almacenado únicamente de forma local.
-
-Un proyecto local puede aparecer en el hub sin necesidad de tener todavía un repositorio GitHub.
-
----
-
-# 9. Proyectos actuales
-
-## AWS ORBISHOT
-
-Categoría:
-
-Desarrollo de Videojuegos
-
-Subtipo:
-
-Videojuego web
-
-Tecnologías:
-
-- HTML5 Canvas
-- JavaScript
-- CSS
-
-Estado:
-
-Estable con roadmap activo
-
-Visibilidad:
-
-Público
-
-Página:
-
-https://robdev512.github.io/AWS-ORBISHOT/
-
----
-
-## LabNotes
-
-Categoría:
-
-Desarrollo Web
-
-Subtipo:
-
-Aplicación web full-stack
-
-Tecnologías:
-
-- HTML
-- CSS
-- JavaScript
-- Node.js
-- Express
-- SQL Server
-- Azure
-
-Estado:
-
-En desarrollo
-
-Release actual:
-
-v1.1.0-alpha.1 - Night Shift
-
-Visibilidad:
-
-Código privado / aplicación pública
-
-Página:
-
-https://robdev512.github.io/projects/labnotes/
-
----
-
-# 10. Catálogo central
-
-El hub utiliza actualmente:
-
-data/projects.json
-
-como fuente central de verdad del catálogo.
-
-La lógica de carga, validación, filtrado, navegación y renderizado se encuentra en:
-
-js/hub.js
-
-index.html conserva la estructura general de la página, la navegación visible por categorías y el contenedor donde se renderiza el catálogo.
-
-Cada proyecto puede definir:
-
-- identificador;
-- nombre;
 - categoría;
 - subtipo;
 - descripción;
 - tecnologías;
 - estado;
 - visibilidad;
-- versión;
-- codename;
-- logo;
-- repositorio;
-- página de presentación;
-- aplicación;
-- proyecto destacado;
-- fecha de creación;
-- fecha de última actualización.
+- versión, cuando aplica;
+- enlaces públicos, cuando existen.
 
-Ejemplo conceptual de un registro de LabNotes:
+Las tecnologías son metadata secundaria.
 
-    {
-      "id": "labnotes",
-      "name": "LabNotes",
-      "category": "web",
-      "subtype": "Aplicación web full-stack",
-      "technologies": [
-        "Node.js",
-        "Express",
-        "SQL Server",
-        "Azure"
-      ],
-      "status": "development",
-      "visibility": "private-code-public-app",
-      "version": "v1.1.0-alpha.1",
-      "codename": "Night Shift",
-      "featured": true
-    }
+## 3. Categorías
 
----
+### Desarrollo Web
 
-# 11. Navegación por categorías
+Aplicaciones web, sitios, plataformas, dashboards, portales, PWAs y sistemas full-stack.
 
-La navegación visible del hub se genera dinámicamente a partir de la taxonomía y del contenido real del catálogo.
+Ejemplo: LabNotes.
 
-## Reglas
+### Desarrollo de Aplicaciones de Escritorio
 
-- Siempre existe la opción Todos.
-- Sólo se muestran categorías que contienen al menos un proyecto.
-- Cada filtro muestra su cantidad de proyectos.
-- Al agregar el primer proyecto de una categoría previamente vacía, el filtro aparece automáticamente.
-- Las categorías continúan definidas centralmente en data/projects.json.
-- Los lenguajes y frameworks no se convierten en categorías principales.
+Aplicaciones nativas, utilidades y herramientas locales con interfaz de escritorio.
 
-## URL compartible
+Ejemplo: Convertidor de Archivos.
 
-La categoría activa se representa mediante el parámetro:
+### Desarrollo de Aplicaciones Móviles
 
-?category=<id>
+Aplicaciones Android, iOS o multiplataforma orientadas principalmente a teléfonos o tablets.
 
-Ejemplos conceptuales:
+### Desarrollo de Videojuegos
 
-- ?category=web
-- ?category=games
+Videojuegos web, de escritorio, móviles y prototipos jugables.
 
-Esto permite compartir una vista del catálogo y conserva el comportamiento de Atrás y Adelante del navegador.
+Ejemplo: AWS ORBISHOT.
 
-## Accesibilidad
+### Automatización y Scripts
 
-Los filtros son botones reales y exponen su estado mediante aria-pressed.
+Scripts y herramientas cuyo objetivo principal es automatizar tareas o procesamiento repetitivo.
 
-La cantidad de resultados se anuncia mediante una región aria-live.
+### Backend y Servicios
 
-## Preparación para filtros combinados
+APIs, servicios web, microservicios e integraciones cuyo producto principal es el backend.
 
-El estado interno de js/hub.js conserva filtros independientes para:
+### Datos y Bases de Datos
 
-- categoría;
-- estado;
-- tecnología;
-- visibilidad.
+Procesamiento, análisis, ETL, herramientas SQL/NoSQL y proyectos cuyo producto principal gira alrededor de datos.
 
-En esta fase sólo existe interfaz pública para categoría. Los demás filtros podrán añadirse sin cambiar la estructura del catálogo.
+### Sistemas y Experimentación
 
----
+Compiladores, DSLs, redes, bajo nivel, concurrencia, rendimiento, herramientas de consola y experimentos técnicos.
 
-# 12. Regla de publicación
+Ejemplo: TecNet Finder.
 
-Un proyecto no necesita estar en GitHub para aparecer en el hub.
+### Otros
 
-Los proyectos locales pueden mostrar:
+Categoría temporal para proyectos todavía no clasificables de forma más específica.
 
-- nombre;
-- descripción;
-- categoría;
-- subtipo;
-- tecnologías;
-- estado;
-- capturas;
-- logo;
-- información general.
+## 4. Estados
 
-Nunca se deben publicar:
+- En desarrollo
+- Estable
+- Experimental
+- Pausado
+- Terminado
+- Archivado
+
+## 5. Visibilidad
+
+- Público
+- Código privado / aplicación pública
+- Privado
+- Local
+
+La visibilidad no determina el estado del proyecto.
+
+## 6. Catálogo central
+
+La fuente de verdad es:
+
+`data/projects.json`
+
+La lógica se encuentra en:
+
+`js/hub.js`
+
+El HTML no contiene manualmente la información individual de cada proyecto.
+
+## 7. Navegación
+
+La navegación visible por categoría se genera desde la taxonomía y el contenido real del catálogo.
+
+Reglas:
+
+- siempre existe Todos;
+- sólo aparecen categorías con al menos un proyecto;
+- cada categoría muestra su cantidad;
+- `?category=<id>` representa la categoría activa;
+- Atrás y Adelante restauran la selección;
+- nuevas categorías aparecen automáticamente al recibir su primer proyecto.
+
+## 8. Inventario y publicación
+
+La estructura local de carpetas no se replica públicamente.
+
+Durante el inventario se distinguen:
+
+- proyectos de portafolio;
+- proyectos pequeños o de práctica;
+- variantes históricas;
+- carpetas técnicas;
+- proyectos pendientes de documentación.
+
+Un proyecto privado o local puede tener presencia en el hub sin publicar su código.
+
+Nunca deben publicarse:
 
 - rutas locales;
-- contraseñas;
-- secretos;
 - credenciales;
-- información privada;
+- secretos;
+- contraseñas;
+- datos privados;
 - archivos internos sensibles.
 
----
+## 9. Proyectos registrados
 
-# 13. Relación con las carpetas locales
+### AWS ORBISHOT
 
-La estructura local y la estructura pública son independientes.
+- Desarrollo de Videojuegos
+- Videojuego web
+- Estable
+- Público
 
-Pueden existir carpetas locales como:
+### LabNotes
 
-- Proyectos HTML
-- Proyectos Python
-- Proyectos C++
-- Proyectos GOlang
+- Desarrollo Web
+- Aplicación web full-stack
+- En desarrollo
+- Código privado / aplicación pública
 
-pero esas carpetas representan organización de archivos.
+### Convertidor de Archivos
 
-El hub utiliza categorías orientadas al producto.
+- Desarrollo de Aplicaciones de Escritorio
+- Utilidad de conversión y procesamiento de archivos
+- Estable
+- Público
 
-Por ejemplo:
+### TecNet Finder
 
-Un proyecto almacenado dentro de Proyectos Python puede aparecer públicamente como:
+- Sistemas y Experimentación
+- DSL / compilador para análisis de redes
+- En desarrollo
+- Privado
 
-**Desarrollo de Aplicaciones de Escritorio**
+## 10. Principio del hub
 
-si ese es su propósito.
+La navegación debe responder primero:
 
----
+**¿Qué tipo de proyecto es?**
 
-# 14. Filosofía del hub
+y después:
 
-El hub no debe mostrar solamente código.
+**¿Con qué tecnologías está construido?**
 
-Debe responder:
+El objetivo es mantener un portafolio e historial técnico coherente aunque los proyectos vivan en repositorios, despliegues o ubicaciones diferentes.
 
-- ¿Qué es el proyecto?
-- ¿Qué problema resuelve?
-- ¿Qué se construyó?
-- ¿En qué estado está?
-- ¿Qué tecnologías utiliza?
-- ¿Cómo ha evolucionado?
-- ¿Dónde puede probarse?
-- ¿Existe repositorio?
-- ¿Es público, privado o local?
+## 11. Páginas individuales actuales
 
-El objetivo final es que robdev512.github.io funcione como portafolio e historial técnico de proyectos personales.
+Todos los proyectos del catálogo actual disponen de una presentación propia:
+
+- AWS ORBISHOT: landing independiente del proyecto.
+- LabNotes: `/projects/labnotes/`.
+- Convertidor de Archivos: `/projects/convertidor-archivos/`.
+- TecNet Finder: `/projects/tecnet-finder/`.
+
+Las páginas de proyectos privados pueden describir el producto sin exponer el repositorio ni código interno.
+
+Las páginas nuevas comparten estilos base mediante:
+
+`projects/project-page.css`
+
+## 12. Identidad visual y roadmaps
+
+Cuando un proyecto dispone de logo propio, el Hub utiliza una copia pública
+del recurso de marca dentro de `assets/`.
+
+Las páginas de proyecto pueden incluir un resumen visual de su roadmap y un
+archivo `ROADMAP.md` independiente.
+
+Esto permite que un proyecto con repositorio privado, como TecNet Finder,
+muestre públicamente su identidad y planificación sin exponer su código.

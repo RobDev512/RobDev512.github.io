@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="TecNet Finder, DSL y proyecto de compilador orientado al análisis de redes mediante VLSM."
+  >
+
+  <meta name="theme-color" content="#0b0f14">
+
+  <title>TecNet Finder · RobDev512</title>
+
+  <link rel="stylesheet" href="../project-page.css">
+</head>
+
+<body class="theme-systems">
+
+  <div class="page-shell">
+
+    <header class="project-topbar">
+      <a class="back-link" href="../../">
+        ← Volver al Hub
+      </a>
+
+      <span class="repo-link">
+        Repositorio privado
+      </span>
+    </header>
+
+
+    <main>
+
+      <section class="hero">
+
+        <div class="hero-visual">
+          <img class="hero-logo" src="../../assets/tecnet-finder-logo.png" alt="Logo de TecNet Finder">
+        </div>
+
+        <div class="hero-copy">
+
+          <span class="eyebrow">
+            Sistemas · DSL / Compilador
+          </span>
+
+          <h1>
+            TecNet Finder
+          </h1>
+
+          <p class="hero-description">
+            Lenguaje específico de dominio orientado al análisis y
+            planificación de redes mediante VLSM, implementado en Python
+            con una interfaz gráfica construida con PySide6.
+          </p>
+
+          <div class="meta-row">
+            <span class="meta-chip">v1.2.1</span>
+            <span class="meta-chip">En desarrollo</span>
+            <span class="meta-chip">Privado</span>
+            <span class="meta-chip">Python</span>
+            <span class="meta-chip">PySide6</span>
+          </div>
+
+          <div class="hero-actions">
+
+            <a
+              class="btn btn-primary"
+              href="https://github.com/RobDev512/TecNet-Finder/releases/download/v1.2.1/TecNet.Finder.1.2.1.Setup.exe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Descargar 1.2.1
+            </a>
+
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/RobDev512/TecNet-Finder"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="content">
+
+        <section class="section">
+
+          <div class="section-heading">
+            <span>Proyecto</span>
+            <h2>Un lenguaje para planificar redes</h2>
+          </div>
+
+          <p class="lead">
+            TecNet Finder procesa instrucciones relacionadas con direcciones
+            IPv4, máscaras de red y requerimientos de hosts para realizar
+            cálculos VLSM. El proyecto integra análisis de compiladores con
+            una aplicación gráfica de apoyo.
+          </p>
+
+          <pre class="code-sample">IP 192.168.1.0 MASK /24 HOSTS 50,30,10 NAME Oficina</pre>
+
+        </section>
+
+
+        <section class="section">
+
+          <div class="section-heading">
+            <span>Compilador</span>
+            <h2>Fases actuales</h2>
+          </div>
+
+          <div class="phase-list">
+
+            <div class="phase-item">
+              <span class="phase-status">✓</span>
+              <span>Análisis léxico</span>
+            </div>
+
+            <div class="phase-item">
+              <span class="phase-status">✓</span>
+              <span>Análisis sintáctico</span>
+            </div>
+
+            <div class="phase-item">
+              <span class="phase-status">✓</span>
+              <span>Análisis semántico</span>
+            </div>
+
+            <div class="phase-item pending">
+              <span class="phase-status">·</span>
+              <span>Generación de código intermedio</span>
+            </div>
+
+            <div class="phase-item pending">
+              <span class="phase-status">·</span>
+              <span>Optimización de código</span>
+            </div>
+
+            <div class="phase-item pending">
+              <span class="phase-status">·</span>
+              <span>Generación de código objeto</span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="section">
+
+          <div class="section-heading">
+            <span>Funciones</span>
+            <h2>Diagnóstico y apoyo</h2>
+          </div>
+
+          <div class="feature-grid">
+
+            <article class="feature-card">
+              <h3>Diagnósticos</h3>
+              <p>
+                Maneja errores y advertencias de las fases léxica,
+                sintáctica y semántica.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Recuperación</h3>
+              <p>
+                Incluye recuperación parcial ante instrucciones incorrectas
+                para mantener útil el flujo de análisis.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Resultados</h3>
+              <p>
+                Permite visualizar los resultados del análisis de red y
+                dispone de funciones de exportación.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Asistencia local</h3>
+              <p>
+                El proyecto contempla asistencia local opcional mediante
+                inteligencia artificial para apoyar el trabajo con
+                diagnósticos y código.
+              </p>
+            </article>
+
+          </div>
+
+        </section>
+
+
+
+                <section class="section roadmap-section" id="roadmap">
+
+          <div class="section-heading">
+            <span>Roadmap</span>
+            <h2>Del análisis semántico al compilador completo</h2>
+          </div>
+
+          <div class="roadmap-intro">
+
+            <p class="lead">
+              El roadmap se carga directamente desde el ROADMAP.md del proyecto. Cada tarjeta representa una versión y permite abrir su detalle, manteniendo separados los avances aplicados, el trabajo activo y la visión futura.
+            </p>
+
+            <a class="roadmap-link" href="./ROADMAP.md">
+              Ver ROADMAP.md
+            </a>
+
+          </div>
+
+          <div
+            class="roadmap-toolbar"
+            aria-label="Filtros del roadmap"
+          >
+
+            <button
+              class="roadmap-filter active"
+              type="button"
+              data-roadmap-filter="all"
+              aria-pressed="true"
+            >
+              Todas
+            </button>
+
+            <button
+              class="roadmap-filter"
+              type="button"
+              data-roadmap-filter="applied"
+              aria-pressed="false"
+            >
+              Aplicadas
+            </button>
+
+            <button
+              class="roadmap-filter"
+              type="button"
+              data-roadmap-filter="development"
+              aria-pressed="false"
+            >
+              En desarrollo
+            </button>
+
+            <button
+              class="roadmap-filter"
+              type="button"
+              data-roadmap-filter="next"
+              aria-pressed="false"
+            >
+              Siguiente
+            </button>
+
+            <button
+              class="roadmap-filter"
+              type="button"
+              data-roadmap-filter="pending"
+              aria-pressed="false"
+            >
+              Pendientes
+            </button>
+
+            <button
+              class="roadmap-filter"
+              type="button"
+              data-roadmap-filter="vision"
+              aria-pressed="false"
+            >
+              Visión
+            </button>
+
+          </div>
+
+          <p
+            class="roadmap-load-status"
+            id="roadmapLoadStatus"
+          >
+            Preparando roadmap…
+          </p>
+
+          <div
+            class="roadmap-live-grid"
+            id="roadmapGrid"
+          ></div>
+
+          <article
+            class="roadmap-detail"
+            id="roadmapDetail"
+            hidden
+          ></article>
+
+        </section>
+
+
+<section class="section">
+
+          <div class="section-heading">
+            <span>Tecnologías</span>
+            <h2>Stack principal</h2>
+          </div>
+
+          <div class="tech-list">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">PySide6</span>
+            <span class="tech-chip">Compiladores</span>
+            <span class="tech-chip">VLSM</span>
+            <span class="tech-chip">IPv4</span>
+            <span class="tech-chip">DSL</span>
+          </div>
+
+        </section>
+
+      </div>
+
+    </main>
+
+
+    <footer class="page-footer">
+      <span>RobDev512 · TecNet Finder</span>
+      <span>Proyecto privado · En desarrollo</span>
+    </footer>
+
+  </div>
+
+  <script src="../project-roadmap.js"></script>
+
+</body>
+</html>

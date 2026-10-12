@@ -330,34 +330,100 @@ function renderLabNotesCard(project) {
   return article;
 }
 
+function projectMark(project) {
+  if (
+    project.card &&
+    typeof project.card.mark === "string" &&
+    project.card.mark.trim() !== ""
+  ) {
+    return project.card.mark.trim().slice(0, 3).toUpperCase();
+  }
+
+  const words = project.name
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (words.length === 1) {
+    return words[0].slice(0, 2).toUpperCase();
+  }
+
+  return words
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
 function renderStandardCard(project) {
   const article = createElement(
     "article",
-    "project-card project-card-placeholder"
+    `project-card project-card-standard project-card-standard-${project.category}`
   );
 
   applyProjectDataAttributes(article, project);
 
-  if (project.logo && project.logo.src) {
-    const logoShell = createElement("div", "placeholder-mark");
-    const logo = createElement("img");
+  const visual = createElement(
+    "div",
+    "standard-card-visual"
+  );
 
-    logo.src = project.logo.src;
-    logo.alt = project.logo.alt || project.name;
-    logo.style.maxWidth = "38px";
-    logo.style.maxHeight = "38px";
+  visual.append(
+    createElement("div", "standard-card-orbit orbit-one"),
+    createElement("div", "standard-card-orbit orbit-two")
+  );
 
-    logoShell.append(logo);
-    article.append(logoShell);
+  let identity;
+
+  if (
+    project.logo &&
+    project.logo.src
+  ) {
+    identity = createElement(
+      "img",
+      "standard-card-logo"
+    );
+
+    identity.src = project.logo.src;
+    identity.alt = project.logo.alt || project.name;
+  }
+  else {
+    identity = createElement(
+      "div",
+      "standard-card-mark",
+      projectMark(project)
+    );
   }
 
-  article.append(
+  if (
+    project.logo &&
+    project.logo.src
+  ) {
+    visual.append(identity);
+  }
+  else {
+    const category = createElement(
+      "span",
+      "standard-card-category",
+      categoryLabel(project.category) ?? project.subtype
+    );
+
+    visual.append(identity, category);
+  }
+
+  const copy = createElement(
+    "div",
+    "standard-card-copy"
+  );
+
+  copy.append(
     createMeta(project),
     createElement("h3", "", project.name),
     createElement("p", "", project.description),
     createBadges(project),
     createActions(project)
   );
+
+  article.append(visual, copy);
 
   return article;
 }
