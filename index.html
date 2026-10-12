@@ -10,6 +10,7 @@
   >
   <title>RobDev512 · Proyectos</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./labnotes-card.css">
 </head>
 
 <body>
@@ -124,37 +125,43 @@
         </article>
 
 
-        <article class="project-card project-card-placeholder">
+        <article class="project-card project-card-placeholder project-card-labnotes">
 
-          <div class="placeholder-mark">
-            LN
+          <div class="placeholder-mark labnotes-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M25 8h14v5l-3 3v10l14 23c2 4-1 7-5 7H19c-4 0-7-3-5-7l14-23V16l-3-3V8Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M20 44h24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            </svg>
           </div>
 
-          <span class="project-type">
-            Aplicaciones · Académico / Profesional
-          </span>
+          <div class="project-meta labnotes-meta">
+            <span class="project-type">
+              Aplicación · Knowledge Base
+            </span>
+            <span class="project-version labnotes-version">
+              v1.1.0-alpha.1
+            </span>
+          </div>
 
           <h3>LabNotes</h3>
 
           <p>
-            Proyecto independiente orientado a la gestión y organización
-            de notas, actualmente mantenido en un repositorio privado.
+            Plataforma colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo.
           </p>
 
           <div class="project-tags">
-            <span>Aplicación</span>
-            <span>En desarrollo</span>
-            <span>Repositorio privado</span>
+            <span>Node.js</span>
+            <span>SQL Server</span>
+            <span>Night Shift</span>
+            <span>Código privado</span>
           </div>
 
           <div class="project-actions">
             <a
-              class="btn btn-secondary"
-              href="https://github.com/RobDev512/LabNotes"
-              target="_blank"
-              rel="noreferrer"
+              class="btn btn-primary labnotes-button"
+              href="./projects/labnotes/"
             >
-              Abrir repositorio
+              Ver proyecto
             </a>
           </div>
 

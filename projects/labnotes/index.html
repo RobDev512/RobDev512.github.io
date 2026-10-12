@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Presentación pública de LabNotes, plataforma colaborativa para documentar problemas y soluciones de laboratorios de cómputo.">
+  <title>LabNotes · RobDev512</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="site-brand" href="../../" aria-label="Volver al hub de RobDev512">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M25 8h14v5l-3 3v10l14 23c2 4-1 7-5 7H19c-4 0-7-3-5-7l14-23V16l-3-3V8Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M20 44h24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="25" cy="38" r="2.5" fill="currentColor"/>
+            <circle cx="36" cy="34" r="2.5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span><strong>Lab</strong>Notes</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="#about">Proyecto</a>
+        <a href="#current">Night Shift</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="../../">Hub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="about">
+        <div class="hero-copy">
+          <div class="eyebrow">Collaborative knowledge · Laboratory support</div>
+          <h1>Lab<span>Notes</span></h1>
+          <p class="hero-lead">
+            Una plataforma web colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo, con una evolución planeada desde notas compartidas hasta soporte institucional.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#roadmap">Explorar roadmap</a>
+            <a class="btn btn-secondary" href="../../">Volver al hub</a>
+          </div>
+
+          <div class="hero-meta">
+            <div>
+              <strong>v1.0.0</strong>
+              <span>Foundation · base estable</span>
+            </div>
+            <div>
+              <strong>v1.1.0</strong>
+              <span>Night Shift · en desarrollo</span>
+            </div>
+            <div>
+              <strong>Privado</strong>
+              <span>Código fuente del proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="glow glow-a"></div>
+          <div class="glow glow-b"></div>
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="lab-icon">
+            <svg viewBox="0 0 64 64">
+              <path d="M25 8h14v5l-3 3v10l14 23c2 4-1 7-5 7H19c-4 0-7-3-5-7l14-23V16l-3-3V8Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M20 44h24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="24" cy="38" r="2.7" fill="currentColor"/>
+              <circle cx="36" cy="34" r="2.7" fill="currentColor"/>
+              <circle cx="31" cy="46" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-strip" aria-label="Pilares de LabNotes">
+        <article>
+          <span class="feature-number">01</span>
+          <h2>Documentar</h2>
+          <p>Registrar problemas, soluciones, imágenes, categorías, laboratorios y etiquetas.</p>
+        </article>
+        <article>
+          <span class="feature-number">02</span>
+          <h2>Colaborar</h2>
+          <p>Comentarios, participación comunitaria y una ruta futura hacia soluciones validadas.</p>
+        </article>
+        <article>
+          <span class="feature-number">03</span>
+          <h2>Organizar</h2>
+          <p>Búsqueda, filtros, perfiles, favoritos y estados que hacen reutilizable el conocimiento.</p>
+        </article>
+        <article>
+          <span class="feature-number">04</span>
+          <h2>Escalar</h2>
+          <p>Azure, SQL Server y un roadmap que evoluciona hacia equipos, QR, PWA y soporte institucional.</p>
+        </article>
+      </section>
+
+      <section class="section-grid" id="current">
+        <div class="section-heading">
+          <span class="section-kicker">Release actual</span>
+          <h2>v1.1.0 · Night Shift</h2>
+          <p>
+            El primer gran upgrade posterior a Foundation mejora accesibilidad visual, participación y organización sin romper la arquitectura principal del proyecto.
+          </p>
+        </div>
+
+        <article class="release-card">
+          <div class="release-topline">
+            <span class="status-pill status-current">En desarrollo</span>
+            <span class="build-label">v1.1.0-alpha.1</span>
+          </div>
+          <h3>Experience & Participation</h3>
+          <ul>
+            <li>Modo oscuro y sistema de temas.</li>
+            <li>Versión y codename visibles.</li>
+            <li>Votos Útil / No útil.</li>
+            <li>Favoritos y sección Mis favoritos.</li>
+            <li>Ordenamiento por recientes, útiles y comentadas.</li>
+            <li>Estado Abierto / Resuelto con filtrado.</li>
+          </ul>
+          <p class="release-note">El alcance se implementa y prueba por etapas antes de considerar estable el release.</p>
+        </article>
+      </section>
+
+      <section class="stack-section">
+        <div class="section-heading compact-heading">
+          <span class="section-kicker">Arquitectura actual</span>
+          <h2>Web full-stack sin frameworks de frontend</h2>
+        </div>
+        <div class="stack-grid">
+          <article><span>Frontend</span><strong>HTML · CSS · JavaScript</strong></article>
+          <article><span>Backend</span><strong>Node.js · Express</strong></article>
+          <article><span>Datos</span><strong>SQL Server · Azure SQL</strong></article>
+          <article><span>Sesión</span><strong>JWT · cookie HttpOnly</strong></article>
+          <article><span>Correo</span><strong>Nodemailer · SMTP</strong></article>
+          <article><span>Deploy</span><strong>GitHub Actions · Azure App Service</strong></article>
+        </div>
+      </section>
+
+      <section class="roadmap-section" id="roadmap">
+        <div class="section-heading roadmap-heading">
+          <span class="section-kicker">Ruta de evolución</span>
+          <h2>De Foundation a Insight</h2>
+          <p>
+            El roadmap público resume las versiones planeadas. La documentación detallada y la implementación permanecen en el repositorio privado de LabNotes.
+          </p>
+        </div>
+
+        <div class="roadmap-toolbar" aria-label="Filtros del roadmap">
+          <button class="roadmap-filter active" type="button" data-filter="all" aria-pressed="true">Todas</button>
+          <button class="roadmap-filter" type="button" data-filter="published" aria-pressed="false">Publicada</button>
+          <button class="roadmap-filter" type="button" data-filter="current" aria-pressed="false">Actual</button>
+          <button class="roadmap-filter" type="button" data-filter="planned" aria-pressed="false">Planeadas</button>
+          <button class="roadmap-filter" type="button" data-filter="future" aria-pressed="false">Visión</button>
+        </div>
+
+        <div class="roadmap-grid" id="roadmapGrid"></div>
+        <article class="roadmap-detail" id="roadmapDetail" hidden></article>
+      </section>
+
+      <section class="privacy-card">
+        <div>
+          <span class="section-kicker">Proyecto privado</span>
+          <h2>Presentación pública, código protegido</h2>
+        </div>
+        <p>
+          Esta página comunica el producto y su evolución sin publicar el repositorio privado, secretos, credenciales, base de datos ni archivos generados por usuarios.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>LabNotes · Proyecto personal en evolución</span>
+      <a href="../../">RobDev512 · Hub de proyectos</a>
+    </footer>
+  </div>
+
+  <script src="./roadmap.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.project-card-labnotes {
+  background:
+    radial-gradient(circle at 85% 14%, rgba(45,212,191,.08), transparent 15rem),
+    linear-gradient(155deg, rgba(20,125,245,.06), rgba(167,139,250,.04)),
+    rgba(18,25,34,.78);
+}
+
+.project-card-labnotes .project-type {
+  color: #69aefc;
+}
+
+.labnotes-mark {
+  width: 72px;
+  height: 72px;
+  border-style: solid;
+  border-color: rgba(20,125,245,.22);
+  color: #69aefc;
+  background: rgba(20,125,245,.07);
+}
+
+.labnotes-mark svg {
+  width: 42px;
+  height: 42px;
+}
+
+.labnotes-meta {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.labnotes-version {
+  color: #b9a7ff;
+}
+
+.labnotes-button {
+  background: #147df5;
+  color: #fff;
+}
+
+.labnotes-button:hover {
+  background: #2e8cf7;
+}
