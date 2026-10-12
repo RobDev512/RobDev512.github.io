@@ -437,3 +437,75 @@ El documento se dibuja como PDF vectorial con:
 
 Esto evita depender del cuadro de impresión y mantiene una apariencia
 consistente en el archivo descargado.
+
+## 21. Historial del portafolio
+
+La Fase 7 introduce una fuente independiente para hechos históricos:
+
+`data/history.json`
+
+El renderer vive en:
+
+`js/history.js`
+
+### Separación de responsabilidades
+
+- `data/projects.json`: estado actual del catálogo.
+- `data/project-pages.json`: contenido de páginas estándar.
+- `data/history.json`: hechos que ya ocurrieron.
+- `docs/HUB-ROADMAP.md`: planificación del propio Hub.
+
+El historial no debe deducirse automáticamente a partir de `updatedAt` ni de un
+roadmap. Un evento sólo se registra cuando existe una fecha y descripción
+suficientemente confiables.
+
+### Modelo de evento
+
+Cada evento puede declarar:
+
+- `id`;
+- `date` como fecha de respaldo y compatibilidad;
+- `occurredAt` opcional con timestamp ISO-8601 cuando la hora es verificable;
+- `precision` (`day` o `time`) para no inventar granularidad inexistente;
+- `sequence` para desempatar u ordenar hitos relacionados;
+- `type`;
+- `projectId`;
+- `title`;
+- `summary`;
+- `version`, cuando aplica;
+- `featured`;
+- `links`.
+
+### Tipos iniciales
+
+- `hub-phase`: cierre o avance de una fase del Hub.
+- `release`: release verificable de un proyecto.
+- `milestone`: hito relevante que no corresponde necesariamente a un release.
+
+### Navegación
+
+La vista pública admite:
+
+- filtro por proyecto;
+- filtro por tipo;
+- filtro por año;
+- filtro por mes;
+- filtro por día;
+- filtro por hora cuando existen timestamps exactos;
+- agrupación por año, mes, día u hora;
+- vista Cronología;
+- vista Por periodo.
+
+Los filtros utilizan parámetros `hProject`, `hType`, `hYear`, `hMonth`, `hDay`,
+`hHour`, `hGroup` y `hView`, que coexisten con los parámetros del catálogo sin
+reemplazarlos.
+
+Los timestamps exactos se almacenan en UTC y se presentan usando la zona horaria
+local del navegador. Los eventos sin `occurredAt` se muestran con precisión de
+día y quedan fuera de un filtro de hora específico.
+
+### Principio de integridad histórica
+
+El historial es curado. La automatización futura podrá sugerir eventos a partir
+de tags, releases o commits, pero la publicación seguirá requiriendo datos
+públicos y verificables.
