@@ -1,6 +1,7 @@
 "use strict";
 
 const CATALOG_URL = "./data/projects.json";
+const HUB_ROADMAP_URL = "./docs/HUB-ROADMAP.md";
 const SUPPORTED_SCHEMA_VERSION = 1;
 const SUPPORTED_CARD_VARIANTS = new Set([
   "featured",
@@ -19,7 +20,15 @@ const state = {
     query: null,
     featured: false
   },
-  sort: "curated"
+  sort: "curated",
+  advancedOpen: false,
+  roadmap: {
+    phases: [],
+    markdown: "",
+    view: "cards",
+    selected: null,
+    canvasNodes: []
+  }
 };
 
 const grid = document.querySelector("#projectsGrid");
@@ -46,6 +55,42 @@ const featuredOnly =
 
 const resetCatalogFilters =
   document.querySelector("#resetCatalogFilters");
+
+const advancedSearchToggle =
+  document.querySelector("#advancedSearchToggle");
+
+const advancedCatalogPanel =
+  document.querySelector("#advancedCatalogPanel");
+
+const hubRoadmapGrid =
+  document.querySelector("#hubRoadmapGrid");
+
+const hubRoadmapStatus =
+  document.querySelector("#hubRoadmapStatus");
+
+const hubRoadmapViewToggle =
+  document.querySelector("#hubRoadmapViewToggle");
+
+const hubRoadmapPdfExport =
+  document.querySelector("#hubRoadmapPdfExport");
+
+const hubRoadmapTimeline =
+  document.querySelector("#hubRoadmapTimeline");
+
+const hubRoadmapCanvas =
+  document.querySelector("#hubRoadmapCanvas");
+
+const hubRoadmapDetail =
+  document.querySelector("#hubRoadmapDetail");
+
+const hubRoadmapDetailTop =
+  document.querySelector("#hubRoadmapDetailTop");
+
+const hubRoadmapDetailTitle =
+  document.querySelector("#hubRoadmapDetailTitle");
+
+const hubRoadmapDetailBody =
+  document.querySelector("#hubRoadmapDetailBody");
 
 function createElement(tagName, className = "", text = "") {
   const element = document.createElement(tagName);
@@ -189,6 +234,32 @@ function validateProject(project, catalog, knownIds) {
     requireString(link.label, "links.label", project.id);
     requireString(link.url, "links.url", project.id);
   }
+
+  if (project.roadmapExport !== undefined) {
+    requireString(
+      project.roadmapExport.type,
+      "roadmapExport.type",
+      project.id
+    );
+
+    requireString(
+      project.roadmapExport.url,
+      "roadmapExport.url",
+      project.id
+    );
+
+    requireString(
+      project.roadmapExport.title,
+      "roadmapExport.title",
+      project.id
+    );
+
+    requireString(
+      project.roadmapExport.filename,
+      "roadmapExport.filename",
+      project.id
+    );
+  }
 }
 
 function validateCatalog(catalog) {
@@ -238,6 +309,219 @@ function buttonClasses(link) {
   }
 }
 
+
+let roadmapPdfLoaderPromise = null;
+
+
+function ensureRoadmapPdfExporter() {
+  if (window.RoadmapPdf) {
+    return Promise.resolve(
+      window.RoadmapPdf
+    );
+  }
+
+  if (roadmapPdfLoaderPromise) {
+    return roadmapPdfLoaderPromise;
+  }
+
+  roadmapPdfLoaderPromise =
+    new Promise(
+      (resolve, reject) => {
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.src =
+          "./js/roadmap-pdf.js";
+
+        script.onload =
+          () => {
+            if (window.RoadmapPdf) {
+              resolve(
+                window.RoadmapPdf
+              );
+              return;
+            }
+
+            reject(
+              new Error(
+                "El exportador PDF no se inicializó."
+              )
+            );
+          };
+
+        script.onerror =
+          () => {
+            reject(
+              new Error(
+                "No se pudo cargar roadmap-pdf.js."
+              )
+            );
+          };
+
+        document.head.append(
+          script
+        );
+      }
+    );
+
+  return roadmapPdfLoaderPromise;
+}
+
+
+async function exportProjectRoadmap(
+  project,
+  button
+) {
+  const config =
+    project.roadmapExport;
+
+  if (!config) {
+    return;
+  }
+
+  const originalText =
+    button.textContent;
+
+  button.disabled = true;
+  button.textContent =
+    "Generando PDF…";
+
+  try {
+    const exporter =
+      await ensureRoadmapPdfExporter();
+
+    await exporter.downloadFromSource(
+      config
+    );
+
+    button.textContent =
+      "PDF descargado";
+
+    window.setTimeout(
+      () => {
+        button.textContent =
+          originalText;
+
+        button.disabled =
+          false;
+      },
+      1200
+    );
+  }
+  catch (error) {
+    console.error(
+      `No se pudo exportar el roadmap de ${project.name}:`,
+      error
+    );
+
+    button.textContent =
+      "Error al exportar";
+
+    window.setTimeout(
+      () => {
+        button.textContent =
+          originalText;
+
+        button.disabled =
+          false;
+      },
+      1500
+    );
+  }
+}
+
+
+async function exportHubRoadmapPdf() {
+  if (!hubRoadmapPdfExport) {
+    return;
+  }
+
+  const originalText =
+    hubRoadmapPdfExport.textContent;
+
+  hubRoadmapPdfExport.disabled =
+    true;
+
+  hubRoadmapPdfExport.textContent =
+    "Generando PDF…";
+
+  try {
+    const exporter =
+      await ensureRoadmapPdfExporter();
+
+    let markdown =
+      state.roadmap.markdown;
+
+    if (!markdown) {
+      const response =
+        await fetch(
+          HUB_ROADMAP_URL,
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+      }
+
+      markdown =
+        await response.text();
+    }
+
+    exporter.downloadMarkdown({
+      markdown,
+      title:
+        "RobDev512 Hub",
+      subtitle:
+        "Roadmap general del portafolio",
+      source:
+        HUB_ROADMAP_URL,
+      filename:
+        "RobDev512-Hub-Roadmap.pdf"
+    });
+
+    hubRoadmapPdfExport.textContent =
+      "PDF descargado";
+
+    window.setTimeout(
+      () => {
+        hubRoadmapPdfExport.textContent =
+          originalText;
+
+        hubRoadmapPdfExport.disabled =
+          false;
+      },
+      1200
+    );
+  }
+  catch (error) {
+    console.error(
+      "No se pudo exportar el roadmap del Hub:",
+      error
+    );
+
+    hubRoadmapPdfExport.textContent =
+      "Error al exportar";
+
+    window.setTimeout(
+      () => {
+        hubRoadmapPdfExport.textContent =
+          originalText;
+
+        hubRoadmapPdfExport.disabled =
+          false;
+      },
+      1500
+    );
+  }
+}
+
+
 function createActions(project, extraClass = "") {
   const actions = createElement(
     "div",
@@ -253,6 +537,35 @@ function createActions(project, extraClass = "") {
 
     applyLinkBehavior(anchor, link);
     actions.append(anchor);
+  }
+
+  if (project.roadmapExport) {
+    const exportButton =
+      createElement(
+        "button",
+        "btn btn-secondary roadmap-pdf-action",
+        "Roadmap PDF"
+      );
+
+    exportButton.type =
+      "button";
+
+    exportButton.title =
+      `Descargar respaldo PDF del roadmap de ${project.name}`;
+
+    exportButton.addEventListener(
+      "click",
+      () => {
+        exportProjectRoadmap(
+          project,
+          exportButton
+        );
+      }
+    );
+
+    actions.append(
+      exportButton
+    );
   }
 
   return actions;
@@ -1007,6 +1320,60 @@ function populateAdvancedFilters() {
 }
 
 
+function hasAdvancedFilterState() {
+  return Boolean(
+    state.filters.status ||
+    state.filters.visibility ||
+    state.filters.technology ||
+    state.filters.featured === true ||
+    state.sort !== "curated"
+  );
+}
+
+
+function clearAdvancedFilters({
+  historyMode = "push"
+} = {}) {
+  state.filters = {
+    ...state.filters,
+    status: null,
+    visibility: null,
+    technology: null,
+    featured: false
+  };
+
+  state.sort = "curated";
+  state.advancedOpen = false;
+
+  syncUrl(historyMode);
+  renderCatalog();
+}
+
+
+function setAdvancedOpen(
+  open,
+  {
+    clearOnClose = true
+  } = {}
+) {
+  const shouldOpen =
+    open === true;
+
+  if (
+    !shouldOpen &&
+    clearOnClose &&
+    hasAdvancedFilterState()
+  ) {
+    clearAdvancedFilters();
+    return;
+  }
+
+  state.advancedOpen =
+    shouldOpen;
+
+  syncControlValues();
+}
+
 function syncControlValues() {
   if (catalogSearch) {
     catalogSearch.value =
@@ -1041,6 +1408,23 @@ function syncControlValues() {
   if (resetCatalogFilters) {
     resetCatalogFilters.disabled =
       !hasActiveFilters();
+  }
+
+  if (advancedSearchToggle) {
+    advancedSearchToggle.setAttribute(
+      "aria-expanded",
+      String(state.advancedOpen)
+    );
+
+    advancedSearchToggle.textContent =
+      state.advancedOpen
+        ? "Ocultar búsqueda avanzada"
+        : "Búsqueda avanzada";
+  }
+
+  if (advancedCatalogPanel) {
+    advancedCatalogPanel.hidden =
+      !state.advancedOpen;
   }
 }
 
@@ -1163,6 +1547,10 @@ function renderCatalog() {
   renderCatalogSummary();
   syncControlValues();
   renderProjects();
+
+  requestAnimationFrame(
+    refreshInteractionPolish
+  );
 }
 
 
@@ -1512,6 +1900,7 @@ function resetFilters() {
   };
 
   state.sort = "curated";
+  state.advancedOpen = false;
 
   syncUrl("push");
   renderCatalog();
@@ -1556,6 +1945,15 @@ function getViewState() {
 
 
 function bindAdvancedControls() {
+  advancedSearchToggle?.addEventListener(
+    "click",
+    () => {
+      setAdvancedOpen(
+        !state.advancedOpen
+      );
+    }
+  );
+
   catalogSearch?.addEventListener(
     "input",
     () => {
@@ -1575,6 +1973,8 @@ function bindAdvancedControls() {
   statusFilter?.addEventListener(
     "change",
     () => {
+      state.advancedOpen = true;
+
       setFilters(
         {
           status:
@@ -1591,6 +1991,8 @@ function bindAdvancedControls() {
   visibilityFilter?.addEventListener(
     "change",
     () => {
+      state.advancedOpen = true;
+
       setFilters(
         {
           visibility:
@@ -1607,6 +2009,8 @@ function bindAdvancedControls() {
   technologyFilter?.addEventListener(
     "change",
     () => {
+      state.advancedOpen = true;
+
       setFilters(
         {
           technology:
@@ -1623,6 +2027,8 @@ function bindAdvancedControls() {
   sortOrder?.addEventListener(
     "change",
     () => {
+      state.advancedOpen = true;
+
       setSort(
         sortOrder.value
       );
@@ -1632,6 +2038,8 @@ function bindAdvancedControls() {
   featuredOnly?.addEventListener(
     "change",
     () => {
+      state.advancedOpen = true;
+
       setFilters(
         {
           featured:
@@ -1761,6 +2169,9 @@ async function loadCatalog() {
   state.sort =
     initial.sort;
 
+  state.advancedOpen =
+    hasAdvancedFilterState();
+
   bindAdvancedControls();
 
   syncUrl("replace");
@@ -1784,9 +2195,301 @@ window.addEventListener(
     state.sort =
       next.sort;
 
+    state.advancedOpen =
+      hasAdvancedFilterState();
+
     renderCatalog();
   }
 );
+
+
+
+
+/* =========================================================
+   INTERACTION POLISH
+   ========================================================= */
+
+function enablePointerGlow(root = document) {
+  const targets =
+    root.querySelectorAll(
+      ".project-card, .catalog-controls, .hub-roadmap-card, .hub-roadmap-detail"
+    );
+
+  for (const target of targets) {
+    if (
+      target.dataset.pointerGlowReady ===
+      "true"
+    ) {
+      continue;
+    }
+
+    target.dataset.pointerGlowReady =
+      "true";
+
+    target.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect =
+          target.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        target.style.setProperty(
+          "--pointer-x",
+          `${x}px`
+        );
+
+        target.style.setProperty(
+          "--pointer-y",
+          `${y}px`
+        );
+
+        target.classList.add(
+          "pointer-active"
+        );
+      }
+    );
+
+    target.addEventListener(
+      "pointerleave",
+      () => {
+        target.classList.remove(
+          "pointer-active"
+        );
+      }
+    );
+  }
+}
+
+
+function enableRevealAnimations(root = document) {
+  const targets =
+    root.querySelectorAll(
+      [
+        ".catalog-controls",
+        ".project-card",
+        ".hub-roadmap-card",
+        ".hub-roadmap-detail",
+        ".projects-heading"
+      ].join(",")
+    );
+
+  if (
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+    for (const target of targets) {
+      target.classList.add(
+        "reveal-visible"
+      );
+    }
+
+    return;
+  }
+
+  const observer =
+    new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            continue;
+          }
+
+          entry.target.classList.add(
+            "reveal-visible"
+          );
+
+          observer.unobserve(
+            entry.target
+          );
+        }
+      },
+      {
+        threshold: 0.12,
+        rootMargin:
+          "0px 0px -28px 0px"
+      }
+    );
+
+  for (const target of targets) {
+    if (
+      target.dataset.revealReady ===
+      "true"
+    ) {
+      continue;
+    }
+
+    target.dataset.revealReady =
+      "true";
+
+    target.classList.add(
+      "reveal-ready"
+    );
+
+    observer.observe(target);
+  }
+}
+
+
+function refreshInteractionPolish() {
+  enablePointerGlow();
+  enableRevealAnimations();
+}
+
+
+
+
+function installHubScrollProgress() {
+  if (
+    document.querySelector(
+      ".hub-scroll-progress"
+    )
+  ) {
+    return;
+  }
+
+  const bar =
+    document.createElement(
+      "div"
+    );
+
+  bar.className =
+    "hub-scroll-progress";
+
+  bar.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.append(
+    bar
+  );
+
+  const update = () => {
+    const maxScroll =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    const ratio =
+      maxScroll > 0
+        ? Math.min(
+            1,
+            Math.max(
+              0,
+              window.scrollY /
+              maxScroll
+            )
+          )
+        : 0;
+
+    bar.style.transform =
+      `scaleX(${ratio})`;
+  };
+
+  update();
+
+  window.addEventListener(
+    "scroll",
+    update,
+    {
+      passive: true
+    }
+  );
+
+  window.addEventListener(
+    "resize",
+    update
+  );
+}
+
+
+function installHubRippleFeedback() {
+  if (
+    document.body.dataset.hubRippleReady ===
+    "true"
+  ) {
+    return;
+  }
+
+  document.body.dataset.hubRippleReady =
+    "true";
+
+  document.addEventListener(
+    "pointerdown",
+    (event) => {
+      const target =
+        event.target.closest(
+          [
+            ".btn",
+            ".github-link",
+            ".category-filter",
+            ".catalog-reset",
+            ".catalog-advanced-toggle",
+            ".hub-roadmap-view-button",
+            ".hub-roadmap-link",
+            ".hub-roadmap-detail-button"
+          ].join(",")
+        );
+
+      if (!target) {
+        return;
+      }
+
+      const rect =
+        target.getBoundingClientRect();
+
+      const size =
+        Math.max(
+          rect.width,
+          rect.height
+        ) * 1.7;
+
+      const ripple =
+        document.createElement(
+          "span"
+        );
+
+      ripple.className =
+        "hub-ui-ripple";
+
+      ripple.style.width =
+        `${size}px`;
+
+      ripple.style.height =
+        `${size}px`;
+
+      ripple.style.left =
+        `${event.clientX -
+        rect.left -
+        size / 2}px`;
+
+      ripple.style.top =
+        `${event.clientY -
+        rect.top -
+        size / 2}px`;
+
+      target.append(ripple);
+
+      window.setTimeout(
+        () => {
+          ripple.remove();
+        },
+        620
+      );
+    }
+  );
+}
+
+
+function installHubFinalMotionLayer() {
+  installHubScrollProgress();
+  installHubRippleFeedback();
+}
 
 
 window.HubCatalog = {
@@ -1802,4 +2505,1119 @@ window.HubCatalog = {
 
 loadCatalog().catch(
   showCatalogError
+);
+
+
+
+
+function normalizeHubRoadmapStatus(raw = "") {
+  const value =
+    raw
+      .replace(/\.$/, "")
+      .trim();
+
+  const normalized =
+    normalizeSearchText(value);
+
+  if (normalized.includes("completada")) {
+    return {
+      key: "completed",
+      label: value
+    };
+  }
+
+  if (normalized.includes("parcial")) {
+    return {
+      key: "partial",
+      label: value
+    };
+  }
+
+  if (normalized.includes("vision")) {
+    return {
+      key: "vision",
+      label: value
+    };
+  }
+
+  if (normalized.includes("siguiente")) {
+    return {
+      key: "next",
+      label: value
+    };
+  }
+
+  return {
+    key: "planned",
+    label: value || "Planeada"
+  };
+}
+
+
+function parseRoadmapSectionLines(lines) {
+  const sections = [];
+  let current = null;
+
+  for (const rawLine of lines) {
+    const line =
+      rawLine.trim();
+
+    const heading =
+      line.match(/^##\s+(.+)$/);
+
+    if (heading) {
+      if (current) {
+        sections.push(current);
+      }
+
+      current = {
+        title: heading[1].trim(),
+        lines: []
+      };
+
+      continue;
+    }
+
+    if (!current) {
+      continue;
+    }
+
+    if (line.startsWith("---")) {
+      continue;
+    }
+
+    current.lines.push(rawLine);
+  }
+
+  if (current) {
+    sections.push(current);
+  }
+
+  return sections;
+}
+
+
+function cleanRoadmapText(raw = "") {
+  return raw
+    .replace(/`/g, "")
+    .replace(/\*\*/g, "")
+    .trim();
+}
+
+
+function roadmapSectionToHtml(section) {
+  const lines =
+    section.lines
+      .map(
+        (line) => line.trimEnd()
+      )
+      .filter(
+        (line) => line.trim() !== ""
+      );
+
+  if (!lines.length) {
+    return "";
+  }
+
+  const parts = [];
+  let currentList = [];
+
+  const flushList = () => {
+    if (!currentList.length) {
+      return;
+    }
+
+    parts.push(
+      `<ul>${currentList
+        .map(
+          (item) =>
+            `<li>${cleanRoadmapText(item)}</li>`
+        )
+        .join("")}</ul>`
+    );
+
+    currentList = [];
+  };
+
+  for (const rawLine of lines) {
+    const line =
+      rawLine.trim();
+
+    if (line.startsWith("- ")) {
+      currentList.push(
+        line.slice(2)
+      );
+      continue;
+    }
+
+    flushList();
+
+    parts.push(
+      `<p>${cleanRoadmapText(line)}</p>`
+    );
+  }
+
+  flushList();
+
+  return `
+    <section class="hub-roadmap-detail-section">
+      <h4>${section.title}</h4>
+      ${parts.join("")}
+    </section>
+  `;
+}
+
+
+function roadmapSummary(phase) {
+  const preferred =
+    phase.sections.find(
+      (section) =>
+        section.title === "Impacto"
+    ) ||
+    phase.sections.find(
+      (section) =>
+        section.title === "Impacto esperado"
+    ) ||
+    phase.sections.find(
+      (section) =>
+        section.title === "Objetivo"
+    ) ||
+    phase.sections[0];
+
+  if (!preferred) {
+    return "Consulta el ROADMAP.md para ver el detalle completo.";
+  }
+
+  for (const rawLine of preferred.lines) {
+    const line =
+      cleanRoadmapText(rawLine);
+
+    if (
+      line &&
+      !line.startsWith("-")
+    ) {
+      return line;
+    }
+  }
+
+  return "Consulta el ROADMAP.md para ver el detalle completo.";
+}
+
+
+function roadmapHighlights(phase) {
+  const section =
+    phase.sections.find(
+      (item) =>
+        [
+          "Implementado",
+          "Ya adelantado",
+          "Posibles funciones",
+          "Falta por completar"
+        ].includes(item.title)
+    );
+
+  if (!section) {
+    return [];
+  }
+
+  return section.lines
+    .map(
+      (line) => line.trim()
+    )
+    .filter(
+      (line) =>
+        line.startsWith("- ")
+    )
+    .map(
+      (line) =>
+        cleanRoadmapText(
+          line.slice(2)
+        )
+    )
+    .slice(0, 3);
+}
+
+
+function parseHubRoadmap(markdown) {
+  const lines =
+    markdown
+      .replace(/\r/g, "")
+      .split("\n");
+
+  const phases = [];
+  let current = null;
+
+  const headingPattern =
+    /^# Fase (\d+) - (.+)$/;
+
+  for (const rawLine of lines) {
+    const match =
+      rawLine.match(headingPattern);
+
+    if (match) {
+      if (current) {
+        phases.push(current);
+      }
+
+      current = {
+        number: Number(match[1]),
+        title: match[2].trim(),
+        statusRaw: "",
+        lines: []
+      };
+
+      continue;
+    }
+
+    if (!current) {
+      continue;
+    }
+
+    const statusMatch =
+      rawLine
+        .trim()
+        .match(
+          /^\*\*Estado:\*\*\s*(.+)$/
+        );
+
+    if (statusMatch) {
+      current.statusRaw =
+        statusMatch[1].trim();
+    }
+
+    current.lines.push(rawLine);
+  }
+
+  if (current) {
+    phases.push(current);
+  }
+
+  return phases
+    .map(
+      (phase) => {
+        const sections =
+          parseRoadmapSectionLines(
+            phase.lines
+          );
+
+        return {
+          ...phase,
+          status:
+            normalizeHubRoadmapStatus(
+              phase.statusRaw
+            ),
+          sections,
+          excerpt:
+            roadmapSummary({
+              ...phase,
+              sections
+            }),
+          highlights:
+            roadmapHighlights({
+              ...phase,
+              sections
+            })
+        };
+      }
+    )
+    .sort(
+      (a, b) =>
+        a.number - b.number
+    );
+}
+
+
+function roadmapViewClass(view) {
+  return view === "timeline"
+    ? "timeline-view"
+    : "cards-view";
+}
+
+
+function renderHubRoadmapDetail() {
+  if (
+    !hubRoadmapDetail ||
+    !hubRoadmapDetailTop ||
+    !hubRoadmapDetailTitle ||
+    !hubRoadmapDetailBody
+  ) {
+    return;
+  }
+
+  const phase =
+    state.roadmap.phases.find(
+      (item) =>
+        item.number ===
+        state.roadmap.selected
+    );
+
+  if (!phase) {
+    hubRoadmapDetail.hidden =
+      true;
+
+    return;
+  }
+
+  hubRoadmapDetail.hidden =
+    false;
+
+  hubRoadmapDetailTop.replaceChildren(
+    createElement(
+      "span",
+      "hub-roadmap-phase",
+      `Fase ${phase.number}`
+    ),
+    createElement(
+      "span",
+      `hub-roadmap-state hub-roadmap-state-${phase.status.key}`,
+      phase.status.label
+    )
+  );
+
+  hubRoadmapDetailTitle.textContent =
+    phase.title;
+
+  hubRoadmapDetailBody.innerHTML =
+    phase.sections
+      .map(
+        roadmapSectionToHtml
+      )
+      .join("");
+}
+
+
+function setRoadmapView(view) {
+  state.roadmap.view = view;
+  renderHubRoadmap();
+}
+
+
+function bindRoadmapViewToggle() {
+  if (!hubRoadmapViewToggle) {
+    return;
+  }
+
+  const buttons =
+    hubRoadmapViewToggle.querySelectorAll(
+      "[data-view]"
+    );
+
+  for (const button of buttons) {
+    button.addEventListener(
+      "click",
+      () => {
+        setRoadmapView(
+          button.dataset.view
+        );
+      }
+    );
+  }
+}
+
+
+function phaseStatusColor(statusKey) {
+  switch (statusKey) {
+    case "completed":
+      return "#59d289";
+
+    case "partial":
+      return "#36c5f0";
+
+    case "next":
+      return "#ff9f1c";
+
+    case "vision":
+      return "#a78bfa";
+
+    default:
+      return "#7c8b99";
+  }
+}
+
+
+function drawRoundedRect(
+  context,
+  x,
+  y,
+  width,
+  height,
+  radius
+) {
+  context.beginPath();
+  context.moveTo(
+    x + radius,
+    y
+  );
+  context.lineTo(
+    x + width - radius,
+    y
+  );
+  context.quadraticCurveTo(
+    x + width,
+    y,
+    x + width,
+    y + radius
+  );
+  context.lineTo(
+    x + width,
+    y + height - radius
+  );
+  context.quadraticCurveTo(
+    x + width,
+    y + height,
+    x + width - radius,
+    y + height
+  );
+  context.lineTo(
+    x + radius,
+    y + height
+  );
+  context.quadraticCurveTo(
+    x,
+    y + height,
+    x,
+    y + height - radius
+  );
+  context.lineTo(
+    x,
+    y + radius
+  );
+  context.quadraticCurveTo(
+    x,
+    y,
+    x + radius,
+    y
+  );
+  context.closePath();
+}
+
+
+function canvasWrapText(
+  context,
+  text,
+  x,
+  y,
+  maxWidth,
+  lineHeight,
+  maxLines = 2
+) {
+  const words =
+    text.split(/\s+/);
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const test =
+      current
+        ? `${current} ${word}`
+        : word;
+
+    if (
+      context.measureText(test).width <=
+      maxWidth
+    ) {
+      current = test;
+      continue;
+    }
+
+    if (current) {
+      lines.push(current);
+    }
+
+    current = word;
+  }
+
+  if (current) {
+    lines.push(current);
+  }
+
+  const renderLines =
+    lines.slice(0, maxLines);
+
+  if (
+    lines.length > maxLines &&
+    renderLines.length
+  ) {
+    const lastIndex =
+      renderLines.length - 1;
+
+    renderLines[lastIndex] =
+      `${renderLines[lastIndex]}…`;
+  }
+
+  renderLines.forEach(
+    (line, index) => {
+      context.fillText(
+        line,
+        x,
+        y + index * lineHeight
+      );
+    }
+  );
+}
+
+
+function renderRoadmapTimelineCanvas() {
+  if (
+    !hubRoadmapCanvas ||
+    !hubRoadmapTimeline ||
+    state.roadmap.view !== "timeline"
+  ) {
+    return;
+  }
+
+  const phases =
+    state.roadmap.phases;
+
+  if (!phases.length) {
+    return;
+  }
+
+  const shell =
+    hubRoadmapCanvas.parentElement;
+
+  const width =
+    Math.max(
+      shell.clientWidth,
+      phases.length * 180
+    );
+
+  const height = 360;
+
+  hubRoadmapCanvas.width =
+    width * window.devicePixelRatio;
+
+  hubRoadmapCanvas.height =
+    height * window.devicePixelRatio;
+
+  hubRoadmapCanvas.style.width =
+    `${width}px`;
+
+  hubRoadmapCanvas.style.height =
+    `${height}px`;
+
+  const context =
+    hubRoadmapCanvas.getContext("2d");
+
+  context.setTransform(
+    window.devicePixelRatio,
+    0,
+    0,
+    window.devicePixelRatio,
+    0,
+    0
+  );
+
+  context.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+  const baselineY = 190;
+  const startX = 90;
+  const endX = width - 90;
+  const spacing =
+    phases.length > 1
+      ? (endX - startX) /
+        (phases.length - 1)
+      : 0;
+
+  context.lineWidth = 4;
+  context.strokeStyle =
+    "rgba(54, 197, 240, 0.18)";
+  context.beginPath();
+  context.moveTo(
+    startX,
+    baselineY
+  );
+  context.lineTo(
+    endX,
+    baselineY
+  );
+  context.stroke();
+
+  state.roadmap.canvasNodes = [];
+
+  phases.forEach(
+    (phase, index) => {
+      const x =
+        startX + spacing * index;
+      const y =
+        baselineY;
+
+      const selected =
+        phase.number ===
+        state.roadmap.selected;
+
+      const cardWidth = 150;
+      const cardHeight = 110;
+      const cardX =
+        x - cardWidth / 2;
+      const cardY =
+        index % 2 === 0
+          ? 34
+          : 214;
+
+      const color =
+        phaseStatusColor(
+          phase.status.key
+        );
+
+      context.strokeStyle =
+        color;
+      context.fillStyle =
+        "rgba(12, 19, 28, 0.96)";
+      context.lineWidth =
+        selected
+          ? 2.5
+          : 1.5;
+
+      drawRoundedRect(
+        context,
+        cardX,
+        cardY,
+        cardWidth,
+        cardHeight,
+        14
+      );
+      context.fill();
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(
+        x,
+        index % 2 === 0
+          ? cardY + cardHeight
+          : cardY
+      );
+      context.lineTo(
+        x,
+        y
+      );
+      context.strokeStyle =
+        "rgba(54, 197, 240, 0.15)";
+      context.lineWidth = 2;
+      context.stroke();
+
+      context.beginPath();
+      context.fillStyle =
+        selected
+          ? color
+          : "#0b1620";
+      context.arc(
+        x,
+        y,
+        selected ? 11 : 9,
+        0,
+        Math.PI * 2
+      );
+      context.fill();
+
+      context.beginPath();
+      context.lineWidth = 3;
+      context.strokeStyle = color;
+      context.arc(
+        x,
+        y,
+        selected ? 13 : 11,
+        0,
+        Math.PI * 2
+      );
+      context.stroke();
+
+      context.fillStyle =
+        selected
+          ? color
+          : "#5fdfff";
+      context.font =
+        "900 10px system-ui, sans-serif";
+      context.textAlign = "left";
+      context.fillText(
+        `FASE ${phase.number}`,
+        cardX + 14,
+        cardY + 18
+      );
+
+      context.fillStyle = "#f2f6fa";
+      context.font =
+        "700 18px system-ui, sans-serif";
+      canvasWrapText(
+        context,
+        phase.title,
+        cardX + 14,
+        cardY + 44,
+        cardWidth - 28,
+        22,
+        2
+      );
+
+      context.fillStyle = color;
+      context.font =
+        "800 9px system-ui, sans-serif";
+
+      canvasWrapText(
+        context,
+        phase.status.label.toUpperCase(),
+        cardX + 14,
+        cardY + cardHeight - 27,
+        cardWidth - 28,
+        12,
+        2
+      );
+
+      state.roadmap.canvasNodes.push({
+        number: phase.number,
+        x,
+        y,
+        radius: 18,
+        cardX,
+        cardY,
+        cardWidth,
+        cardHeight
+      });
+    }
+  );
+}
+
+
+function onRoadmapCanvasClick(event) {
+  if (!hubRoadmapCanvas) {
+    return;
+  }
+
+  const rect =
+    hubRoadmapCanvas.getBoundingClientRect();
+
+  const x =
+    event.clientX - rect.left;
+  const y =
+    event.clientY - rect.top;
+
+  const hit =
+    state.roadmap.canvasNodes.find(
+      (node) =>
+        (
+          (x - node.x) ** 2 +
+          (y - node.y) ** 2
+        ) <= node.radius ** 2 ||
+        (
+          x >= node.cardX &&
+          x <= node.cardX + node.cardWidth &&
+          y >= node.cardY &&
+          y <= node.cardY + node.cardHeight
+        )
+    );
+
+  if (!hit) {
+    return;
+  }
+
+  state.roadmap.selected =
+    hit.number;
+
+  renderHubRoadmap();
+
+  if (hubRoadmapDetail) {
+    hubRoadmapDetail.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+}
+
+
+function createRoadmapCard(phase) {
+  const card =
+    createElement(
+      "article",
+      `hub-roadmap-card hub-roadmap-card-${phase.status.key}`
+    );
+
+  const top =
+    createElement(
+      "div",
+      "hub-roadmap-card-top"
+    );
+
+  top.append(
+    createElement(
+      "span",
+      "hub-roadmap-phase",
+      `Fase ${phase.number}`
+    ),
+    createElement(
+      "span",
+      `hub-roadmap-state hub-roadmap-state-${phase.status.key}`,
+      phase.status.label
+    )
+  );
+
+  const highlights =
+    createElement(
+      "ul",
+      "hub-roadmap-highlights"
+    );
+
+  for (const item of phase.highlights) {
+    highlights.append(
+      createElement(
+        "li",
+        "",
+        item
+      )
+    );
+  }
+
+  const detailButton =
+    createElement(
+      "button",
+      `hub-roadmap-detail-button${
+        state.roadmap.selected ===
+        phase.number
+          ? " active"
+          : ""
+      }`,
+      state.roadmap.selected ===
+        phase.number
+        ? "Ocultar detalle"
+        : "Ver detalle"
+    );
+
+  detailButton.type = "button";
+
+  detailButton.addEventListener(
+    "click",
+    () => {
+      if (
+        state.roadmap.selected ===
+        phase.number
+      ) {
+        state.roadmap.selected =
+          null;
+      }
+      else {
+        state.roadmap.selected =
+          phase.number;
+      }
+
+      renderHubRoadmap();
+
+      if (
+        state.roadmap.selected ===
+          phase.number &&
+        hubRoadmapDetail
+      ) {
+        hubRoadmapDetail.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+  );
+
+  card.append(
+    top,
+    createElement(
+      "h3",
+      "",
+      phase.title
+    ),
+    createElement(
+      "p",
+      "",
+      phase.excerpt
+    )
+  );
+
+  if (phase.highlights.length) {
+    card.append(highlights);
+  }
+
+  const footer =
+    createElement(
+      "div",
+      "hub-roadmap-card-footer"
+    );
+
+  footer.append(detailButton);
+  card.append(footer);
+
+  return card;
+}
+
+
+function renderHubRoadmap() {
+  if (!hubRoadmapGrid) {
+    return;
+  }
+
+  hubRoadmapGrid.className =
+    `hub-roadmap-grid ${roadmapViewClass(
+      state.roadmap.view
+    )}`;
+
+  const cardsMode =
+    state.roadmap.view === "cards";
+
+  hubRoadmapGrid.hidden =
+    !cardsMode;
+
+  if (hubRoadmapTimeline) {
+    hubRoadmapTimeline.hidden =
+      cardsMode;
+  }
+
+  if (cardsMode) {
+    const fragment =
+      document.createDocumentFragment();
+
+    for (const phase of state.roadmap.phases) {
+      fragment.append(
+        createRoadmapCard(phase)
+      );
+    }
+
+    hubRoadmapGrid.replaceChildren(
+      fragment
+    );
+  }
+  else {
+    renderRoadmapTimelineCanvas();
+  }
+
+  if (hubRoadmapStatus) {
+    hubRoadmapStatus.textContent =
+      `${state.roadmap.phases.length} fases cargadas desde HUB-ROADMAP.md.`;
+  }
+
+  if (hubRoadmapViewToggle) {
+    const buttons =
+      hubRoadmapViewToggle.querySelectorAll(
+        "[data-view]"
+      );
+
+    for (const button of buttons) {
+      const isActive =
+        button.dataset.view ===
+        state.roadmap.view;
+
+      button.classList.toggle(
+        "active",
+        isActive
+      );
+
+      button.setAttribute(
+        "aria-pressed",
+        String(isActive)
+      );
+    }
+  }
+
+  renderHubRoadmapDetail();
+
+  requestAnimationFrame(
+    refreshInteractionPolish
+  );
+}
+
+
+async function loadHubRoadmap() {
+  if (!hubRoadmapGrid) {
+    return;
+  }
+
+  const response =
+    await fetch(
+      HUB_ROADMAP_URL,
+      {
+        cache: "no-store"
+      }
+    );
+
+  if (!response.ok) {
+    throw new Error(
+      `HTTP ${response.status} al cargar ${HUB_ROADMAP_URL}`
+    );
+  }
+
+  const markdown =
+    await response.text();
+
+  const phases =
+    parseHubRoadmap(markdown);
+
+  if (!phases.length) {
+    throw new Error(
+      "No se encontraron fases en HUB-ROADMAP.md."
+    );
+  }
+
+  state.roadmap.phases =
+    phases;
+
+  state.roadmap.markdown =
+    markdown;
+
+  state.roadmap.selected =
+    phases[0].number;
+
+  bindRoadmapViewToggle();
+
+  if (
+    hubRoadmapPdfExport &&
+    hubRoadmapPdfExport.dataset.bound !== "true"
+  ) {
+    hubRoadmapPdfExport.dataset.bound =
+      "true";
+
+    hubRoadmapPdfExport.addEventListener(
+      "click",
+      exportHubRoadmapPdf
+    );
+  }
+
+  if (hubRoadmapCanvas) {
+    hubRoadmapCanvas.addEventListener(
+      "click",
+      onRoadmapCanvasClick
+    );
+  }
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (
+        state.roadmap.view ===
+        "timeline"
+      ) {
+        renderRoadmapTimelineCanvas();
+      }
+    }
+  );
+
+  renderHubRoadmap();
+}
+
+
+function showHubRoadmapError(error) {
+  console.error(
+    "No se pudo cargar el roadmap del Hub:",
+    error
+  );
+
+  if (hubRoadmapStatus) {
+    hubRoadmapStatus.textContent =
+      "No se pudo cargar el roadmap del Hub.";
+  }
+}
+
+loadHubRoadmap().catch(
+  showHubRoadmapError
+);
+
+
+requestAnimationFrame(
+  installHubFinalMotionLayer
 );

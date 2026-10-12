@@ -18,7 +18,14 @@ const roadmapFilters =
     )
   ];
 
+const roadmapPdfExport =
+  document.querySelector(
+    "#roadmapPdfExport"
+  );
+
 let roadmapItems = [];
+let roadmapMarkdown = "";
+let roadmapPdfLoaderPromise = null;
 let activeRoadmapFilter = "all";
 let selectedRoadmapVersion = null;
 
@@ -278,6 +285,52 @@ function roadmapStatusClass(status) {
 }
 
 
+function prepareRoadmapCardMotion(
+  button,
+  index
+) {
+  button.style.setProperty(
+    "--roadmap-index",
+    String(index)
+  );
+
+  button.classList.add(
+    "roadmap-enter"
+  );
+
+  button.addEventListener(
+    "pointermove",
+    (event) => {
+      const rect =
+        button.getBoundingClientRect();
+
+      button.style.setProperty(
+        "--roadmap-pointer-x",
+        `${event.clientX - rect.left}px`
+      );
+
+      button.style.setProperty(
+        "--roadmap-pointer-y",
+        `${event.clientY - rect.top}px`
+      );
+
+      button.classList.add(
+        "roadmap-pointer-active"
+      );
+    }
+  );
+
+  button.addEventListener(
+    "pointerleave",
+    () => {
+      button.classList.remove(
+        "roadmap-pointer-active"
+      );
+    }
+  );
+}
+
+
 function renderRoadmapGrid() {
   const visible =
     roadmapItems.filter(
@@ -341,6 +394,8 @@ function renderRoadmapGrid() {
         No hay versiones que coincidan con este filtro.
       </div>
     `;
+
+    return;
   }
 
   roadmapGrid
@@ -348,7 +403,12 @@ function renderRoadmapGrid() {
       "[data-roadmap-version]"
     )
     .forEach(
-      (button) => {
+      (button, index) => {
+        prepareRoadmapCardMotion(
+          button,
+          index
+        );
+
         button.addEventListener(
           "click",
           () => {
@@ -439,6 +499,10 @@ function showRoadmapDetail(version) {
         roadmapDetail.hidden =
           true;
 
+        roadmapDetail.classList.remove(
+          "roadmap-detail-enter"
+        );
+
         roadmapDetail.innerHTML =
           "";
 
@@ -446,10 +510,163 @@ function showRoadmapDetail(version) {
       }
     );
 
+  roadmapDetail.classList.remove(
+    "roadmap-detail-enter"
+  );
+
+  requestAnimationFrame(
+    () => {
+      roadmapDetail.classList.add(
+        "roadmap-detail-enter"
+      );
+    }
+  );
+
   roadmapDetail.scrollIntoView({
     behavior: "smooth",
     block: "nearest"
   });
+}
+
+
+
+
+function ensureRoadmapPdfExporter() {
+  if (window.RoadmapPdf) {
+    return Promise.resolve(
+      window.RoadmapPdf
+    );
+  }
+
+  if (roadmapPdfLoaderPromise) {
+    return roadmapPdfLoaderPromise;
+  }
+
+  roadmapPdfLoaderPromise =
+    new Promise(
+      (resolve, reject) => {
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        script.src =
+          "../../js/roadmap-pdf.js";
+
+        script.onload =
+          () => {
+            if (window.RoadmapPdf) {
+              resolve(
+                window.RoadmapPdf
+              );
+              return;
+            }
+
+            reject(
+              new Error(
+                "El exportador PDF no se inicializó."
+              )
+            );
+          };
+
+        script.onerror =
+          () => {
+            reject(
+              new Error(
+                "No se pudo cargar roadmap-pdf.js."
+              )
+            );
+          };
+
+        document.head.append(
+          script
+        );
+      }
+    );
+
+  return roadmapPdfLoaderPromise;
+}
+
+
+async function exportRoadmapPdf() {
+  if (
+    !roadmapPdfExport ||
+    !roadmapMarkdown
+  ) {
+    return;
+  }
+
+  const originalText =
+    roadmapPdfExport.textContent;
+
+  roadmapPdfExport.disabled =
+    true;
+
+  roadmapPdfExport.textContent =
+    "Generando PDF…";
+
+  try {
+    const exporter =
+      await ensureRoadmapPdfExporter();
+
+    const projectTitle =
+      document.querySelector(
+        ".hero h1"
+      )
+      ?.textContent
+      ?.replace(/\s+/g, " ")
+      ?.trim() ||
+      document.title
+        .split("·")[0]
+        .trim();
+
+    exporter.downloadMarkdown({
+      markdown:
+        roadmapMarkdown,
+      title:
+        projectTitle,
+      subtitle:
+        "Roadmap del proyecto",
+      source:
+        ROADMAP_URL,
+      filename:
+        `${projectTitle}-Roadmap.pdf`
+    });
+
+    roadmapPdfExport.textContent =
+      "PDF descargado";
+
+    window.setTimeout(
+      () => {
+        roadmapPdfExport.textContent =
+          originalText;
+
+        roadmapPdfExport.disabled =
+          false;
+      },
+      1200
+    );
+  }
+  catch (error) {
+    console.error(
+      "No se pudo exportar el roadmap a PDF:",
+      error
+    );
+
+    roadmapPdfExport.textContent =
+      "Error al exportar";
+
+    window.setTimeout(
+      () => {
+        roadmapPdfExport.textContent =
+          originalText;
+
+        roadmapPdfExport.disabled =
+          false;
+      },
+      1500
+    );
+  }
 }
 
 
@@ -475,6 +692,9 @@ async function loadRoadmap() {
     const markdown =
       await response.text();
 
+    roadmapMarkdown =
+      markdown;
+
     roadmapItems =
       parseRoadmap(markdown);
 
@@ -488,6 +708,19 @@ async function loadRoadmap() {
       `${roadmapItems.length} versiones cargadas desde ROADMAP.md. Selecciona una para ver su detalle.`;
 
     renderRoadmapGrid();
+
+    if (
+      roadmapPdfExport &&
+      roadmapPdfExport.dataset.bound !== "true"
+    ) {
+      roadmapPdfExport.dataset.bound =
+        "true";
+
+      roadmapPdfExport.addEventListener(
+        "click",
+        exportRoadmapPdf
+      );
+    }
   }
   catch (error) {
     console.error(
@@ -546,7 +779,43 @@ roadmapFilters.forEach(
           }
         );
 
-        renderRoadmapGrid();
+        const reduceMotion =
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+
+        if (reduceMotion) {
+          renderRoadmapGrid();
+          return;
+        }
+
+        roadmapGrid.classList.add(
+          "roadmap-grid-leaving"
+        );
+
+        window.setTimeout(
+          () => {
+            renderRoadmapGrid();
+
+            roadmapGrid.classList.remove(
+              "roadmap-grid-leaving"
+            );
+
+            roadmapGrid.classList.add(
+              "roadmap-grid-entering"
+            );
+
+            window.setTimeout(
+              () => {
+                roadmapGrid.classList.remove(
+                  "roadmap-grid-entering"
+                );
+              },
+              260
+            );
+          },
+          130
+        );
       }
     );
   }

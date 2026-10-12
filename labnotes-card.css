@@ -478,3 +478,40 @@
   }
 
 }
+
+
+/* =========================================================
+   MOTION POLISH
+   ========================================================= */
+
+.project-card-labnotes:hover {
+  border-color:
+    rgba(105, 174, 252, .22);
+
+  box-shadow:
+    0 20px 52px
+    rgba(20, 125, 245, .10);
+}
+
+
+.project-card-labnotes:hover
+.labnotes-logo-shell {
+  background:
+    radial-gradient(
+      circle,
+      rgba(20, 125, 245, .21),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 125, 245, .11),
+      rgba(54, 197, 240, .04)
+    );
+}
+
+
+.labnotes-button:active {
+  transform:
+    translateY(0)
+    scale(.97);
+}

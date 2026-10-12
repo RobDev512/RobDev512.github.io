@@ -2,41 +2,133 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.2.1
-**Estado general:** Cerrada funcionalmente / roadmap activo
+**Versión vigente:** v1.2.1  
+**Estado general:** Cerrada funcionalmente / roadmap activo  
 **Siguiente etapa activa:** v1.2.2 — Stability & Polish
 
 > Cada versión debe cubrir una necesidad académica concreta y, además,
 > incorporar una mejora visible del producto.
 
+> Nota histórica: el repositorio conserva el hito `lya1-base` como base final
+> de Lenguajes y Autómatas I. Para que el roadmap SemVer muestre la evolución
+> completa, ese hito se representa aquí como `v1.0.0`, aunque no existió un tag
+> o release público con ese número.
+
 ---
 
-## v1.2.1 — Semantic Update
+## v1.0.0 — Base de Lenguajes y Autómatas I
+
+**Estado:** Aplicada  
+**Hito histórico:** reconstrucción SemVer del tag `lya1-base`
+
+Primera base funcional del proyecto desarrollada en Lenguajes y Autómatas I.
+
+### Compilador
+
+- Análisis léxico.
+- Análisis sintáctico.
+- Análisis semántico todavía pendiente.
+
+### Producto
+
+- DSL orientado a redes.
+- Procesamiento de IPv4, máscaras y requerimientos de hosts.
+- Cálculo VLSM.
+- Interfaz gráfica en PySide6.
+
+---
+
+## v1.1.0 — Packaged Release
 
 **Estado:** Aplicada
 
-Cierre formal de la Unidad 1 con análisis semántico integrado al lexer y
-parser heredados de Lenguajes y Autómatas I.
-
-### Función estrella
-
-Diagnósticos completos y navegación inteligente entre resumen, VLSM y errores.
+Primera versión empaquetada y distribuible de TecNet Finder.
 
 ### Incluido
+
+- Analizador léxico y sintáctico.
+- Cálculo VLSM.
+- Diagnósticos y advertencias.
+- Exportación de resultados.
+- Interfaz gráfica de escritorio.
+- Integración opcional de asistencia local con IA.
+- Instalador para Windows.
+
+---
+
+## v1.2.0 — Semantic Update
+
+**Estado:** Aplicada
+
+Cierre funcional de la Unidad 1 de Lenguajes y Autómatas II mediante la
+incorporación del análisis semántico.
+
+### Compilador
+
+- Análisis léxico.
+- Análisis sintáctico.
+- Análisis semántico.
+- Cálculo VLSM.
+- Diagnósticos léxicos, sintácticos y semánticos.
+- Advertencias.
+- Recuperación parcial ante entradas con errores.
+- Exportación de resultados.
+
+### Infraestructura y producto
+
+- Ejemplos válidos e inválidos ampliados.
+- Pruebas automáticas de ejemplos y diagnósticos.
+- Arquitectura interna reorganizada por áreas funcionales.
+- Separación de Interfaz, Motor y Asistente IA.
+- Suite de pruebas reorganizada por dominio.
+- Temas claros y oscuros mejorados.
+- Empaquetado e instalación actualizados.
+- 164 pruebas automáticas superadas al cierre de la versión.
+
+---
+
+## v1.2.1 — Final Polish & Internationalization
+
+**Estado:** Aplicada
+
+Versión vigente y cierre de estabilización posterior a la integración semántica.
+
+### Internacionalización
+
+- Español.
+- English.
+- Português.
+- Français.
+- Deutsch.
+- Lingua Latina.
+- Ejemplos localizados sin modificar palabras reservadas del DSL.
+- Diagnósticos, diálogos y configuraciones traducidos.
+
+### Interfaz y editor
+
+- Configuración de tipografía de interfaz y editor.
+- Tamaños de fuente configurables.
+- Números de línea sincronizados con el tamaño de fuente.
+- Correcciones finales de interfaz y estabilidad.
+
+### Árbol sintáctico y exportación
+
+- Visualización del árbol sintáctico mejorada.
+- Nodos circulares para terminales cortos.
+- Centrado de ramas y nodos corregido.
+- Exportación PNG de alta resolución.
+- Exportación vectorial SVG.
+- Exportación directa a PDF.
+
+### Compilador consolidado
 
 - Análisis léxico.
 - Análisis sintáctico.
 - Análisis semántico.
 - Diagnósticos y advertencias.
 - Recuperación parcial ante bloques con errores.
-- Seis idiomas.
-- Ejemplos traducibles.
-- Configuración avanzada.
-- Editor ampliado.
-- Modos de ventana.
-- IA local opcional.
-- Árboles adaptativos.
-- Exportación PNG HD, SVG y PDF.
+- Cálculo VLSM.
+- Asistencia local opcional mediante IA.
 
 ---
 

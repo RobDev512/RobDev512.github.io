@@ -1,305 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
-    content="Convertidor de Archivos, aplicación de escritorio para Windows desarrollada por RobDev512."
+    content="Proyecto personal de RobDev512."
   >
 
-  <meta name="theme-color" content="#0b0f14">
+  <meta
+    name="theme-color"
+    content="#0b0f14"
+  >
 
-  <title>Convertidor de Archivos · RobDev512</title>
+  <title>
+    Proyecto · RobDev512
+  </title>
 
-  <link rel="stylesheet" href="../project-page.css">
+  <link
+    rel="stylesheet"
+    href="../project-page.css"
+  >
+
+  <script
+    src="../project-page.js"
+    defer
+  ></script>
+
 </head>
 
-<body class="theme-desktop">
 
-  <div class="page-shell">
+<body data-project-id="convertidor-archivos">
 
-    <header class="project-topbar">
-      <a class="back-link" href="../../">
-        ← Volver al Hub
-      </a>
+  <div id="projectPageRoot">
 
-      <a
-        class="repo-link"
-        href="https://github.com/RobDev512/ConvertidorArchivos"
-        target="_blank"
-        rel="noreferrer"
-      >
-        GitHub
-      </a>
-    </header>
+    <div class="page-shell">
 
+      <section class="page-loading">
 
-    <main>
+        <span class="eyebrow">
+          RobDev512
+        </span>
 
-      <section class="hero">
-
-        <div class="hero-visual">
-          <img class="hero-logo" src="../../assets/convertidor-archivos-logo.png" alt="Logo de Convertidor de Archivos">
-        </div>
-
-        <div class="hero-copy">
-
-          <span class="eyebrow">
-            Aplicación de escritorio · Windows
-          </span>
-
-          <h1>
-            Convertidor de Archivos
-          </h1>
-
-          <p class="hero-description">
-            Aplicación de escritorio para Windows que permite convertir
-            documentos, imágenes, PDF y otros formatos de forma local,
-            además de integrar herramientas especializadas de PDF e imagen.
-          </p>
-
-          <div class="meta-row">
-            <span class="meta-chip">v1.1.1</span>
-            <span class="meta-chip">Estable</span>
-            <span class="meta-chip">Público</span>
-            <span class="meta-chip">Windows 64-bit</span>
-          </div>
-
-          <div class="hero-actions">
-
-            <a
-              class="btn btn-primary"
-              href="https://github.com/RobDev512/ConvertidorArchivos/releases/download/v1.1.1/ConvertidorArchivos_Setup_1.1.1.exe"
-            >
-              Descargar 1.1.1
-            </a>
-
-            <a
-              class="btn btn-secondary"
-              href="https://github.com/RobDev512/ConvertidorArchivos"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver repositorio
-            </a>
-
-          </div>
-
-        </div>
+        <h1>
+          Cargando proyecto...
+        </h1>
 
       </section>
 
-
-      <div class="content">
-
-        <section class="section">
-
-          <div class="section-heading">
-            <span>Proyecto</span>
-            <h2>Conversión y herramientas locales</h2>
-          </div>
-
-          <p class="lead">
-            El proyecto reúne conversión de archivos y utilidades de
-            procesamiento en una sola aplicación de escritorio. Las tareas
-            se realizan localmente y los motores incluidos en el instalador
-            no requieren que el usuario instale Python por separado.
-          </p>
-
-        </section>
-
-
-        <section class="section">
-
-          <div class="section-heading">
-            <span>Funciones</span>
-            <h2>Áreas principales</h2>
-          </div>
-
-          <div class="feature-grid">
-
-            <article class="feature-card">
-              <h3>Conversión de formatos</h3>
-              <p>
-                Trabaja con imágenes, documentos de texto, hojas de cálculo,
-                presentaciones, PDF, libros, formatos de marcado, archivos
-                comprimidos, JAR y otros contenedores.
-              </p>
-            </article>
-
-            <article class="feature-card">
-              <h3>Herramientas PDF</h3>
-              <p>
-                Incluye unión, división, extracción y reordenamiento de
-                páginas, compresión y conversión PDF → DOCX.
-              </p>
-            </article>
-
-            <article class="feature-card">
-              <h3>Herramientas de imagen</h3>
-              <p>
-                Permite redimensionar, comprimir, crear PDF desde imágenes,
-                mejorar resolución y quitar fondos.
-              </p>
-            </article>
-
-            <article class="feature-card">
-              <h3>Procesamiento local</h3>
-              <p>
-                La superresolución y la eliminación de fondos pueden
-                ejecutarse con motores y modelos locales sin subir los
-                archivos a servicios externos.
-              </p>
-            </article>
-
-          </div>
-
-        </section>
-
-
-
-                <section class="section roadmap-section" id="roadmap">
-
-          <div class="section-heading">
-            <span>Roadmap</span>
-            <h2>De la versión estable a una suite de conversión completa</h2>
-          </div>
-
-          <div class="roadmap-intro">
-
-            <p class="lead">
-              El roadmap se carga directamente desde el ROADMAP.md del proyecto. Puedes filtrar por estado y abrir cada versión para consultar objetivos, funciones y alcance sin mostrar una cadena de versiones separada.
-            </p>
-
-            <a class="roadmap-link" href="./ROADMAP.md">
-              Ver ROADMAP.md
-            </a>
-
-          </div>
-
-          <div
-            class="roadmap-toolbar"
-            aria-label="Filtros del roadmap"
-          >
-
-            <button
-              class="roadmap-filter active"
-              type="button"
-              data-roadmap-filter="all"
-              aria-pressed="true"
-            >
-              Todas
-            </button>
-
-            <button
-              class="roadmap-filter"
-              type="button"
-              data-roadmap-filter="applied"
-              aria-pressed="false"
-            >
-              Aplicadas
-            </button>
-
-            <button
-              class="roadmap-filter"
-              type="button"
-              data-roadmap-filter="development"
-              aria-pressed="false"
-            >
-              En desarrollo
-            </button>
-
-            <button
-              class="roadmap-filter"
-              type="button"
-              data-roadmap-filter="next"
-              aria-pressed="false"
-            >
-              Siguiente
-            </button>
-
-            <button
-              class="roadmap-filter"
-              type="button"
-              data-roadmap-filter="pending"
-              aria-pressed="false"
-            >
-              Pendientes
-            </button>
-
-            <button
-              class="roadmap-filter"
-              type="button"
-              data-roadmap-filter="vision"
-              aria-pressed="false"
-            >
-              Visión
-            </button>
-
-          </div>
-
-          <p
-            class="roadmap-load-status"
-            id="roadmapLoadStatus"
-          >
-            Preparando roadmap…
-          </p>
-
-          <div
-            class="roadmap-live-grid"
-            id="roadmapGrid"
-          ></div>
-
-          <article
-            class="roadmap-detail"
-            id="roadmapDetail"
-            hidden
-          ></article>
-
-        </section>
-
-
-<section class="section">
-
-          <div class="section-heading">
-            <span>Tecnologías</span>
-            <h2>Stack y motores</h2>
-          </div>
-
-          <div class="tech-list">
-            <span class="tech-chip">Python</span>
-            <span class="tech-chip">PySide6</span>
-            <span class="tech-chip">Pillow</span>
-            <span class="tech-chip">pypdf</span>
-            <span class="tech-chip">pdfplumber</span>
-            <span class="tech-chip">OpenPyXL</span>
-            <span class="tech-chip">python-docx</span>
-            <span class="tech-chip">ONNX Runtime</span>
-            <span class="tech-chip">rembg</span>
-            <span class="tech-chip">Real-ESRGAN</span>
-            <span class="tech-chip">LibreOffice</span>
-            <span class="tech-chip">ImageMagick</span>
-            <span class="tech-chip">7-Zip</span>
-            <span class="tech-chip">Pandoc</span>
-          </div>
-
-        </section>
-
-      </div>
-
-    </main>
-
-
-    <footer class="page-footer">
-      <span>RobDev512 · Convertidor de Archivos</span>
-      <span>Aplicación de escritorio · v1.1.1</span>
-    </footer>
+    </div>
 
   </div>
 
-  <script src="../project-roadmap.js"></script>
-
 </body>
+
 </html>

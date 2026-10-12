@@ -158,3 +158,219 @@ el detalle de versiones.
 Los logos del Hub son copias de los recursos de marca oficiales de cada
 proyecto y se almacenan en `assets/` para que el catálogo público no dependa
 de repositorios privados.
+
+
+## Búsqueda simple y avanzada
+
+La búsqueda principal permanece siempre disponible junto con las categorías.
+
+La búsqueda avanzada es opcional y se despliega mediante un botón. Al cerrarla,
+los filtros avanzados se limpian y el catálogo vuelve a la navegación simple,
+conservando únicamente la búsqueda de texto y la categoría activa.
+
+## Roadmap público del Hub
+
+La página principal incluye una sección de roadmap que se carga desde
+`docs/HUB-ROADMAP.md`.
+
+Esto permite mostrar temporalmente la evolución del propio Hub sin duplicar
+manualmente el estado de sus fases en `index.html`.
+
+
+## Visualización del roadmap
+
+La portada del hub incluye una sección de roadmap más expresiva:
+
+- tarjetas con resumen;
+- detalle expandible por fase;
+- vista tipo árbol vertical;
+- vista tipo árbol horizontal;
+- carga directa desde `docs/HUB-ROADMAP.md`.
+
+Esto permite usar el roadmap como referencia rápida sin perder el documento
+Markdown como fuente principal.
+
+
+## Roadmap del Hub en modo timeline
+
+La portada ahora ofrece dos visualizaciones para el roadmap del Hub:
+
+- tarjetas;
+- línea de tiempo interactiva en canvas.
+
+La línea de tiempo permite recorrer fases, seleccionar nodos y consultar el
+detalle de cada etapa sin abandonar la portada.
+
+
+## Estándar de páginas individuales
+
+La Fase 6 establece un sistema reutilizable para páginas de proyecto.
+
+Los proyectos estándar usan:
+
+- `data/project-pages.json`;
+- `projects/project-page.js`;
+- `projects/project-page.css`;
+- `projects/project-roadmap.js`;
+- un `index.html` mínimo por proyecto.
+
+Convertidor de Archivos y TecNet Finder ya utilizan este patrón.
+
+AWS ORBISHOT y LabNotes conservan páginas personalizadas porque su identidad
+visual y estructura justifican una presentación propia.
+
+Para crear una página nueva:
+
+`node scripts/new-project-page.mjs <project-id>`
+
+Guía:
+
+`docs/PROJECT-PAGE-STANDARD.md`
+
+
+## Motion polish
+
+Antes de cerrar la Fase 6 se añadió una capa visual de interacción:
+
+- iluminación al hacer hover sobre botones;
+- respuesta visual al presionar controles;
+- elevación sutil de tarjetas;
+- glow reactivo a la posición del cursor;
+- aparición progresiva al hacer scroll;
+- movimiento sutil de logos;
+- soporte de `prefers-reduced-motion` para accesibilidad.
+
+El objetivo es dar más vida al Hub sin convertir las animaciones en una
+distracción.
+
+
+## Roadmaps unificados
+
+Convertidor de Archivos y TecNet Finder usan ahora el mismo patrón visual de
+roadmap empleado como referencia por AWS ORBISHOT y LabNotes: grid de tarjetas,
+estado superior, acción de detalle y panel expandido.
+
+La semántica de los estados continúa siendo propia de cada proyecto; lo que se
+unifica es la experiencia visual y de interacción.
+
+
+## Portal visual común de proyectos
+
+La Fase 6 unifica también la composición completa de las páginas estándar.
+
+Convertidor de Archivos y TecNet Finder usan ahora el mismo lenguaje estructural
+de AWS ORBISHOT:
+
+- header del proyecto;
+- hero editorial con visual orbital;
+- franja de cuatro funciones;
+- release actual;
+- roadmap dinámico;
+- siguiente release;
+- footer.
+
+La identidad de cada proyecto se conserva mediante su logo, color de acento y
+contenido.
+
+
+## Respaldo PDF de roadmaps
+
+Los roadmaps pueden descargarse como PDF directamente desde el Hub.
+
+El sistema usa `js/roadmap-pdf.js`, un exportador local sin dependencias
+externas. Convierte el contenido fuente a un documento A4 paginado y descarga
+un archivo con fecha.
+
+Fuentes actuales:
+
+- Hub: `docs/HUB-ROADMAP.md`;
+- AWS ORBISHOT: `AWS-Game/docs/ROADMAP.md` del repositorio público;
+- LabNotes: `projects/labnotes/ROADMAP.md`;
+- Convertidor de Archivos: `projects/convertidor-archivos/ROADMAP.md`;
+- TecNet Finder: `projects/tecnet-finder/ROADMAP.md`.
+
+El PDF es un respaldo documental; el Markdown o los datos del roadmap continúan
+siendo la fuente de verdad.
+
+
+### Cómo funciona la exportación PDF diseñada
+
+La exportación de roadmaps ya no genera un PDF plano de texto.
+
+Ahora el Hub construye una **vista de impresión diseñada**, con portada, resumen,
+estadísticas, tarjetas por versión, estados y bloques de contenido. Después abre
+el diálogo de impresión del navegador para guardar el resultado como PDF.
+
+Flujo esperado:
+
+1. pulsar `Roadmap PDF` o `Exportar PDF`;
+2. se prepara una vista de impresión estilizada;
+3. el navegador abre el diálogo de impresión;
+4. elegir **Guardar como PDF**.
+
+De esta manera se conserva el diseño visual del documento exportado.
+
+
+### Exportación PDF visual directa
+
+La exportación final vuelve a ser una **descarga directa `.pdf`**, pero conserva
+un diseño propio en lugar del formato textual inicial.
+
+Cada respaldo incluye:
+
+- portada oscura con identidad de color por proyecto;
+- estadísticas generales;
+- metadatos de la exportación;
+- una página diseñada por fase o versión;
+- badges de versión y estado;
+- tarjetas para objetivos, funciones y listas del roadmap;
+- numeración y pie de página.
+
+No usa el diálogo de impresión del navegador.
+
+
+### Maquetación compacta del PDF
+
+El respaldo PDF usa ahora una composición híbrida:
+
+- portada;
+- tarjetas de dos columnas para versiones/fases cortas;
+- páginas completas sólo para versiones extensas;
+- continuidad automática cuando una versión supera una página.
+
+Esto reduce páginas casi vacías y conserva más la sensación de un roadmap
+visual, sin sacrificar el contenido completo.
+
+
+### Maquetación adaptativa del PDF
+
+El exportador PDF usa una cuadrícula adaptativa:
+
+- tres columnas para versiones realmente breves;
+- dos columnas para tarjetas medianas;
+- ancho completo para versiones densas;
+- páginas de detalle para versiones muy largas.
+
+La altura de cada tarjeta se calcula a partir del contenido antes de dibujarla.
+Los badges largos reducen tipografía o cambian de fila para no desbordarse.
+
+
+### Maquetación masonry segura
+
+El PDF usa una cuadrícula de dos columnas tipo masonry para aprovechar mejor el
+alto disponible de cada página.
+
+- las tarjetas cortas ocupan la columna con más espacio libre;
+- las tarjetas medianas conservan dos columnas;
+- una versión densa puede usar el ancho completo;
+- una versión muy extensa pasa a páginas de detalle;
+- la altura se calcula antes de dibujar para evitar desbordes.
+
+Los badges de estado largos también ajustan tamaño o cambian de fila.
+
+
+### Empaque final del PDF
+
+La maquetación final combina masonry de dos columnas con tarjetas de ancho
+completo cuando eso aprovecha mejor el espacio. El exportador calcula la altura
+real antes de dibujar y evita badges o texto fuera de sus contenedores.

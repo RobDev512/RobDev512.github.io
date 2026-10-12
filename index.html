@@ -160,11 +160,22 @@
 
 
           <button
+            class="catalog-advanced-toggle"
+            id="advancedSearchToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="advancedCatalogPanel"
+          >
+            Búsqueda avanzada
+          </button>
+
+
+          <button
             class="catalog-reset"
             id="resetCatalogFilters"
             type="button"
           >
-            Limpiar filtros
+            Limpiar
           </button>
 
         </div>
@@ -197,100 +208,127 @@
         </nav>
 
 
-        <div class="advanced-filter-grid">
+        <div
+          class="advanced-panel"
+          id="advancedCatalogPanel"
+          hidden
+        >
 
-          <label class="catalog-field">
+          <div class="advanced-panel-heading">
+
+            <div>
+              <span class="catalog-kicker">
+                Filtros adicionales
+              </span>
+
+              <strong>
+                Búsqueda avanzada
+              </strong>
+            </div>
+
+            <p>
+              Combina estado, visibilidad, tecnología y ordenamiento.
+            </p>
+
+          </div>
+
+
+          <div class="advanced-filter-grid">
+
+            <label class="catalog-field">
+
+              <span>
+                Estado
+              </span>
+
+              <select id="statusFilter">
+                <option value="">
+                  Todos los estados
+                </option>
+              </select>
+
+            </label>
+
+
+            <label class="catalog-field">
+
+              <span>
+                Visibilidad
+              </span>
+
+              <select id="visibilityFilter">
+                <option value="">
+                  Todas las visibilidades
+                </option>
+              </select>
+
+            </label>
+
+
+            <label class="catalog-field">
+
+              <span>
+                Tecnología
+              </span>
+
+              <select id="technologyFilter">
+                <option value="">
+                  Todas las tecnologías
+                </option>
+              </select>
+
+            </label>
+
+
+            <label class="catalog-field">
+
+              <span>
+                Ordenar por
+              </span>
+
+              <select id="sortOrder">
+                <option value="curated">
+                  Orden recomendado
+                </option>
+
+                <option value="recent">
+                  Más recientes
+                </option>
+
+                <option value="featured">
+                  Destacados primero
+                </option>
+
+                <option value="name-asc">
+                  Nombre A–Z
+                </option>
+
+                <option value="name-desc">
+                  Nombre Z–A
+                </option>
+              </select>
+
+            </label>
+
+          </div>
+
+
+          <label class="featured-filter">
+
+            <input
+              id="featuredOnly"
+              type="checkbox"
+            >
+
+            <span class="featured-filter-box"></span>
 
             <span>
-              Estado
+              Mostrar sólo proyectos destacados
             </span>
-
-            <select id="statusFilter">
-              <option value="">
-                Todos los estados
-              </option>
-            </select>
-
-          </label>
-
-
-          <label class="catalog-field">
-
-            <span>
-              Visibilidad
-            </span>
-
-            <select id="visibilityFilter">
-              <option value="">
-                Todas las visibilidades
-              </option>
-            </select>
-
-          </label>
-
-
-          <label class="catalog-field">
-
-            <span>
-              Tecnología
-            </span>
-
-            <select id="technologyFilter">
-              <option value="">
-                Todas las tecnologías
-              </option>
-            </select>
-
-          </label>
-
-
-          <label class="catalog-field">
-
-            <span>
-              Ordenar por
-            </span>
-
-            <select id="sortOrder">
-              <option value="curated">
-                Orden recomendado
-              </option>
-
-              <option value="recent">
-                Más recientes
-              </option>
-
-              <option value="featured">
-                Destacados primero
-              </option>
-
-              <option value="name-asc">
-                Nombre A–Z
-              </option>
-
-              <option value="name-desc">
-                Nombre Z–A
-              </option>
-            </select>
 
           </label>
 
         </div>
-
-
-        <label class="featured-filter">
-
-          <input
-            id="featuredOnly"
-            type="checkbox"
-          >
-
-          <span class="featured-filter-box"></span>
-
-          <span>
-            Mostrar sólo proyectos destacados
-          </span>
-
-        </label>
 
       </section>
 
@@ -320,6 +358,148 @@
         </article>
 
       </section>
+
+
+
+      <section
+        class="hub-roadmap"
+        id="hubRoadmap"
+        aria-labelledby="hubRoadmapTitle"
+      >
+
+        <div class="hub-roadmap-heading">
+
+          <div>
+
+            <span class="catalog-kicker">
+              Evolución del Hub
+            </span>
+
+            <h2 id="hubRoadmapTitle">
+              Roadmap
+            </h2>
+
+          </div>
+
+
+          <div class="hub-roadmap-actions">
+
+            <div
+              class="hub-roadmap-view-toggle"
+              id="hubRoadmapViewToggle"
+              role="group"
+              aria-label="Cambiar vista del roadmap"
+            >
+
+              <button
+                class="hub-roadmap-view-button active"
+                type="button"
+                data-view="cards"
+                aria-pressed="true"
+              >
+                Tarjetas
+              </button>
+
+              <button
+                class="hub-roadmap-view-button"
+                type="button"
+                data-view="timeline"
+                aria-pressed="false"
+              >
+                Línea de tiempo
+              </button>
+
+            </div>
+
+
+            <a
+              class="hub-roadmap-link"
+              href="./docs/HUB-ROADMAP.md"
+            >
+              Abrir ROADMAP.md
+            </a>
+
+
+            <button
+              class="hub-roadmap-link hub-roadmap-pdf"
+              id="hubRoadmapPdfExport"
+              type="button"
+            >
+              Exportar PDF
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <p
+          class="hub-roadmap-status"
+          id="hubRoadmapStatus"
+          aria-live="polite"
+        >
+          Cargando roadmap...
+        </p>
+
+
+        <div
+          class="hub-roadmap-grid cards-view"
+          id="hubRoadmapGrid"
+        ></div>
+
+
+        <section
+          class="hub-roadmap-timeline"
+          id="hubRoadmapTimeline"
+          hidden
+        >
+
+          <div class="hub-roadmap-timeline-top">
+
+            <p>
+              Vista tipo timeline interactiva. Haz clic en una fase para ver su detalle.
+            </p>
+
+            <span class="hub-roadmap-timeline-legend">
+              Fase seleccionada resaltada
+            </span>
+
+          </div>
+
+          <div class="hub-roadmap-canvas-shell">
+            <canvas
+              id="hubRoadmapCanvas"
+              aria-label="Línea de tiempo del roadmap del Hub"
+            ></canvas>
+          </div>
+
+        </section>
+
+
+        <article
+          class="hub-roadmap-detail"
+          id="hubRoadmapDetail"
+          hidden
+        >
+
+          <div
+            class="hub-roadmap-detail-top"
+            id="hubRoadmapDetailTop"
+          ></div>
+
+          <h3 id="hubRoadmapDetailTitle">
+            Detalle de fase
+          </h3>
+
+          <div
+            class="hub-roadmap-detail-body"
+            id="hubRoadmapDetailBody"
+          ></div>
+
+        </article>
+
+      </section>
+
 
     </main>
 
