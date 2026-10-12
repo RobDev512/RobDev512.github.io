@@ -105,18 +105,23 @@ Esto evita publicar nombres o información insuficiente únicamente por existir 
 
 # Fase 5 - Navegación avanzada
 
-**Estado:** Siguiente objetivo.
+**Estado:** Completada.
 
-## Funciones
+## Implementado
 
-- buscador;
-- filtros por estado;
-- filtros por tecnología;
-- filtros por visibilidad;
-- ordenamiento;
-- proyectos destacados;
-- proyectos recientes;
-- combinación de filtros.
+- [x] Buscador.
+- [x] Filtro por estado.
+- [x] Filtro por tecnología.
+- [x] Filtro por visibilidad.
+- [x] Ordenamiento recomendado.
+- [x] Ordenamiento por actividad reciente.
+- [x] Ordenamiento alfabético.
+- [x] Destacados primero.
+- [x] Filtro sólo destacados.
+- [x] Combinación simultánea de filtros.
+- [x] Estado completo de navegación en la URL.
+- [x] Atrás / Adelante con restauración de filtros.
+- [x] Botón para limpiar filtros.
 
 ---
 
@@ -172,6 +177,9 @@ Los lenguajes son metadata secundaria.
 
 # Próximo paso
 
-Implementar la Fase 5:
+Continuar con la Fase 6:
 
-**navegación avanzada, búsqueda y filtros combinados**.
+**consolidar el patrón de páginas individuales para proyectos futuros**.
+
+La cobertura del catálogo actual ya está adelantada: los cuatro proyectos
+registrados disponen de una landing o página propia.

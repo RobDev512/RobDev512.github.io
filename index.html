@@ -121,7 +121,7 @@
             </span>
 
             <h2 id="catalogFiltersTitle">
-              Categorías
+              Navegación avanzada
             </h2>
 
           </div>
@@ -138,10 +138,46 @@
         </div>
 
 
+        <div class="catalog-search-row">
+
+          <label
+            class="catalog-search"
+            for="catalogSearch"
+          >
+
+            <span>
+              Buscar
+            </span>
+
+            <input
+              id="catalogSearch"
+              type="search"
+              placeholder="Nombre, tecnología, descripción..."
+              autocomplete="off"
+            >
+
+          </label>
+
+
+          <button
+            class="catalog-reset"
+            id="resetCatalogFilters"
+            type="button"
+          >
+            Limpiar filtros
+          </button>
+
+        </div>
+
+
         <nav
           class="category-nav"
           aria-label="Filtrar proyectos por categoría"
         >
+
+          <span class="control-label">
+            Categoría
+          </span>
 
           <div
             class="category-filters"
@@ -159,6 +195,102 @@
           </div>
 
         </nav>
+
+
+        <div class="advanced-filter-grid">
+
+          <label class="catalog-field">
+
+            <span>
+              Estado
+            </span>
+
+            <select id="statusFilter">
+              <option value="">
+                Todos los estados
+              </option>
+            </select>
+
+          </label>
+
+
+          <label class="catalog-field">
+
+            <span>
+              Visibilidad
+            </span>
+
+            <select id="visibilityFilter">
+              <option value="">
+                Todas las visibilidades
+              </option>
+            </select>
+
+          </label>
+
+
+          <label class="catalog-field">
+
+            <span>
+              Tecnología
+            </span>
+
+            <select id="technologyFilter">
+              <option value="">
+                Todas las tecnologías
+              </option>
+            </select>
+
+          </label>
+
+
+          <label class="catalog-field">
+
+            <span>
+              Ordenar por
+            </span>
+
+            <select id="sortOrder">
+              <option value="curated">
+                Orden recomendado
+              </option>
+
+              <option value="recent">
+                Más recientes
+              </option>
+
+              <option value="featured">
+                Destacados primero
+              </option>
+
+              <option value="name-asc">
+                Nombre A–Z
+              </option>
+
+              <option value="name-desc">
+                Nombre Z–A
+              </option>
+            </select>
+
+          </label>
+
+        </div>
+
+
+        <label class="featured-filter">
+
+          <input
+            id="featuredOnly"
+            type="checkbox"
+          >
+
+          <span class="featured-filter-box"></span>
+
+          <span>
+            Mostrar sólo proyectos destacados
+          </span>
+
+        </label>
 
       </section>
 

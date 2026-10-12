@@ -215,3 +215,59 @@ Las tarjetas muestran ambos valores mediante indicadores visuales separados:
 Las tecnologías permanecen en `card.badges` y no deben duplicar el estado o la
 visibilidad. Los atributos `data-status` y `data-visibility` se conservan en
 cada tarjeta para habilitar filtros visibles en una fase posterior.
+
+
+## 14. Navegación avanzada
+
+La Fase 5 convierte los filtros internos del catálogo en controles visibles.
+
+El estado de navegación puede combinar:
+
+- categoría;
+- estado;
+- visibilidad;
+- tecnología;
+- texto de búsqueda;
+- sólo destacados;
+- ordenamiento.
+
+La URL conserva el estado mediante parámetros:
+
+- `category`
+- `status`
+- `visibility`
+- `tech`
+- `q`
+- `featured`
+- `sort`
+
+Atrás y Adelante restauran la vista completa.
+
+### Búsqueda
+
+La búsqueda se normaliza sin distinguir mayúsculas ni acentos y consulta:
+
+- nombre;
+- subtipo;
+- descripción;
+- versión;
+- codename;
+- detalle de estado;
+- categoría;
+- estado;
+- visibilidad;
+- tecnologías;
+- badges de la tarjeta.
+
+### Ordenamiento
+
+El catálogo admite:
+
+- orden recomendado (`displayOrder`);
+- más recientes (`updatedAt`);
+- destacados primero (`featured`);
+- nombre A–Z;
+- nombre Z–A.
+
+`updatedAt` representa la actividad más reciente conocida del repositorio del
+proyecto y permite ordenar sin depender del orden manual del catálogo.
