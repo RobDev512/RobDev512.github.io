@@ -427,8 +427,8 @@ aprendizajes sin convertir todas las páginas en reportes extensos.
 ## Objetivo
 
 Documentar formalmente qué hace el Hub, quién interactúa con él y qué reglas
-gobiernan su comportamiento, tomando como referencia prácticas de ingeniería de
-software utilizadas en FISW, pero adaptadas a un proyecto personal real.
+gobiernan su comportamiento, siguiendo buenas prácticas de análisis, modelado y
+documentación de sistemas adaptadas a un proyecto personal real.
 
 ## Documentación prevista
 
