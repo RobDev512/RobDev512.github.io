@@ -91,16 +91,74 @@
           </span>
 
           <h2>
-            Aplicaciones y videojuegos
+            Proyectos personales
           </h2>
 
         </div>
 
 
         <p>
-          Cada proyecto mantiene su propio repositorio, historial,
-          documentación y ciclo de desarrollo de manera independiente.
+          Cada proyecto mantiene su propio historial, documentación y ciclo
+          de desarrollo. El catálogo se organiza por tipo de proyecto, no por
+          lenguaje de programación.
         </p>
+
+      </section>
+
+
+
+      <section
+        class="catalog-controls"
+        aria-labelledby="catalogFiltersTitle"
+      >
+
+        <div class="catalog-controls-heading">
+
+          <div>
+
+            <span class="catalog-kicker">
+              Explorar catálogo
+            </span>
+
+            <h2 id="catalogFiltersTitle">
+              Categorías
+            </h2>
+
+          </div>
+
+
+          <p
+            class="catalog-summary"
+            id="catalogSummary"
+            aria-live="polite"
+          >
+            Cargando catálogo...
+          </p>
+
+        </div>
+
+
+        <nav
+          class="category-nav"
+          aria-label="Filtrar proyectos por categoría"
+        >
+
+          <div
+            class="category-filters"
+            id="categoryFilters"
+          >
+
+            <button
+              class="category-filter active"
+              type="button"
+              disabled
+            >
+              Cargando...
+            </button>
+
+          </div>
+
+        </nav>
 
       </section>
 

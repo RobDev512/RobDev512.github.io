@@ -67,13 +67,30 @@ La fuente central de verdad es:
 
 data/projects.json
 
-La lógica del catálogo se encuentra en:
+La lógica del catálogo y la navegación se encuentran en:
 
 js/hub.js
 
-index.html contiene únicamente la estructura general de la página y el contenedor donde JavaScript renderiza las tarjetas.
+index.html contiene la estructura general, la navegación visible por categorías y el contenedor donde JavaScript renderiza las tarjetas.
 
-La información individual de los proyectos ya no se mantiene directamente dentro de index.html.
+La información individual de los proyectos no se mantiene directamente dentro de index.html.
+
+## Navegación por categorías
+
+El hub genera automáticamente los filtros visibles usando la taxonomía de data/projects.json.
+
+La navegación incluye:
+
+- opción Todos;
+- categorías que actualmente contienen al menos un proyecto;
+- contador de proyectos por categoría;
+- estado activo accesible mediante aria-pressed;
+- URL compartible mediante el parámetro category;
+- compatibilidad con los botones Atrás y Adelante del navegador.
+
+Las categorías sin proyectos permanecen en la taxonomía, pero no ocupan espacio visual. Cuando se registre el primer proyecto de una categoría, su filtro aparecerá automáticamente.
+
+Los filtros internos por estado, tecnología y visibilidad permanecen preparados para fases posteriores.
 
 ## Proyectos actuales
 
@@ -154,11 +171,4 @@ docs/HUB-ROADMAP.md
 
 ## Próximo objetivo
 
-La siguiente fase del hub consiste en incorporar navegación y filtros visibles utilizando la taxonomía que ya existe en projects.json.
-
-Los filtros futuros podrán utilizar:
-
-- categoría;
-- estado;
-- tecnología;
-- visibilidad.
+La siguiente fase es realizar el inventario de proyectos personales existentes e incorporarlos progresivamente al catálogo sin publicar rutas locales ni información sensible.
