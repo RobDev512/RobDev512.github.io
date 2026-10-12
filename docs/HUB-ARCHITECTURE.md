@@ -391,15 +391,19 @@ https://robdev512.github.io/projects/labnotes/
 
 ---
 
-# 10. Catálogo central futuro
+# 10. Catálogo central
 
-Actualmente parte de la información de los proyectos está escrita directamente en index.html.
-
-La arquitectura objetivo utilizará:
+El hub utiliza actualmente:
 
 data/projects.json
 
-como fuente central del catálogo.
+como fuente central de verdad del catálogo.
+
+La lógica de carga, validación, filtrado y renderizado se encuentra en:
+
+js/hub.js
+
+index.html conserva únicamente la estructura general de la página y el contenedor donde se renderiza el catálogo.
 
 Cada proyecto podrá definir:
 
