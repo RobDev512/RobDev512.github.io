@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.2.1  
-**Estado general:** Cerrada funcionalmente / roadmap activo  
+**Versión vigente:** v1.2.1
+**Estado general:** Cerrada funcionalmente / roadmap activo
 **Siguiente etapa activa:** v1.2.2 — Stability & Polish
 
 > Cada versión debe cubrir una necesidad académica concreta y, además,

@@ -89,25 +89,23 @@ Esto evita publicar nombres o información insuficiente únicamente por existir 
 
 # Fase 4 - Estados y visibilidad
 
-**Estado:** Siguiente objetivo.
+**Estado:** Completada.
 
-## Objetivo
+## Implementado
 
-Hacer más clara la condición de cada proyecto dentro del catálogo.
-
-## Alcance previsto
-
-- mostrar estado visible;
-- mostrar visibilidad visible;
-- distinguir proyectos públicos, privados y locales;
-- mantener estas propiedades separadas;
-- preparar filtros visibles posteriores.
+- [x] Mostrar el estado en cada tarjeta.
+- [x] Mostrar la visibilidad en cada tarjeta.
+- [x] Diferenciar visualmente proyectos públicos, privados y locales.
+- [x] Mantener estado y visibilidad como propiedades independientes.
+- [x] Mostrar `statusDetail` cuando aporta contexto adicional.
+- [x] Separar tecnologías de estado y visibilidad.
+- [x] Conservar `data-status` y `data-visibility` para filtros posteriores.
 
 ---
 
 # Fase 5 - Navegación avanzada
 
-**Estado:** Planeado.
+**Estado:** Siguiente objetivo.
 
 ## Funciones
 
@@ -174,6 +172,6 @@ Los lenguajes son metadata secundaria.
 
 # Próximo paso
 
-Implementar la Fase 4:
+Implementar la Fase 5:
 
-**estados y visibilidad visibles dentro del catálogo**.
+**navegación avanzada, búsqueda y filtros combinados**.

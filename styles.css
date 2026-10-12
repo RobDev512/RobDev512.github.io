@@ -495,6 +495,184 @@ main {
   line-height: 1.7;
 }
 
+/* =========================================================
+   PROJECT STATE & VISIBILITY
+   ========================================================= */
+
+.project-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.project-state-pill {
+  min-height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 5px 9px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, .025);
+
+  font-size: 10px;
+  line-height: 1;
+}
+
+.project-state-key {
+  color: #788898;
+
+  font-weight: 750;
+}
+
+.project-state-pill strong {
+  color: #d7e0e8;
+
+  font-weight: 900;
+}
+
+.project-status-stable {
+  border-color:
+    rgba(82, 211, 153, .25);
+
+  background:
+    rgba(82, 211, 153, .07);
+}
+
+.project-status-stable strong {
+  color: #73dda7;
+}
+
+.project-status-development {
+  border-color:
+    rgba(54, 197, 240, .28);
+
+  background:
+    rgba(54, 197, 240, .07);
+}
+
+.project-status-development strong {
+  color: #6ed6f5;
+}
+
+.project-status-experimental {
+  border-color:
+    rgba(167, 139, 250, .3);
+
+  background:
+    rgba(167, 139, 250, .08);
+}
+
+.project-status-experimental strong {
+  color: #c1adff;
+}
+
+.project-status-paused {
+  border-color:
+    rgba(245, 196, 81, .3);
+
+  background:
+    rgba(245, 196, 81, .07);
+}
+
+.project-status-paused strong {
+  color: #f5cc6c;
+}
+
+.project-status-completed {
+  border-color:
+    rgba(66, 211, 190, .26);
+
+  background:
+    rgba(66, 211, 190, .07);
+}
+
+.project-status-completed strong {
+  color: #69dcc8;
+}
+
+.project-status-archived {
+  border-color:
+    rgba(151, 166, 182, .2);
+
+  background:
+    rgba(151, 166, 182, .05);
+}
+
+.project-status-archived strong {
+  color: #a8b5c1;
+}
+
+.project-visibility-public {
+  border-color:
+    rgba(82, 211, 153, .2);
+}
+
+.project-visibility-public strong {
+  color: #a8eac5;
+}
+
+.project-visibility-private-code-public-app {
+  border-color:
+    rgba(105, 174, 252, .26);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(105, 174, 252, .07),
+      rgba(167, 139, 250, .055)
+    );
+}
+
+.project-visibility-private-code-public-app strong {
+  color: #a9cfff;
+}
+
+.project-visibility-private {
+  border-color:
+    rgba(167, 139, 250, .26);
+
+  background:
+    rgba(167, 139, 250, .055);
+}
+
+.project-visibility-private strong {
+  color: #c7b7ff;
+}
+
+.project-visibility-local {
+  border-color:
+    rgba(151, 166, 182, .2);
+
+  background:
+    rgba(151, 166, 182, .04);
+}
+
+.project-visibility-local strong {
+  color: #b4c0cb;
+}
+
+.project-state-detail {
+  flex: 1 1 100%;
+
+  margin-top: 2px;
+
+  color: #7f90a0;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;
@@ -979,6 +1157,14 @@ footer {
 
   .project-copy h3 {
     font-size: 28px;
+  }
+
+  .project-state {
+    align-items: flex-start;
+  }
+
+  .project-state-pill {
+    min-height: 30px;
   }
 
   .project-actions {

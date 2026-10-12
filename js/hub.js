@@ -227,6 +227,97 @@ function createBadges(project) {
   return tags;
 }
 
+function taxonomyLabel(groupName, itemId) {
+  if (
+    !itemId ||
+    !state.catalog ||
+    !state.catalog.taxonomy ||
+    !Array.isArray(state.catalog.taxonomy[groupName])
+  ) {
+    return null;
+  }
+
+  return (
+    state.catalog.taxonomy[groupName].find(
+      (item) => item.id === itemId
+    )?.label ?? null
+  );
+}
+
+function statusLabel(statusId) {
+  return taxonomyLabel("statuses", statusId);
+}
+
+function visibilityLabel(visibilityId) {
+  return taxonomyLabel("visibilities", visibilityId);
+}
+
+function createProjectState(project, extraClass = "") {
+  const wrapper = createElement(
+    "div",
+    `project-state ${extraClass}`.trim()
+  );
+
+  const status = createElement(
+    "span",
+    `project-state-pill project-status project-status-${project.status}`
+  );
+
+  status.append(
+    createElement(
+      "span",
+      "project-state-key",
+      "Estado"
+    ),
+    createElement(
+      "strong",
+      "",
+      statusLabel(project.status) ?? project.status
+    )
+  );
+
+  const visibility = createElement(
+    "span",
+    `project-state-pill project-visibility project-visibility-${project.visibility}`
+  );
+
+  visibility.append(
+    createElement(
+      "span",
+      "project-state-key",
+      "Visibilidad"
+    ),
+    createElement(
+      "strong",
+      "",
+      visibilityLabel(project.visibility) ?? project.visibility
+    )
+  );
+
+  wrapper.append(
+    status,
+    visibility
+  );
+
+  const statusText =
+    statusLabel(project.status);
+
+  if (
+    project.statusDetail &&
+    project.statusDetail !== statusText
+  ) {
+    wrapper.append(
+      createElement(
+        "span",
+        "project-state-detail",
+        project.statusDetail
+      )
+    );
+  }
+
+  return wrapper;
+}
+
 function createMeta(project, extraClass = "", versionClass = "") {
   const meta = createElement(
     "div",
@@ -287,6 +378,7 @@ function renderFeaturedCard(project) {
     createMeta(project),
     createElement("h3", "", project.name),
     createElement("p", "", project.description),
+    createProjectState(project),
     createBadges(project),
     createActions(project)
   );
@@ -323,6 +415,7 @@ function renderLabNotesCard(project) {
     ),
     createElement("h3", "", project.name),
     createElement("p", "", project.description),
+    createProjectState(project, "labnotes-state"),
     createBadges(project),
     createActions(project, "labnotes-actions")
   );
@@ -419,6 +512,7 @@ function renderStandardCard(project) {
     createMeta(project),
     createElement("h3", "", project.name),
     createElement("p", "", project.description),
+    createProjectState(project),
     createBadges(project),
     createActions(project)
   );
@@ -483,14 +577,9 @@ function visibleProjects() {
 }
 
 function categoryLabel(categoryId) {
-  if (!categoryId || !state.catalog) {
-    return null;
-  }
-
-  return (
-    state.catalog.taxonomy.categories.find(
-      (category) => category.id === categoryId
-    )?.label ?? null
+  return taxonomyLabel(
+    "categories",
+    categoryId
   );
 }
 
