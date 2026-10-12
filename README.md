@@ -106,6 +106,21 @@ La Fase 3 revisó los proyectos personales existentes y separó:
 
 El catálogo público no refleja directamente la estructura local de carpetas.
 
+
+## Estados y visibilidad
+
+Cada tarjeta muestra de forma separada:
+
+- el estado actual del proyecto;
+- la visibilidad del proyecto;
+- un detalle adicional del estado cuando aporta información útil.
+
+Los estados no se mezclan con las tecnologías.
+
+La visibilidad tampoco implica el estado: un proyecto puede estar en
+desarrollo y ser público, privado, local o tener código privado con una
+aplicación pública.
+
 ## Documentación
 
 - `docs/HUB-ARCHITECTURE.md`

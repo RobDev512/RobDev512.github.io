@@ -11,6 +11,7 @@
     "logo meta"
     "logo title"
     "logo description"
+    "logo state"
     "logo tags"
     "logo actions";
 
@@ -235,13 +236,27 @@
 }
 
 
+.project-card-labnotes .labnotes-state {
+  grid-area: state;
+
+  position: relative;
+  z-index: 1;
+
+  margin-top: 18px;
+
+  padding:
+    0
+    48px;
+}
+
+
 .project-card-labnotes .project-tags {
   grid-area: tags;
 
   position: relative;
   z-index: 1;
 
-  margin-top: 22px;
+  margin-top: 18px;
 
   padding:
     0
@@ -313,6 +328,7 @@
       "meta"
       "title"
       "description"
+      "state"
       "tags"
       "actions";
 
@@ -350,6 +366,13 @@
 
 
   .project-card-labnotes > p {
+    padding:
+      0
+      32px;
+  }
+
+
+  .project-card-labnotes .labnotes-state {
     padding:
       0
       32px;
@@ -421,6 +444,13 @@
       24px;
 
     font-size: 15px;
+  }
+
+
+  .project-card-labnotes .labnotes-state {
+    padding:
+      0
+      24px;
   }
 
 

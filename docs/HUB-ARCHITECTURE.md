@@ -200,3 +200,18 @@ archivo `ROADMAP.md` independiente.
 
 Esto permite que un proyecto con repositorio privado, como TecNet Finder,
 muestre públicamente su identidad y planificación sin exponer su código.
+
+## 13. Presentación de estado y visibilidad
+
+El catálogo mantiene `status` y `visibility` como dimensiones independientes.
+
+Las tarjetas muestran ambos valores mediante indicadores visuales separados:
+
+- Estado: En desarrollo, Estable, Experimental, Pausado, Terminado o Archivado.
+- Visibilidad: Público, Código privado / aplicación pública, Privado o Local.
+
+`statusDetail` puede añadir contexto sin sustituir el estado normalizado.
+
+Las tecnologías permanecen en `card.badges` y no deben duplicar el estado o la
+visibilidad. Los atributos `data-status` y `data-visibility` se conservan en
+cada tarjeta para habilitar filtros visibles en una fase posterior.

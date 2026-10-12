@@ -2,8 +2,8 @@
 
 ## Estado actual
 
-**Versión vigente:** v1.1.1  
-**Estado general:** Estable / publicada  
+**Versión vigente:** v1.1.1
+**Estado general:** Estable / publicada
 **Plataforma principal:** Windows 64-bit
 
 > La ruta futura conserva la planificación original del proyecto. Los estados
