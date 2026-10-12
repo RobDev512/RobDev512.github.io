@@ -5,19 +5,16 @@
 El hub ya cuenta con:
 
 - GitHub Pages;
-- dominio robdev512.github.io;
-- AWS ORBISHOT;
-- página individual de AWS ORBISHOT;
-- LabNotes;
-- página individual de LabNotes;
 - catálogo dinámico;
-- fuente central data/projects.json;
-- renderizado mediante js/hub.js;
-- taxonomía inicial de categorías, estados y visibilidades;
+- `data/projects.json` como fuente central;
+- renderizado mediante `js/hub.js`;
+- taxonomía de categorías, estados y visibilidades;
 - navegación visible por categoría;
 - contadores por categoría;
-- URL compartible de categoría;
-- soporte interno para filtros combinados por categoría, estado, tecnología y visibilidad.
+- URL compartible;
+- soporte interno para filtros combinados;
+- inventario inicial de proyectos personales;
+- cuatro proyectos registrados en el catálogo.
 
 ---
 
@@ -25,133 +22,86 @@ El hub ya cuenta con:
 
 **Estado:** Completada.
 
-## Objetivo
-
-Transformar el hub en un catálogo centralizado y eliminar la información individual de proyectos de index.html.
-
 ## Implementado
 
-- [x] Crear data/projects.json.
-- [x] Crear js/hub.js.
-- [x] Extraer la información individual de proyectos de index.html.
-- [x] Generar las tarjetas mediante JavaScript.
-- [x] Mantener el diseño destacado de AWS ORBISHOT.
-- [x] Mantener el diseño específico de LabNotes.
-- [x] Mantener las páginas individuales.
-- [x] Mantener los enlaces actuales.
+- [x] Crear `data/projects.json`.
+- [x] Crear `js/hub.js`.
+- [x] Renderizar proyectos desde JavaScript.
+- [x] Mantener las tarjetas de AWS ORBISHOT y LabNotes.
 - [x] Validar la estructura del catálogo.
-- [x] Preparar filtros internos por categoría.
-- [x] Preparar filtros internos por estado.
-- [x] Preparar filtros internos por tecnología.
-- [x] Añadir estado de error si projects.json no puede cargarse.
-
-## Primeros proyectos
-
-- AWS ORBISHOT.
-- LabNotes.
+- [x] Preparar filtros internos.
 
 ---
 
-# Fase 2 - Categorías y navegación del catálogo
+# Fase 2 - Categorías y navegación
 
 **Estado:** Completada.
 
-## Objetivo
-
-Permitir explorar el catálogo por tipo de proyecto sin clasificarlo principalmente por lenguaje.
-
-## Categorías iniciales
-
-- Desarrollo Web.
-- Desarrollo de Aplicaciones de Escritorio.
-- Desarrollo de Aplicaciones Móviles.
-- Desarrollo de Videojuegos.
-- Automatización y Scripts.
-- Backend y Servicios.
-- Datos y Bases de Datos.
-- Sistemas y Experimentación.
-- Otros.
-
 ## Implementado
 
-- [x] Mostrar navegación visible por categoría.
-- [x] Añadir opción Todos.
-- [x] Generar los filtros desde la taxonomía de projects.json.
-- [x] Mostrar únicamente categorías que contienen proyectos.
-- [x] Añadir contador de proyectos por categoría.
-- [x] Conectar los controles con HubCatalog.setFilters().
-- [x] Mantener tecnologías como etiquetas secundarias.
-- [x] Preparar filtros combinados posteriores.
-- [x] Preparar filtro interno de visibilidad.
-- [x] Mantener el diseño responsive.
-- [x] Añadir estado activo accesible con aria-pressed.
-- [x] Añadir resumen dinámico de resultados.
-- [x] Sincronizar la categoría activa con ?category=<id>.
-- [x] Soportar navegación Atrás / Adelante del navegador.
-- [x] Hacer que nuevas categorías aparezcan automáticamente al recibir su primer proyecto.
+- [x] Navegación visible por categoría.
+- [x] Opción Todos.
+- [x] Filtros generados desde la taxonomía.
+- [x] Ocultar categorías vacías.
+- [x] Contadores.
+- [x] `aria-pressed`.
+- [x] Resumen dinámico.
+- [x] `?category=<id>`.
+- [x] Atrás / Adelante.
+- [x] Aparición automática de nuevas categorías con proyectos.
 
 ---
 
 # Fase 3 - Inventario de proyectos existentes
 
-**Estado:** Siguiente objetivo.
+**Estado:** Completada.
 
 ## Objetivo
 
-Revisar los proyectos personales existentes y registrarlos dentro del catálogo.
+Revisar los proyectos personales existentes y registrar en el catálogo los que ya tienen identidad suficiente para el portafolio.
 
-## Fuentes locales iniciales
+## Resultado del inventario inicial
 
-- Proyectos HTML.
-- Proyectos Python.
-- Proyectos C++.
-- Proyectos GOlang.
-- futuros proyectos móviles;
-- otras carpetas personales.
+### Registrados
 
-## Datos a identificar
+- AWS ORBISHOT.
+- LabNotes.
+- Convertidor de Archivos.
+- TecNet Finder.
 
-Para cada proyecto:
+### No registrados como proyectos independientes
 
-- nombre;
-- categoría;
-- subtipo;
-- descripción;
-- tecnologías;
-- estado;
-- visibilidad;
-- versión;
-- logo;
-- disponibilidad pública;
-- repositorio si existe.
+Se descartaron del catálogo público inicial:
 
-Nunca se publicarán rutas locales.
+- carpetas técnicas de entorno o editor;
+- el propio repositorio del Hub;
+- variantes históricas de un mismo proyecto;
+- ejercicios introductorios aislados de C++;
+- colecciones de prácticas de Go sin identidad de producto independiente.
+
+### Pendientes de promoción futura
+
+Algunos proyectos locales pequeños permanecen fuera del catálogo hasta contar con suficiente descripción, alcance o identidad propia.
+
+Esto evita publicar nombres o información insuficiente únicamente por existir como carpeta local.
 
 ---
 
 # Fase 4 - Estados y visibilidad
 
-**Estado:** Planeado.
-
-## Estados
-
-- En desarrollo.
-- Estable.
-- Experimental.
-- Pausado.
-- Terminado.
-- Archivado.
-
-## Visibilidad
-
-- Público.
-- Código privado / aplicación pública.
-- Privado.
-- Local.
+**Estado:** Siguiente objetivo.
 
 ## Objetivo
 
-Permitir que proyectos todavía no publicados tengan presencia en el portafolio.
+Hacer más clara la condición de cada proyecto dentro del catálogo.
+
+## Alcance previsto
+
+- mostrar estado visible;
+- mostrar visibilidad visible;
+- distinguir proyectos públicos, privados y locales;
+- mantener estas propiedades separadas;
+- preparar filtros visibles posteriores.
 
 ---
 
@@ -170,32 +120,24 @@ Permitir que proyectos todavía no publicados tengan presencia en el portafolio.
 - proyectos recientes;
 - combinación de filtros.
 
-La navegación básica por categoría ya quedó implementada en la Fase 2.
-
 ---
 
 # Fase 6 - Páginas individuales
 
-**Estado:** Planeado.
+**Estado:** Parcialmente adelantada.
 
 Los proyectos importantes podrán disponer de una página:
 
-/projects/<id>/
+`/projects/<id>/`
 
-Contenido posible:
+Cobertura actual:
 
-- presentación;
-- capturas;
-- tecnologías;
-- historial;
-- versión;
-- estado;
-- roadmap;
-- enlaces;
-- aplicación;
-- repositorio.
+- AWS ORBISHOT: página propia.
+- LabNotes: página propia.
+- Convertidor de Archivos: página propia.
+- TecNet Finder: página propia.
 
-AWS ORBISHOT y LabNotes funcionan como primeras referencias.
+Los futuros proyectos importantes podrán adoptar la misma estructura.
 
 ---
 
@@ -205,14 +147,14 @@ AWS ORBISHOT y LabNotes funcionan como primeras referencias.
 
 Posibles funciones:
 
-- timeline de proyectos;
+- timeline;
 - año de creación;
 - fecha de última actualización;
 - proyectos activos;
 - proyectos terminados;
 - estadísticas por categoría;
 - estadísticas por tecnología;
-- evolución histórica del portafolio.
+- evolución histórica.
 
 ---
 
@@ -222,7 +164,7 @@ La navegación debe responder primero:
 
 **¿Qué tipo de proyecto es?**
 
-Y después:
+y después:
 
 **¿Con qué tecnologías está construido?**
 
@@ -232,8 +174,6 @@ Los lenguajes son metadata secundaria.
 
 # Próximo paso
 
-Implementar la Fase 3:
+Implementar la Fase 4:
 
-**inventario de proyectos personales existentes**
-
-registrándolos progresivamente en data/projects.json sin publicar rutas locales ni información sensible.
+**estados y visibilidad visibles dentro del catálogo**.
