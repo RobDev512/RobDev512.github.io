@@ -343,6 +343,71 @@
         "subtitle": "Roadmap del DSL / compilador",
         "filename": "TecNet-Finder-Roadmap.pdf"
       }
+    },
+    {
+      "id": "autoinputr",
+      "displayOrder": 50,
+      "name": "AutoInputR",
+      "category": "desktop",
+      "subtype": "Herramienta de automatización visual de escritorio",
+      "technologies": [
+        "Python",
+        "CustomTkinter",
+        "OpenCV",
+        "PyAutoGUI",
+        "Win32"
+      ],
+      "status": "stable",
+      "statusDetail": "Estable con roadmap activo",
+      "visibility": "public",
+      "version": "v1.3.0",
+      "codename": "Target Window Update",
+      "description": "Aplicación de escritorio para Windows que permite automatizar clicks, teclado, movimiento del cursor, rutas y acciones basadas en detección visual desde una interfaz configurable, sin necesidad de escribir scripts.",
+      "featured": true,
+      "logo": {
+        "src": "./assets/autoinputr-logo.png",
+        "alt": "Logo de AutoInputR"
+      },
+      "card": {
+        "variant": "standard",
+        "eyebrow": "Escritorio · Automatización visual",
+        "badges": [
+          "Python",
+          "CustomTkinter",
+          "Windows"
+        ]
+      },
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "./projects/autoinputr/",
+          "style": "primary",
+          "external": false
+        },
+        {
+          "id": "download",
+          "label": "Descargar",
+          "url": "https://github.com/RobDev512/AutoInputR-Desktop/releases/download/v1.3.0/AutoInputR_Setup_v1.3.0.exe",
+          "style": "secondary",
+          "external": true
+        },
+        {
+          "id": "repository",
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/AutoInputR-Desktop",
+          "style": "secondary",
+          "external": true
+        }
+      ],
+      "updatedAt": "2026-10-19",
+      "roadmapExport": {
+        "type": "markdown",
+        "url": "./projects/autoinputr/ROADMAP.md",
+        "title": "AutoInputR",
+        "subtitle": "Roadmap de automatización de escritorio",
+        "filename": "AutoInputR-Roadmap.pdf"
+      }
     }
   ]
 }

@@ -214,6 +214,113 @@
           "external": true
         }
       }
+    },
+    {
+      "id": "autoinputr",
+      "theme": "theme-desktop",
+      "title": "AutoInputR",
+      "documentTitle": "AutoInputR · RobDev512",
+      "metaDescription": "AutoInputR, automatización visual y configurable para Windows sin necesidad de escribir scripts.",
+      "eyebrow": "Aplicación de escritorio · Automatización",
+      "logo": {
+        "src": "../../assets/autoinputr-logo.png",
+        "alt": "Logo de AutoInputR"
+      },
+      "repository": {
+        "label": "GitHub",
+        "url": "https://github.com/RobDev512/AutoInputR-Desktop",
+        "external": true
+      },
+      "hero": {
+        "titleLines": [
+          "AutoInput",
+          "R"
+        ],
+        "description": "Automatización visual y configurable para Windows: clicks, teclado, movimiento, rutas y detección visual desde una interfaz gráfica, sin necesidad de escribir scripts.",
+        "actions": [
+          {
+            "label": "Descargar 1.3.0",
+            "url": "https://github.com/RobDev512/AutoInputR-Desktop/releases/download/v1.3.0/AutoInputR_Setup_v1.3.0.exe",
+            "style": "primary",
+            "external": true
+          },
+          {
+            "label": "Ver roadmap",
+            "url": "#roadmap-explorer",
+            "style": "secondary",
+            "external": false
+          }
+        ],
+        "meta": [
+          {
+            "strong": "v1.3.0",
+            "small": "Target Window Update"
+          },
+          {
+            "strong": "Windows",
+            "small": "Automatización local"
+          },
+          {
+            "strong": "Sin scripts",
+            "small": "Interfaz visual configurable"
+          }
+        ]
+      },
+      "features": [
+        {
+          "title": "Entrada automatizada",
+          "text": "Clicks, pulsaciones de teclado y movimiento del cursor con intervalos, modos y hotkeys configurables."
+        },
+        {
+          "title": "Rutas",
+          "text": "Grabación y reproducción de movimientos y clicks para repetir interacciones de forma consistente."
+        },
+        {
+          "title": "Rastreo visual",
+          "text": "Detección por plantilla con OpenCV para localizar objetivos y reaccionar a elementos visibles en pantalla."
+        },
+        {
+          "title": "Ventana objetivo",
+          "text": "Control contextual por título, proceso y clase, con pausa y reanudación automática al cambiar el foco."
+        }
+      ],
+      "release": {
+        "kicker": "Release estable",
+        "version": "v1.3.0",
+        "summary": "La versión pública vigente incorpora la ventana objetivo y añade controles para que las automatizaciones respondan al contexto de la aplicación seleccionada.",
+        "status": "Aplicada",
+        "title": "Target Window Update",
+        "items": [
+          "Selector de ventana objetivo por título, proceso y clase.",
+          "Pausa automática al perder el foco.",
+          "Reanudación automática opcional al recuperarlo.",
+          "Protección integrada en Clicker, KeyPresser, Mover, Ruta y Rastreador.",
+          "Persistencia de la selección entre ejecuciones."
+        ],
+        "link": {
+          "label": "Explorar releases en GitHub →",
+          "url": "https://github.com/RobDev512/AutoInputR-Desktop/releases",
+          "external": true
+        }
+      },
+      "roadmap": {
+        "kicker": "Roadmap dinámico",
+        "title": "Explora la evolución de AutoInputR",
+        "description": "El roadmap parte de una base estable de automatización y avanza hacia perfiles, macros, condiciones y un estudio visual de automatización sin scripts."
+      },
+      "nextRelease": {
+        "kicker": "Siguiente versión",
+        "title": "v1.4.0 · Perfiles y portabilidad",
+        "text": "La siguiente etapa se centra en perfiles reutilizables, importación y exportación, combinaciones de hotkeys y detección de conflictos."
+      },
+      "footer": {
+        "left": "AutoInputR · Automatización visual para Windows",
+        "right": {
+          "label": "Descargar",
+          "url": "https://github.com/RobDev512/AutoInputR-Desktop/releases/download/v1.3.0/AutoInputR_Setup_v1.3.0.exe",
+          "external": true
+        }
+      }
     }
   ]
 }
