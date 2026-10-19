@@ -83,15 +83,17 @@ Las categorías visibles se generan automáticamente según los proyectos regist
 - Página: https://robdev512.github.io/projects/tecnet-finder/
 - Código no publicado desde el hub
 
-### AutoInputR
+### TaskPilot
 
 - Categoría: Desarrollo de Aplicaciones de Escritorio
 - Subtipo: Herramienta de automatización visual de escritorio
-- Estado: Estable con roadmap activo
-- Versión: v1.3.0
+- Estado: En desarrollo
+- Versión de desarrollo: v1.4.0-dev
+- Última release pública: AutoInputR v1.3.0
 - Visibilidad: Público
-- Página: https://robdev512.github.io/projects/autoinputr/
-- Repositorio: https://github.com/RobDev512/AutoInputR-Desktop
+- Página: https://robdev512.github.io/projects/taskpilot/
+- Repositorio: https://github.com/RobDev512/TaskPilot-Desktop
+- Continuidad: anteriormente AutoInputR; las releases v1.3.0 y anteriores conservan ese nombre.
 
 ## Navegación del catálogo
 
@@ -161,7 +163,7 @@ Actualmente:
 
 - `projects/convertidor-archivos/ROADMAP.md`
 - `projects/tecnet-finder/ROADMAP.md`
-- `projects/autoinputr/ROADMAP.md`
+- `projects/taskpilot/ROADMAP.md`
 
 Las páginas HTML muestran un resumen visual del roadmap y el Markdown conserva
 el detalle de versiones.
@@ -225,7 +227,7 @@ Los proyectos estándar usan:
 - `projects/project-roadmap.js`;
 - un `index.html` mínimo por proyecto.
 
-Convertidor de Archivos, TecNet Finder y AutoInputR ya utilizan este patrón.
+Convertidor de Archivos, TecNet Finder y TaskPilot ya utilizan este patrón.
 
 AWS ORBISHOT y LabNotes conservan páginas personalizadas porque su identidad
 visual y estructura justifican una presentación propia.
@@ -257,7 +259,7 @@ distracción.
 
 ## Roadmaps unificados
 
-Convertidor de Archivos, TecNet Finder y AutoInputR usan ahora el mismo patrón visual de
+Convertidor de Archivos, TecNet Finder y TaskPilot usan ahora el mismo patrón visual de
 roadmap empleado como referencia por AWS ORBISHOT y LabNotes: grid de tarjetas,
 estado superior, acción de detalle y panel expandido.
 
@@ -269,7 +271,7 @@ unifica es la experiencia visual y de interacción.
 
 La Fase 6 unifica también la composición completa de las páginas estándar.
 
-Convertidor de Archivos, TecNet Finder y AutoInputR usan ahora el mismo lenguaje estructural
+Convertidor de Archivos, TecNet Finder y TaskPilot usan ahora el mismo lenguaje estructural
 de AWS ORBISHOT:
 
 - header del proyecto;
@@ -299,7 +301,7 @@ Fuentes actuales:
 - LabNotes: `projects/labnotes/ROADMAP.md`;
 - Convertidor de Archivos: `projects/convertidor-archivos/ROADMAP.md`;
 - TecNet Finder: `projects/tecnet-finder/ROADMAP.md`;
-- AutoInputR: `projects/autoinputr/ROADMAP.md`;
+- TaskPilot: `projects/taskpilot/ROADMAP.md`;
 
 El PDF es un respaldo documental; el Markdown o los datos del roadmap continúan
 siendo la fuente de verdad.

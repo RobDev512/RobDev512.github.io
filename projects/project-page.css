@@ -2930,3 +2930,234 @@ footer a {
   }
 
 }
+
+
+/* =========================================================
+   HERO TITLE BRANDING
+   ========================================================= */
+
+.hero-title-row {
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  margin:
+    16px 0 18px;
+}
+
+
+.hero-title-row h1 {
+  margin: 0;
+}
+
+
+.hero-title-logo {
+  width:
+    clamp(
+      76px,
+      8vw,
+      112px
+    );
+
+  height: auto;
+
+  flex:
+    0 0 auto;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 0 18px
+      rgba(
+        var(--accent-rgb),
+        .24
+      )
+    );
+}
+
+
+@media (max-width: 640px) {
+
+  .hero-title-row {
+    gap: 16px;
+  }
+
+
+  .hero-title-logo {
+    width:
+      clamp(
+        62px,
+        18vw,
+        82px
+      );
+  }
+
+}
+
+/* =========================================================
+   TASKPILOT THEME
+   ========================================================= */
+
+body.theme-taskpilot {
+  --bg: #07101d;
+  --panel: #0c1828;
+  --panel-2: #102238;
+
+  --text: #f4f8ff;
+  --muted: #91a6bf;
+
+  --accent: #637dff;
+  --accent-soft: #89a0ff;
+  --accent-rgb: 99, 125, 255;
+
+  --cyan: #2bd9ff;
+  --green: #61e8d0;
+
+  background:
+    radial-gradient(
+      circle at 78% 4%,
+      rgba(
+        99,
+        125,
+        255,
+        .14
+      ),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 12% 34%,
+      rgba(
+        43,
+        217,
+        255,
+        .075
+      ),
+      transparent 25rem
+    ),
+    linear-gradient(
+      155deg,
+      #08111f 0%,
+      #07101d 48%,
+      #071522 100%
+    );
+}
+
+
+.theme-taskpilot
+.eyebrow,
+.theme-taskpilot
+.section-kicker {
+  color: #48d6ff;
+}
+
+
+.theme-taskpilot
+.hero-title-accent {
+  color: transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7088ff 0%,
+      #3db9ff 52%,
+      #28e1f5 100%
+    );
+
+  background-clip: text;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.theme-taskpilot
+.btn-primary {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #617aff 0%,
+      #478fff 48%,
+      #27cdec 100%
+    );
+
+  box-shadow:
+    0 12px 30px
+    rgba(
+      77,
+      130,
+      255,
+      .22
+    );
+}
+
+
+.theme-taskpilot
+.btn-primary:hover {
+  box-shadow:
+    0 16px 38px
+    rgba(
+      62,
+      167,
+      255,
+      .32
+    );
+
+  filter:
+    brightness(1.08)
+    saturate(1.08);
+}
+
+
+.theme-taskpilot
+.btn-secondary:hover {
+  border-color:
+    rgba(
+      70,
+      201,
+      255,
+      .6
+    );
+}
+
+
+.theme-taskpilot
+.brand-dot {
+  background:
+    linear-gradient(
+      135deg,
+      #637dff,
+      #2bd9ff
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(
+      43,
+      217,
+      255,
+      .52
+    );
+}
+
+
+.theme-taskpilot
+.hero-title-logo {
+  filter:
+    drop-shadow(
+      0 0 20px
+      rgba(
+        62,
+        166,
+        255,
+        .32
+      )
+    );
+}
+
+/* =========================================================
+   END TASKPILOT THEME
+   ========================================================= */

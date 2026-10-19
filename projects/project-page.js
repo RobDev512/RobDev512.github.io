@@ -267,8 +267,39 @@ function renderHero(page) {
     }
   );
 
+  const titleRow =
+    createElement(
+      "div",
+      "hero-title-row"
+    );
+
+  if (page.hero.titleLogo?.src) {
+    const titleLogo =
+      document.createElement(
+        "img"
+      );
+
+    titleLogo.className =
+      "hero-title-logo";
+
+    titleLogo.src =
+      page.hero.titleLogo.src;
+
+    titleLogo.alt =
+      page.hero.titleLogo.alt ||
+      "";
+
+    titleRow.append(
+      titleLogo
+    );
+  }
+
+  titleRow.append(
+    title
+  );
+
   copy.append(
-    title,
+    titleRow,
     createElement(
       "p",
       "hero-lead",

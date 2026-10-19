@@ -1,14 +1,15 @@
-# ROADMAP — AutoInputR
+# ROADMAP — TaskPilot
 
 ## Estado actual
 
-**Versión vigente:** v1.3.0  
-**Estado general:** Estable / publicada  
+**Versión de desarrollo:** v1.4.0-dev
+**Última release pública:** AutoInputR v1.3.0
+**Estado general:** En desarrollo
 **Plataforma principal:** Windows
 
-AutoInputR evoluciona como una herramienta de automatización visual y configurable para Windows, sin necesidad de escribir scripts. Los juegos pueden ser un escenario de uso, pero no constituyen el propósito principal del producto.
+TaskPilot es la continuación de AutoInputR a partir de v1.4.0. El proyecto evoluciona como una herramienta de automatización visual y configurable para Windows, sin necesidad de escribir scripts.
 
-La definición completa del producto se mantiene en el repositorio principal de AutoInputR.
+Las releases v1.3.0 y anteriores conservan el nombre AutoInputR como parte del historial del proyecto.
 
 ---
 
@@ -26,11 +27,12 @@ La definición completa del producto se mantiene en el repositorio principal de 
 
 **Estado:** Aplicada
 
+- Última release publicada bajo el nombre AutoInputR.
 - Selector de ventana objetivo por título, proceso y clase.
 - Pausa al perder el foco y reanudación automática opcional.
 - Integración con Clicker, KeyPresser, Mover, Ruta y Rastreador.
 - Persistencia de la ventana objetivo entre ejecuciones.
-- Base modular posterior al release con paquete `autoinputr/`, módulos funcionales, servicios y diálogos separados.
+- Base modular posterior al release.
 - Definición del producto como herramienta general de automatización de escritorio.
 
 ---
@@ -39,6 +41,7 @@ La definición completa del producto se mantiene en el repositorio principal de 
 
 **Estado:** Siguiente
 
+- Primera versión bajo el nombre TaskPilot.
 - Perfiles de configuración.
 - Importar y exportar perfiles.
 - Combinaciones de hotkeys.

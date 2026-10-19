@@ -345,9 +345,9 @@
       }
     },
     {
-      "id": "autoinputr",
+      "id": "taskpilot",
       "displayOrder": 50,
-      "name": "AutoInputR",
+      "name": "TaskPilot",
       "category": "desktop",
       "subtype": "Herramienta de automatización visual de escritorio",
       "technologies": [
@@ -357,16 +357,15 @@
         "PyAutoGUI",
         "Win32"
       ],
-      "status": "stable",
-      "statusDetail": "Estable con roadmap activo",
+      "status": "development",
+      "statusDetail": "En desarrollo · v1.4.0 en preparación",
       "visibility": "public",
-      "version": "v1.3.0",
-      "codename": "Target Window Update",
-      "description": "Aplicación de escritorio para Windows que permite automatizar clicks, teclado, movimiento del cursor, rutas y acciones basadas en detección visual desde una interfaz configurable, sin necesidad de escribir scripts.",
+      "version": "v1.4.0-dev",
+      "description": "Aplicación de escritorio para Windows que automatiza clicks, teclado, movimiento del cursor, rutas y acciones basadas en detección visual desde una interfaz configurable, sin necesidad de escribir scripts.",
       "featured": true,
       "logo": {
-        "src": "./assets/autoinputr-logo.png",
-        "alt": "Logo de AutoInputR"
+        "src": "./assets/taskpilot-logo.png",
+        "alt": "Logo de TaskPilot"
       },
       "card": {
         "variant": "standard",
@@ -381,21 +380,21 @@
         {
           "id": "project",
           "label": "Ver proyecto",
-          "url": "./projects/autoinputr/",
+          "url": "./projects/taskpilot/",
           "style": "primary",
           "external": false
         },
         {
           "id": "download",
-          "label": "Descargar",
-          "url": "https://github.com/RobDev512/AutoInputR-Desktop/releases/download/v1.3.0/AutoInputR_Setup_v1.3.0.exe",
+          "label": "AutoInputR 1.3.0",
+          "url": "https://github.com/RobDev512/TaskPilot-Desktop/releases/download/v1.3.0/AutoInputR_Setup_v1.3.0.exe",
           "style": "secondary",
           "external": true
         },
         {
           "id": "repository",
           "label": "GitHub",
-          "url": "https://github.com/RobDev512/AutoInputR-Desktop",
+          "url": "https://github.com/RobDev512/TaskPilot-Desktop",
           "style": "secondary",
           "external": true
         }
@@ -403,10 +402,10 @@
       "updatedAt": "2026-10-19",
       "roadmapExport": {
         "type": "markdown",
-        "url": "./projects/autoinputr/ROADMAP.md",
-        "title": "AutoInputR",
+        "url": "./projects/taskpilot/ROADMAP.md",
+        "title": "TaskPilot",
         "subtitle": "Roadmap de automatización de escritorio",
-        "filename": "AutoInputR-Roadmap.pdf"
+        "filename": "TaskPilot-Roadmap.pdf"
       }
     }
   ]

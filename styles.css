@@ -5043,3 +5043,440 @@ footer { align-items: center; }
     width: 100%;
   }
 }
+
+/* =========================================================
+   PROJECT CARD IDENTITIES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   AWS ORBISHOT
+   Solar amber + orbital coral
+   --------------------------------------------------------- */
+
+.project-card[data-project-id="aws-orbishot"] {
+  --card-accent: 255, 184, 74;
+  --card-accent-secondary: 255, 86, 120;
+}
+
+
+/* ---------------------------------------------------------
+   LABNOTES
+   Azure + teal
+   --------------------------------------------------------- */
+
+.project-card[data-project-id="labnotes"] {
+  --card-accent: 105, 174, 252;
+  --card-accent-secondary: 45, 212, 191;
+}
+
+
+/* ---------------------------------------------------------
+   CONVERTIDOR DE ARCHIVOS
+   Violet + magenta
+   --------------------------------------------------------- */
+
+.project-card[data-project-id="convertidor-archivos"] {
+  --card-accent: 168, 85, 247;
+  --card-accent-secondary: 236, 72, 153;
+
+  --standard-accent:
+    var(--card-accent);
+
+  --standard-accent-secondary:
+    var(--card-accent-secondary);
+}
+
+
+/* ---------------------------------------------------------
+   TECNET FINDER
+   Network teal + lime
+   --------------------------------------------------------- */
+
+.project-card[data-project-id="tecnet-finder"] {
+  --card-accent: 20, 184, 166;
+  --card-accent-secondary: 132, 204, 22;
+
+  --standard-accent:
+    var(--card-accent);
+
+  --standard-accent-secondary:
+    var(--card-accent-secondary);
+}
+
+
+/* ---------------------------------------------------------
+   TASKPILOT
+   Ultramarine + aqua
+   --------------------------------------------------------- */
+
+.project-card[data-project-id="taskpilot"] {
+  --card-accent: 99, 125, 255;
+  --card-accent-secondary: 43, 217, 255;
+
+  --standard-accent:
+    var(--card-accent);
+
+  --standard-accent-secondary:
+    var(--card-accent-secondary);
+}
+
+
+/* =========================================================
+   TRATAMIENTO COMPARTIDO
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"],
+.project-card[data-project-id="labnotes"],
+.project-card[data-project-id="convertidor-archivos"],
+.project-card[data-project-id="tecnet-finder"],
+.project-card[data-project-id="taskpilot"] {
+  border-color:
+    rgba(
+      var(--card-accent),
+      .20
+    );
+
+  box-shadow:
+    0 20px 50px
+    rgba(
+      var(--card-accent),
+      .055
+    );
+
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease;
+}
+
+
+.project-card[data-project-id="aws-orbishot"]:hover,
+.project-card[data-project-id="labnotes"]:hover,
+.project-card[data-project-id="convertidor-archivos"]:hover,
+.project-card[data-project-id="tecnet-finder"]:hover,
+.project-card[data-project-id="taskpilot"]:hover {
+  border-color:
+    rgba(
+      var(--card-accent-secondary),
+      .38
+    );
+
+  box-shadow:
+    0 26px 62px
+    rgba(
+      var(--card-accent),
+      .11
+    );
+}
+
+
+/* Tipo / eyebrow */
+
+.project-card[data-project-id="aws-orbishot"]
+.project-type,
+
+.project-card[data-project-id="labnotes"]
+.project-type,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-type,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-type,
+
+.project-card[data-project-id="taskpilot"]
+.project-type {
+  color:
+    rgb(
+      var(--card-accent)
+    );
+}
+
+
+/* Versión */
+
+.project-card[data-project-id="aws-orbishot"]
+.project-version,
+
+.project-card[data-project-id="labnotes"]
+.project-version,
+
+.project-card[data-project-id="labnotes"]
+.labnotes-version,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-version,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-version,
+
+.project-card[data-project-id="taskpilot"]
+.project-version {
+  color:
+    rgb(
+      var(--card-accent-secondary)
+    );
+}
+
+
+/* =========================================================
+   PANELES VISUALES
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"]
+.featured-project-visual,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-visual,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-visual,
+
+.project-card[data-project-id="taskpilot"]
+.project-visual {
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(
+        var(--card-accent-secondary),
+        .11
+      ),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(
+        var(--card-accent),
+        .11
+      ),
+      transparent 58%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(
+        var(--card-accent),
+        .055
+      ),
+      rgba(
+        var(--card-accent-secondary),
+        .02
+      )
+    );
+}
+
+
+/* LabNotes conserva su composición especial */
+
+.project-card[data-project-id="labnotes"]
+.labnotes-logo-shell {
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        var(--card-accent),
+        .15
+      ),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(
+        var(--card-accent),
+        .08
+      ),
+      rgba(
+        var(--card-accent-secondary),
+        .035
+      )
+    );
+}
+
+
+/* =========================================================
+   LOGOS
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"]
+img,
+
+.project-card[data-project-id="labnotes"]
+.labnotes-logo,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-visual img,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-visual img,
+
+.project-card[data-project-id="taskpilot"]
+.project-visual img {
+  filter:
+    drop-shadow(
+      0 0 20px
+      rgba(
+        var(--card-accent-secondary),
+        .18
+      )
+    );
+}
+
+
+/* =========================================================
+   BOTONES PRIMARIOS
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"]
+.btn-primary,
+
+.project-card[data-project-id="convertidor-archivos"]
+.btn-primary,
+
+.project-card[data-project-id="tecnet-finder"]
+.btn-primary,
+
+.project-card[data-project-id="taskpilot"]
+.btn-primary,
+
+.project-card[data-project-id="labnotes"]
+.labnotes-button {
+  color: #ffffff;
+
+  border-color:
+    transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgb(
+        var(--card-accent)
+      ),
+      rgb(
+        var(--card-accent-secondary)
+      )
+    );
+
+  box-shadow:
+    0 10px 28px
+    rgba(
+      var(--card-accent),
+      .18
+    );
+}
+
+
+.project-card[data-project-id="aws-orbishot"]
+.btn-primary:hover,
+
+.project-card[data-project-id="convertidor-archivos"]
+.btn-primary:hover,
+
+.project-card[data-project-id="tecnet-finder"]
+.btn-primary:hover,
+
+.project-card[data-project-id="taskpilot"]
+.btn-primary:hover,
+
+.project-card[data-project-id="labnotes"]
+.labnotes-button:hover {
+  box-shadow:
+    0 15px 38px
+    rgba(
+      var(--card-accent-secondary),
+      .25
+    );
+
+  filter:
+    brightness(1.08)
+    saturate(1.08);
+}
+
+
+/* =========================================================
+   BOTONES SECUNDARIOS
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"]
+.btn-secondary:hover,
+
+.project-card[data-project-id="labnotes"]
+.btn-secondary:hover,
+
+.project-card[data-project-id="convertidor-archivos"]
+.btn-secondary:hover,
+
+.project-card[data-project-id="tecnet-finder"]
+.btn-secondary:hover,
+
+.project-card[data-project-id="taskpilot"]
+.btn-secondary:hover {
+  border-color:
+    rgba(
+      var(--card-accent-secondary),
+      .50
+    );
+
+  box-shadow:
+    0 8px 24px
+    rgba(
+      var(--card-accent),
+      .08
+    );
+}
+
+
+/* =========================================================
+   FAVORITOS
+   ========================================================= */
+
+.project-card[data-project-id="aws-orbishot"]
+.project-favorite-button:hover,
+
+.project-card[data-project-id="aws-orbishot"]
+.project-favorite-button.is-favorite,
+
+.project-card[data-project-id="labnotes"]
+.project-favorite-button:hover,
+
+.project-card[data-project-id="labnotes"]
+.project-favorite-button.is-favorite,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-favorite-button:hover,
+
+.project-card[data-project-id="convertidor-archivos"]
+.project-favorite-button.is-favorite,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-favorite-button:hover,
+
+.project-card[data-project-id="tecnet-finder"]
+.project-favorite-button.is-favorite,
+
+.project-card[data-project-id="taskpilot"]
+.project-favorite-button:hover,
+
+.project-card[data-project-id="taskpilot"]
+.project-favorite-button.is-favorite {
+  color:
+    rgb(
+      var(--card-accent-secondary)
+    );
+
+  border-color:
+    rgba(
+      var(--card-accent-secondary),
+      .48
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(
+      var(--card-accent),
+      .10
+    );
+}
+
+/* =========================================================
+   END PROJECT CARD IDENTITIES
+   ========================================================= */
