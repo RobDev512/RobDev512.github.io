@@ -272,13 +272,6 @@
 }
 
 
-.project-card[data-project-id="aws-orbishot"]:hover
-.project-orbit.orbit-b {
-  animation-delay:
-    -1.4s;
-}
-
-
 @media (prefers-reduced-motion: reduce) {
   .project-card[data-project-id="aws-orbishot"]:hover
   .project-orbit {
