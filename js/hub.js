@@ -1002,6 +1002,7 @@ function renderFeaturedCard(project) {
   const logo = createElement("img");
   logo.src = project.logo.src;
   logo.alt = project.logo.alt;
+  logo.decoding = "async";
   art.append(logo);
 
   const copy = createElement("div", "project-copy");
@@ -1040,6 +1041,8 @@ function renderLabNotesCard(project) {
   const logo = createElement("img", "labnotes-logo");
   logo.src = project.logo.src;
   logo.alt = project.logo.alt;
+  logo.loading = "lazy";
+  logo.decoding = "async";
   logoShell.append(logo);
 
   article.append(
@@ -1115,6 +1118,8 @@ function renderStandardCard(project) {
 
     identity.src = project.logo.src;
     identity.alt = project.logo.alt || project.name;
+    identity.loading = "lazy";
+    identity.decoding = "async";
   }
   else {
     identity = createElement(
@@ -2833,6 +2838,23 @@ window.addEventListener(
    ========================================================= */
 
 function enablePointerGlow(root = document) {
+  const finePointer =
+    window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+  const reduceMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  if (
+    !finePointer ||
+    reduceMotion
+  ) {
+    return;
+  }
+
   const targets =
     root.querySelectorAll(
       ".project-card, .catalog-controls, .hub-roadmap-card, .hub-roadmap-detail"
@@ -2849,40 +2871,85 @@ function enablePointerGlow(root = document) {
     target.dataset.pointerGlowReady =
       "true";
 
+    let rect = null;
+    let frame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    const update = () => {
+      frame = 0;
+
+      if (!rect) {
+        return;
+      }
+
+      target.style.setProperty(
+        "--pointer-x",
+        `${pointerX - rect.left}px`
+      );
+
+      target.style.setProperty(
+        "--pointer-y",
+        `${pointerY - rect.top}px`
+      );
+
+      target.classList.add(
+        "pointer-active"
+      );
+    };
+
+    target.addEventListener(
+      "pointerenter",
+      () => {
+        rect =
+          target.getBoundingClientRect();
+      },
+      {
+        passive: true
+      }
+    );
+
     target.addEventListener(
       "pointermove",
       (event) => {
-        const rect =
-          target.getBoundingClientRect();
+        pointerX = event.clientX;
+        pointerY = event.clientY;
 
-        const x =
-          event.clientX - rect.left;
+        if (!rect) {
+          rect =
+            target.getBoundingClientRect();
+        }
 
-        const y =
-          event.clientY - rect.top;
+        if (frame) {
+          return;
+        }
 
-        target.style.setProperty(
-          "--pointer-x",
-          `${x}px`
-        );
-
-        target.style.setProperty(
-          "--pointer-y",
-          `${y}px`
-        );
-
-        target.classList.add(
-          "pointer-active"
-        );
+        frame =
+          requestAnimationFrame(
+            update
+          );
+      },
+      {
+        passive: true
       }
     );
 
     target.addEventListener(
       "pointerleave",
       () => {
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+
+        rect = null;
+
         target.classList.remove(
           "pointer-active"
         );
+      },
+      {
+        passive: true
       }
     );
   }
@@ -2993,7 +3060,11 @@ function installHubScrollProgress() {
     bar
   );
 
+  let frame = 0;
+
   const update = () => {
+    frame = 0;
+
     const maxScroll =
       document.documentElement.scrollHeight -
       window.innerHeight;
@@ -3014,11 +3085,22 @@ function installHubScrollProgress() {
       `scaleX(${ratio})`;
   };
 
-  update();
+  const scheduleUpdate = () => {
+    if (frame) {
+      return;
+    }
+
+    frame =
+      requestAnimationFrame(
+        update
+      );
+  };
+
+  scheduleUpdate();
 
   window.addEventListener(
     "scroll",
-    update,
+    scheduleUpdate,
     {
       passive: true
     }
@@ -3026,7 +3108,10 @@ function installHubScrollProgress() {
 
   window.addEventListener(
     "resize",
-    update
+    scheduleUpdate,
+    {
+      passive: true
+    }
   );
 }
 
@@ -3039,8 +3124,25 @@ function installHubRippleFeedback() {
     return;
   }
 
+  const finePointer =
+    window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+
+  const reduceMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
   document.body.dataset.hubRippleReady =
     "true";
+
+  if (
+    !finePointer ||
+    reduceMotion
+  ) {
+    return;
+  }
 
   document.addEventListener(
     "pointerdown",

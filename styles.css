@@ -2396,7 +2396,9 @@ footer {
 .project-card:hover
 .project-art::before,
 .project-card-labnotes:hover
-.labnotes-logo-shell::before {
+.labnotes-logo-shell::before,
+.project-card-labnotes:hover
+.labnotes-logo-shell::after {
   animation:
     softOrbitPulse
     2.8s ease-in-out
@@ -2419,7 +2421,9 @@ footer {
   .project-card:hover
   .project-art::before,
   .project-card-labnotes:hover
-  .labnotes-logo-shell::before {
+  .labnotes-logo-shell::before,
+  .project-card-labnotes:hover
+  .labnotes-logo-shell::after {
     animation: none;
   }
 
@@ -2461,9 +2465,6 @@ body::after {
 
   filter:
     blur(80px);
-
-  will-change:
-    transform;
 }
 
 
@@ -5480,3 +5481,17 @@ img,
 /* =========================================================
    END PROJECT CARD IDENTITIES
    ========================================================= */
+/* =========================================================
+   PRE-PHASE 8 · PERFORMANCE GUARD
+   ========================================================= */
+
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+
+  body::before,
+  body::after {
+    display: none;
+    animation: none !important;
+    filter: none;
+  }
+
+}
