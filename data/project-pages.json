@@ -216,6 +216,103 @@
       }
     },
     {
+      "id": "labnotes",
+      "theme": "theme-labnotes",
+      "title": "LabNotes",
+      "documentTitle": "LabNotes · RobDev512",
+      "metaDescription": "Presentación pública de LabNotes, plataforma colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo.",
+      "eyebrow": "Aplicación web · Knowledge Base",
+      "logo": {
+        "src": "./assets/labnotes-logo.png",
+        "alt": "Logo de LabNotes"
+      },
+      "hero": {
+        "titleLines": [
+          "Lab",
+          "Notes"
+        ],
+        "description": "Plataforma web colaborativa para documentar problemas, soluciones y conocimiento técnico de laboratorios de cómputo, con una evolución desde una base compartida hacia soporte institucional.",
+        "actions": [
+          {
+            "label": "Abrir LabNotes",
+            "url": "https://labnotes-robert-c5dhcdcfgsfpe7ec.canadacentral-01.azurewebsites.net/",
+            "style": "primary",
+            "external": true
+          },
+          {
+            "label": "Ver roadmap",
+            "url": "#roadmap-explorer",
+            "style": "secondary",
+            "external": false
+          }
+        ],
+        "meta": [
+          {
+            "strong": "v1.0.0",
+            "small": "Foundation · estable"
+          },
+          {
+            "strong": "v1.1.0-alpha.1",
+            "small": "Night Shift · en desarrollo"
+          },
+          {
+            "strong": "Azure",
+            "small": "App Service · producción"
+          }
+        ]
+      },
+      "features": [
+        {
+          "title": "Documentar",
+          "text": "Problemas, soluciones, imágenes, categorías, laboratorios y etiquetas en una base de conocimiento compartida."
+        },
+        {
+          "title": "Colaborar",
+          "text": "Comentarios, votos y evolución hacia soluciones comunitarias validadas."
+        },
+        {
+          "title": "Organizar",
+          "text": "Búsqueda, filtros, perfiles, favoritos y estados para reutilizar conocimiento técnico."
+        },
+        {
+          "title": "Escalar",
+          "text": "Azure, SQL Server y una ruta hacia equipos, QR, PWA y soporte institucional."
+        }
+      ],
+      "release": {
+        "kicker": "Release en desarrollo",
+        "version": "v1.1.0-alpha.1",
+        "summary": "Night Shift es el primer gran upgrade funcional posterior a Foundation y concentra mejoras de apariencia, participación y organización.",
+        "status": "En desarrollo",
+        "title": "Night Shift",
+        "items": [
+          "Sistema de temas y apariencia de Night Shift.",
+          "Tema oscuro y persistencia de preferencias visuales.",
+          "Sistema de votos Útil / No útil.",
+          "Backend, frontend, estilos y migración SQL del sistema de votos.",
+          "Correcciones responsive para móvil."
+        ]
+      },
+      "roadmap": {
+        "kicker": "Roadmap dinámico",
+        "title": "De Foundation a Insight",
+        "description": "El roadmap público resume la evolución planeada de LabNotes y refleja el progreso real de Night Shift directamente desde ROADMAP.md."
+      },
+      "nextRelease": {
+        "kicker": "Después de Night Shift",
+        "title": "v1.2.0 · Resolve",
+        "text": "La siguiente etapa planeada convierte comentarios en respuestas técnicas con validación, solución aceptada, votos, notificaciones y moderación."
+      },
+      "footer": {
+        "left": "LabNotes · Proyecto personal en evolución",
+        "right": {
+          "label": "Abrir aplicación",
+          "url": "https://labnotes-robert-c5dhcdcfgsfpe7ec.canadacentral-01.azurewebsites.net/",
+          "external": true
+        }
+      }
+    },
+    {
       "id": "taskpilot",
       "theme": "theme-taskpilot",
       "title": "TaskPilot",
