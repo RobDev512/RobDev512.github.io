@@ -407,6 +407,71 @@
         "subtitle": "Roadmap de automatización de escritorio",
         "filename": "TaskPilot-Roadmap.pdf"
       }
+    },
+    {
+      "id": "keymint",
+      "displayOrder": 60,
+      "name": "KeyMint",
+      "category": "desktop",
+      "subtype": "Generador seguro de contraseñas",
+      "technologies": [
+        "Python",
+        "Tkinter",
+        "Pillow",
+        "secrets",
+        "Windows"
+      ],
+      "status": "development",
+      "statusDetail": "En desarrollo · v1.1.0 en preparación",
+      "visibility": "public",
+      "version": "v1.1.0-dev",
+      "description": "Generador de contraseñas para Windows centrado en seguridad y privacidad local, con generación basada en secrets, temas claro/oscuro y una renovación completa de identidad e interfaz bajo el nombre KeyMint.",
+      "featured": false,
+      "logo": {
+        "src": "./assets/keymint-logo-transparent.png",
+        "alt": "Logo de KeyMint"
+      },
+      "card": {
+        "variant": "standard",
+        "eyebrow": "Escritorio · Seguridad local",
+        "badges": [
+          "Python",
+          "Tkinter",
+          "Windows 64-bit"
+        ]
+      },
+      "links": [
+        {
+          "id": "project",
+          "label": "Ver proyecto",
+          "url": "./projects/keymint/",
+          "style": "primary",
+          "external": false
+        },
+        {
+          "id": "repository",
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/KeyMint",
+          "style": "secondary",
+          "external": true
+        },
+        {
+          "id": "release",
+          "label": "PasswGen 1.0.0",
+          "url": "https://github.com/RobDev512/KeyMint/releases/tag/v1.0.0",
+          "style": "secondary",
+          "external": true
+        }
+      ],
+      "updatedAt": "2026-11-01",
+      "roadmapExport": {
+        "type": "markdown",
+        "url": "./projects/keymint/ROADMAP.md",
+        "title": "KeyMint",
+        "subtitle": "Roadmap del generador seguro de contraseñas",
+        "filename": "KeyMint-Roadmap.pdf"
+      }
     }
   ]
 }
+

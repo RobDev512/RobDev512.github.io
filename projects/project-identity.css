@@ -157,3 +157,93 @@ body[data-project-id="labnotes"] .roadmap-filter:hover,
 body[data-project-id="labnotes"] .roadmap-filter.active {
   border-color: rgba(var(--identity-secondary-rgb), .42);
 }
+
+/* =========================================================
+   KEYMINT IDENTITY
+   Mint + deep navy / green.
+   ========================================================= */
+
+body[data-project-id="keymint"] {
+  --bg: #071512;
+  --panel: #0c211c;
+  --panel-2: #103028;
+  --line: rgba(53, 214, 174, .15);
+  --text: #f3fffb;
+  --muted: #9bc8bc;
+  --accent: #35d6ae;
+  --accent-soft: #7ef0d1;
+  --accent-rgb: 53, 214, 174;
+  --identity-secondary: #1fa184;
+  --identity-secondary-rgb: 31, 161, 132;
+  --cyan: #7ef0d1;
+  --green: #35d6ae;
+
+  background:
+    radial-gradient(circle at 78% 4%, rgba(53, 214, 174, .16), transparent 28rem),
+    radial-gradient(circle at 12% 34%, rgba(31, 161, 132, .09), transparent 25rem),
+    linear-gradient(155deg, #081914 0%, #071512 50%, #0b201a 100%);
+}
+
+body[data-project-id="keymint"] .eyebrow,
+body[data-project-id="keymint"] .section-kicker {
+  color: var(--accent-soft);
+}
+
+body[data-project-id="keymint"] .hero-title-accent {
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-soft) 52%,
+    var(--identity-secondary) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body[data-project-id="keymint"] .btn-primary {
+  color: #071512;
+  background: linear-gradient(135deg, #35d6ae 0%, #7ef0d1 52%, #1fa184 100%);
+  box-shadow: 0 12px 30px rgba(53, 214, 174, .23);
+}
+
+body[data-project-id="keymint"] .btn-primary:hover {
+  box-shadow: 0 16px 38px rgba(31, 161, 132, .28);
+  filter: brightness(1.07) saturate(1.08);
+}
+
+body[data-project-id="keymint"] .btn-secondary:hover {
+  border-color: rgba(126, 240, 209, .56);
+}
+
+body[data-project-id="keymint"] .brand-dot {
+  background: linear-gradient(135deg, #35d6ae, #7ef0d1);
+  box-shadow: 0 0 20px rgba(53, 214, 174, .48);
+}
+
+body[data-project-id="keymint"] .hero-logo-wrap {
+  background:
+    radial-gradient(circle at 50% 38%, rgba(126, 240, 209, .10), transparent 54%),
+    radial-gradient(circle at 50% 48%, rgba(53, 214, 174, .12), transparent 68%),
+    rgba(7, 21, 18, .82);
+  border-color: rgba(53, 214, 174, .26);
+  box-shadow:
+    0 0 78px rgba(53, 214, 174, .10),
+    inset 0 0 50px rgba(255, 255, 255, .025);
+}
+
+body[data-project-id="keymint"] .orbit-b {
+  border-color: rgba(126, 240, 209, .17);
+}
+
+body[data-project-id="keymint"] .satellite-b {
+  background: #7ef0d1;
+  box-shadow: 0 0 18px rgba(126, 240, 209, .68);
+}
+
+body[data-project-id="keymint"] .roadmap-filter:hover,
+body[data-project-id="keymint"] .roadmap-filter.active {
+  border-color: rgba(126, 240, 209, .44);
+}
+

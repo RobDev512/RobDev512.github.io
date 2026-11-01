@@ -422,6 +422,117 @@
           "external": true
         }
       }
+    },
+    {
+      "id": "keymint",
+      "theme": "theme-desktop",
+      "title": "KeyMint",
+      "documentTitle": "KeyMint · RobDev512",
+      "metaDescription": "KeyMint, generador seguro de contraseñas local para Windows desarrollado por RobDev512.",
+      "eyebrow": "Aplicación de escritorio · Seguridad y privacidad",
+      "logo": {
+        "src": "../../assets/keymint-logo-horizontal.png",
+        "alt": "Logo de KeyMint"
+      },
+      "repository": {
+        "label": "GitHub",
+        "url": "https://github.com/RobDev512/KeyMint",
+        "external": true
+      },
+      "hero": {
+        "titleLines": [
+          "Key",
+          "Mint"
+        ],
+        "description": "Generación segura de contraseñas ejecutada completamente en tu equipo. KeyMint evoluciona desde PasswGen hacia una experiencia más clara, moderna y coherente con una identidad centrada en privacidad y seguridad local.",
+        "actions": [
+          {
+            "label": "Ver en GitHub",
+            "url": "https://github.com/RobDev512/KeyMint",
+            "style": "primary",
+            "external": true
+          },
+          {
+            "label": "Ver roadmap",
+            "url": "#roadmap-explorer",
+            "style": "secondary",
+            "external": false
+          }
+        ],
+        "meta": [
+          {
+            "strong": "v1.1.0-dev",
+            "small": "KeyMint · en desarrollo"
+          },
+          {
+            "strong": "Windows 64-bit",
+            "small": "Aplicación de escritorio"
+          },
+          {
+            "strong": "100% local",
+            "small": "Python · secrets"
+          }
+        ],
+        "titleLogo": {
+          "src": "../../assets/keymint-icon.png",
+          "alt": "Icono de KeyMint"
+        }
+      },
+      "features": [
+        {
+          "title": "Generación segura",
+          "text": "Selección aleatoria basada en secrets para generar contraseñas localmente con una fuente apropiada para este tipo de uso."
+        },
+        {
+          "title": "Privacidad local",
+          "text": "Las contraseñas se generan en el equipo y no necesitan enviarse a servicios externos."
+        },
+        {
+          "title": "Control",
+          "text": "Longitud configurable y una evolución planificada hacia categorías, exclusiones, complejidad y políticas de generación."
+        },
+        {
+          "title": "Experiencia",
+          "text": "Tema claro/oscuro, identidad KeyMint y una renovación visual completa en desarrollo para la versión 1.1.0."
+        }
+      ],
+      "release": {
+        "kicker": "Última release pública",
+        "version": "PasswGen v1.0.0",
+        "summary": "La última release pública pertenece a la etapa histórica PasswGen. KeyMint conserva ese historial y continúa su evolución como la nueva identidad del proyecto.",
+        "status": "Histórica · estable",
+        "title": "Base estable",
+        "items": [
+          "Generación local de contraseñas.",
+          "Selección aleatoria mediante secrets.",
+          "Longitud configurable.",
+          "Temas claro y oscuro.",
+          "Ejecutable e instalador para Windows de 64 bits."
+        ],
+        "link": {
+          "label": "Ver release histórica en GitHub →",
+          "url": "https://github.com/RobDev512/KeyMint/releases/tag/v1.0.0",
+          "external": true
+        }
+      },
+      "roadmap": {
+        "kicker": "Roadmap dinámico",
+        "title": "De PasswGen a KeyMint",
+        "description": "El roadmap refleja la transición de identidad, estructura y experiencia visual, seguida por nuevas capacidades de generación, productividad y portabilidad."
+      },
+      "nextRelease": {
+        "kicker": "Siguiente versión",
+        "title": "v1.1.0 · Transición a KeyMint",
+        "text": "La primera versión bajo la identidad KeyMint consolida el nuevo branding, la reorganización del proyecto, el empaquetado actualizado y una renovación profunda de la interfaz de escritorio."
+      },
+      "footer": {
+        "left": "KeyMint · Anteriormente PasswGen · Seguridad y privacidad local",
+        "right": {
+          "label": "GitHub",
+          "url": "https://github.com/RobDev512/KeyMint",
+          "external": true
+        }
+      }
     }
   ]
 }

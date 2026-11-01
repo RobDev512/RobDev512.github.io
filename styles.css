@@ -5495,3 +5495,26 @@ img,
   }
 
 }
+
+/* =========================================================
+   KEYMINT HUB CARD
+   ========================================================= */
+
+.project-card-standard[data-project-id="keymint"] {
+  --standard-accent: 53, 214, 174;
+  --standard-accent-secondary: 126, 240, 209;
+}
+
+.project-card[data-project-id="keymint"] .btn-primary {
+  color: #071512;
+  background: linear-gradient(135deg, #35d6ae 0%, #7ef0d1 58%, #1fa184 100%);
+}
+
+.project-card[data-project-id="keymint"] .project-type {
+  color: #7ef0d1;
+}
+
+.project-card[data-project-id="keymint"] .project-version {
+  color: #35d6ae;
+}
+
