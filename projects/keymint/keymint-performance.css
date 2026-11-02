@@ -1,7 +1,7 @@
 /* =========================================================
-   KEYMINT · PERFORMANCE LITE
-   Mantiene la identidad visual, pero evita trabajo continuo
-   de composición/repaint en esta página específica.
+   KEYMINT · PERFORMANCE BALANCED
+   Conserva el movimiento característico del portal, pero evita
+   trabajo continuo innecesario durante el scroll.
    ========================================================= */
 
 /* Corrige la alineación vertical del botón Mostrar/Ocultar. */
@@ -13,6 +13,9 @@
    La página ya existe completa en el DOM. Para KeyMint no
    ocultamos bloques hasta que entren al viewport: aparecen
    completos desde el primer render.
+
+   Esto elimina la sensación de que la página "va cargando"
+   conforme se hace scroll, sin tocar las animaciones del hero.
 */
 body[data-project-id="keymint"] .reveal-ready,
 body[data-project-id="keymint"] .reveal-visible {
@@ -21,29 +24,22 @@ body[data-project-id="keymint"] .reveal-visible {
   transition: none !important;
 }
 
-/* Detiene animaciones ambientales permanentes del hero. */
-body[data-project-id="keymint"] .hero-visual::before,
-body[data-project-id="keymint"] .hero-logo-wrap,
-body[data-project-id="keymint"] .orbit,
-body[data-project-id="keymint"] .satellite {
-  animation: none !important;
-}
+/*
+   El hero conserva su comportamiento original:
+   - pulso ambiental;
+   - flotación del logo;
+   - respiración de órbitas;
+   - pulsos de satélites;
+   - parallax al mover el puntero.
 
-/* Ignora visualmente el parallax aunque el portal comparta JS. */
-body[data-project-id="keymint"] .hero-logo-wrap img {
-  transform: none !important;
-}
-
-body[data-project-id="keymint"] .orbit,
-body[data-project-id="keymint"] .satellite {
-  translate: none !important;
-  transition: none !important;
-}
+   No se sobrescriben animation, transform ni translate aquí.
+*/
 
 /*
-   El brillo que sigue al puntero obliga a repintar tarjetas
-   continuamente. En KeyMint se desactiva; los hovers simples
-   de botones se conservan.
+   El brillo radial que sigue continuamente al puntero obliga a
+   repintar tarjetas grandes en cada movimiento. Se desactiva en
+   KeyMint porque aporta menos que el parallax del hero y era uno
+   de los efectos con más posibilidades de producir tirones.
 */
 body[data-project-id="keymint"] .feature-strip article::before,
 body[data-project-id="keymint"] .release-card::before,
@@ -51,14 +47,9 @@ body[data-project-id="keymint"] .next-release::before {
   display: none !important;
 }
 
-/* Evita que el hover de tarjetas desplace bloques grandes. */
-body[data-project-id="keymint"] .feature-strip article:hover {
-  transform: none;
-}
-
 /*
-   Aísla el showcase para que sus repaints no obliguen al resto
-   de la página a recomponerse.
+   Aísla el showcase para que sus repaints internos —slideshow y
+   demo— no obliguen al resto de la página a recomponerse.
 */
 .keymint-showcase,
 .km-showcase-card,
@@ -66,11 +57,10 @@ body[data-project-id="keymint"] .feature-strip article:hover {
   contain: layout paint;
 }
 
-/* No reservamos capas de composición permanentes. */
-body[data-project-id="keymint"] .hero-visual,
-body[data-project-id="keymint"] .hero-logo-wrap,
-body[data-project-id="keymint"] .orbit,
-body[data-project-id="keymint"] .satellite,
+/*
+   No reservamos capas de composición permanentes para el
+   showcase. El hero usa las reglas originales del portal.
+*/
 .keymint-showcase,
 .km-slide {
   will-change: auto;
