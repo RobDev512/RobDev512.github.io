@@ -1,0 +1,87 @@
+/* =========================================================
+   KEYMINT · PERFORMANCE LITE
+   Mantiene la identidad visual, pero evita trabajo continuo
+   de composición/repaint en esta página específica.
+   ========================================================= */
+
+/* Corrige la alineación vertical del botón Mostrar/Ocultar. */
+.km-demo-eye {
+  transform: translateY(-50%);
+}
+
+/*
+   La página ya existe completa en el DOM. Para KeyMint no
+   ocultamos bloques hasta que entren al viewport: aparecen
+   completos desde el primer render.
+*/
+body[data-project-id="keymint"] .reveal-ready,
+body[data-project-id="keymint"] .reveal-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Detiene animaciones ambientales permanentes del hero. */
+body[data-project-id="keymint"] .hero-visual::before,
+body[data-project-id="keymint"] .hero-logo-wrap,
+body[data-project-id="keymint"] .orbit,
+body[data-project-id="keymint"] .satellite {
+  animation: none !important;
+}
+
+/* Ignora visualmente el parallax aunque el portal comparta JS. */
+body[data-project-id="keymint"] .hero-logo-wrap img {
+  transform: none !important;
+}
+
+body[data-project-id="keymint"] .orbit,
+body[data-project-id="keymint"] .satellite {
+  translate: none !important;
+  transition: none !important;
+}
+
+/*
+   El brillo que sigue al puntero obliga a repintar tarjetas
+   continuamente. En KeyMint se desactiva; los hovers simples
+   de botones se conservan.
+*/
+body[data-project-id="keymint"] .feature-strip article::before,
+body[data-project-id="keymint"] .release-card::before,
+body[data-project-id="keymint"] .next-release::before {
+  display: none !important;
+}
+
+/* Evita que el hover de tarjetas desplace bloques grandes. */
+body[data-project-id="keymint"] .feature-strip article:hover {
+  transform: none;
+}
+
+/*
+   Aísla el showcase para que sus repaints no obliguen al resto
+   de la página a recomponerse.
+*/
+.keymint-showcase,
+.km-showcase-card,
+.km-slider-stage {
+  contain: layout paint;
+}
+
+/* No reservamos capas de composición permanentes. */
+body[data-project-id="keymint"] .hero-visual,
+body[data-project-id="keymint"] .hero-logo-wrap,
+body[data-project-id="keymint"] .orbit,
+body[data-project-id="keymint"] .satellite,
+.keymint-showcase,
+.km-slide {
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-slide,
+  .km-demo-button,
+  .km-demo-eye,
+  .km-slide-arrow,
+  .km-slide-dot {
+    transition: none !important;
+  }
+}
