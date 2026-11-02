@@ -5378,6 +5378,9 @@ img,
 .project-card[data-project-id="taskpilot"]
 .btn-primary:hover,
 
+.project-card[data-project-id="keymint"]
+.btn-primary:hover,
+
 .project-card[data-project-id="labnotes"]
 .labnotes-button:hover {
   box-shadow:
@@ -5410,6 +5413,9 @@ img,
 .btn-secondary:hover,
 
 .project-card[data-project-id="taskpilot"]
+.btn-secondary:hover,
+
+.project-card[data-project-id="keymint"]
 .btn-secondary:hover {
   border-color:
     rgba(
@@ -5501,13 +5507,26 @@ img,
    ========================================================= */
 
 .project-card-standard[data-project-id="keymint"] {
-  --standard-accent: 53, 214, 174;
-  --standard-accent-secondary: 126, 240, 209;
+  --card-accent: 53, 214, 174;
+  --card-accent-secondary: 126, 240, 209;
+
+  --standard-accent:
+    var(--card-accent);
+
+  --standard-accent-secondary:
+    var(--card-accent-secondary);
 }
 
 .project-card[data-project-id="keymint"] .btn-primary {
   color: #071512;
-  background: linear-gradient(135deg, #35d6ae 0%, #7ef0d1 58%, #1fa184 100%);
+
+  background:
+    linear-gradient(
+      135deg,
+      #35d6ae 0%,
+      #7ef0d1 58%,
+      #1fa184 100%
+    );
 }
 
 .project-card[data-project-id="keymint"] .project-type {
