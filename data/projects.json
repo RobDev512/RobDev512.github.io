@@ -421,11 +421,11 @@
         "secrets",
         "Windows"
       ],
-      "status": "development",
-      "statusDetail": "En desarrollo · v1.1.0 en preparación",
+      "status": "stable",
+      "statusDetail": "Estable · v1.1.0 publicada",
       "visibility": "public",
-      "version": "v1.1.0-dev",
-      "description": "Generador de contraseñas para Windows centrado en seguridad y privacidad local, con generación basada en secrets, temas claro/oscuro y una renovación completa de identidad e interfaz bajo el nombre KeyMint.",
+      "version": "v1.1.0",
+      "description": "Generador seguro de contraseñas para Windows centrado en privacidad local, con generación basada en secrets, interfaz KeyMint renovada, temas claro/oscuro y controles optimizados para escritorio.",
       "featured": false,
       "logo": {
         "src": "./assets/keymint-logo-transparent.png",
@@ -457,8 +457,8 @@
         },
         {
           "id": "release",
-          "label": "PasswGen 1.0.0",
-          "url": "https://github.com/RobDev512/KeyMint/releases/tag/v1.0.0",
+          "label": "Descargar 1.1.0",
+          "url": "https://github.com/RobDev512/KeyMint/releases/download/v1.1.0/KeyMint_Setup_v1.1.0.exe",
           "style": "secondary",
           "external": true
         }
@@ -474,4 +474,3 @@
     }
   ]
 }
-

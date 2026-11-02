@@ -444,11 +444,11 @@
           "Key",
           "Mint"
         ],
-        "description": "Generación segura de contraseñas ejecutada completamente en tu equipo. KeyMint evoluciona desde PasswGen hacia una experiencia más clara, moderna y coherente con una identidad centrada en privacidad y seguridad local.",
+        "description": "Generación segura de contraseñas ejecutada completamente en tu equipo. KeyMint consolida la transición desde PasswGen con una nueva identidad, interfaz renovada y una experiencia de escritorio centrada en privacidad y seguridad local.",
         "actions": [
           {
-            "label": "Ver en GitHub",
-            "url": "https://github.com/RobDev512/KeyMint",
+            "label": "Descargar 1.1.0",
+            "url": "https://github.com/RobDev512/KeyMint/releases/download/v1.1.0/KeyMint_Setup_v1.1.0.exe",
             "style": "primary",
             "external": true
           },
@@ -461,8 +461,8 @@
         ],
         "meta": [
           {
-            "strong": "v1.1.0-dev",
-            "small": "KeyMint · en desarrollo"
+            "strong": "v1.1.0",
+            "small": "KeyMint · estable"
           },
           {
             "strong": "Windows 64-bit",
@@ -493,43 +493,43 @@
         },
         {
           "title": "Experiencia",
-          "text": "Tema claro/oscuro, identidad KeyMint y una renovación visual completa en desarrollo para la versión 1.1.0."
+          "text": "Interfaz KeyMint completamente renovada, temas claro/oscuro, barra de título propia, iconografía consistente, controles por teclado y desplazamiento horizontal para contraseñas largas."
         }
       ],
       "release": {
-        "kicker": "Última release pública",
-        "version": "PasswGen v1.0.0",
-        "summary": "La última release pública pertenece a la etapa histórica PasswGen. KeyMint conserva ese historial y continúa su evolución como la nueva identidad del proyecto.",
-        "status": "Histórica · estable",
-        "title": "Base estable",
+        "kicker": "Release actual",
+        "version": "KeyMint v1.1.0",
+        "summary": "Primera release pública bajo la identidad KeyMint. Consolida el nuevo branding, la renovación completa de la interfaz de escritorio, el nuevo empaquetado y una base visual coherente para las siguientes etapas del proyecto.",
+        "status": "Estable",
+        "title": "Transición a KeyMint",
         "items": [
-          "Generación local de contraseñas.",
-          "Selección aleatoria mediante secrets.",
-          "Longitud configurable.",
-          "Temas claro y oscuro.",
-          "Ejecutable e instalador para Windows de 64 bits."
+          "Nueva identidad visual KeyMint.",
+          "Interfaz de escritorio completamente rediseñada.",
+          "Ventana personalizada con esquinas y borde nativos mediante Windows DWM.",
+          "Temas claro y oscuro e iconografía renovada.",
+          "Longitud de 4 a 64 caracteres, controles de teclado y desplazamiento horizontal para contraseñas largas."
         ],
         "link": {
-          "label": "Ver release histórica en GitHub →",
-          "url": "https://github.com/RobDev512/KeyMint/releases/tag/v1.0.0",
+          "label": "Ver release v1.1.0 en GitHub →",
+          "url": "https://github.com/RobDev512/KeyMint/releases/tag/v1.1.0",
           "external": true
         }
       },
       "roadmap": {
         "kicker": "Roadmap dinámico",
-        "title": "De PasswGen a KeyMint",
-        "description": "El roadmap refleja la transición de identidad, estructura y experiencia visual, seguida por nuevas capacidades de generación, productividad y portabilidad."
+        "title": "De generador a una plataforma de seguridad local",
+        "description": "El roadmap continúa después de la transición a KeyMint con mayor control de generación, mejoras de experiencia, herramientas de productividad, portabilidad y una visión futura de vault cifrado."
       },
       "nextRelease": {
         "kicker": "Siguiente versión",
-        "title": "v1.1.0 · Transición a KeyMint",
-        "text": "La primera versión bajo la identidad KeyMint consolida el nuevo branding, la reorganización del proyecto, el empaquetado actualizado y una renovación profunda de la interfaz de escritorio."
+        "title": "v1.2.0 · Control de generación",
+        "text": "La siguiente etapa ampliará el control sobre las contraseñas: categorías configurables, garantía de caracteres habilitados, exclusión de caracteres ambiguos, indicador de complejidad, estimación de entropía y generación múltiple."
       },
       "footer": {
-        "left": "KeyMint · Anteriormente PasswGen · Seguridad y privacidad local",
+        "left": "KeyMint · v1.1.0 estable · Seguridad y privacidad local",
         "right": {
-          "label": "GitHub",
-          "url": "https://github.com/RobDev512/KeyMint",
+          "label": "Descargar 1.1.0",
+          "url": "https://github.com/RobDev512/KeyMint/releases/download/v1.1.0/KeyMint_Setup_v1.1.0.exe",
           "external": true
         }
       }
