@@ -1181,6 +1181,7 @@ function loadRoadmapModule() {
     );
 
   script.src =
+    document.body.dataset.roadmapScript ||
     "../project-roadmap.js";
 
   script.defer =
