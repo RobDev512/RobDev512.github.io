@@ -294,9 +294,9 @@
         "IPv4"
       ],
       "status": "development",
-      "statusDetail": "v1.2.1 cerrada funcionalmente; roadmap activo",
+      "statusDetail": "v1.3.0 publicada y validada; desarrollo de futuras versiones en el roadmap",
       "visibility": "private",
-      "description": "Lenguaje específico de dominio orientado al análisis y planificación de redes mediante VLSM, con análisis léxico, sintáctico y semántico, diagnósticos y herramientas de apoyo.",
+      "description": "Lenguaje específico de dominio para redes IPv4 y VLSM con análisis léxico, sintáctico y semántico, y código intermedio mediante generación, ejecución y comprobación de triplos.",
       "featured": false,
       "card": {
         "variant": "standard",
@@ -304,7 +304,7 @@
         "badges": [
           "Python",
           "PySide6",
-          "v1.2.1"
+          "v1.3.0"
         ]
       },
       "links": [
@@ -318,7 +318,7 @@
         {
           "id": "download",
           "label": "Descargar",
-          "url": "https://github.com/RobDev512/TecNet-Finder/releases/download/v1.2.1/TecNet.Finder.1.2.1.Setup.exe",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/download/v1.3.0/TecNet.Finder.1.3.0.Setup.exe",
           "style": "secondary",
           "external": true
         },
@@ -330,12 +330,12 @@
           "external": true
         }
       ],
-      "version": "v1.2.1",
+      "version": "v1.3.0",
       "logo": {
         "src": "./assets/tecnet-finder-logo.png",
         "alt": "Logo de TecNet Finder"
       },
-      "updatedAt": "2026-09-24",
+      "updatedAt": "2026-11-22",
       "roadmapExport": {
         "type": "markdown",
         "url": "./projects/tecnet-finder/ROADMAP.md",

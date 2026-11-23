@@ -356,6 +356,31 @@
         }
       ],
       "precision": "day"
+    },
+    {
+      "id": "tecnet-v1-3-0",
+      "date": "2026-11-22",
+      "sequence": 10,
+      "type": "release",
+      "projectId": "tecnet-finder",
+      "title": "TecNet Finder v1.3.0 · Código intermedio y triplos",
+      "summary": "Publicación estable que incorpora generación, interpretación y comprobación de triplos VLSM, visor por red y mejoras de mantenimiento; 399 pruebas automatizadas aprobadas.",
+      "version": "v1.3.0",
+      "featured": true,
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "./projects/tecnet-finder/",
+          "external": false
+        },
+        {
+          "label": "Release",
+          "url": "https://github.com/RobDev512/TecNet-Finder/releases/tag/v1.3.0",
+          "external": true
+        }
+      ],
+      "occurredAt": "2026-11-23T04:52:37Z",
+      "precision": "time"
     }
   ]
 }
